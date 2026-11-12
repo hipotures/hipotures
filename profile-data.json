@@ -106,22 +106,6 @@
    }
   },
   {
-   "name": "capserv",
-   "html_url": "https://github.com/hipotures/capserv",
-   "description": "Codex app server skill",
-   "fork": false,
-   "archived": false,
-   "pushed_at": "2026-07-24T10:22:54Z",
-   "monthly": {
-    "2026-07": [
-     1,
-     121,
-     0
-    ]
-   },
-   "languages": {}
-  },
-  {
    "name": "command-center",
    "html_url": "https://github.com/hipotures/command-center",
    "description": "Modern SQLite-based analytics for Claude Code usage with intelligent caching",
@@ -314,16 +298,16 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-12T15:03:04Z",
+   "pushed_at": "2026-11-12T15:13:49Z",
    "monthly": {
     "2026-11": [
-     24,
-     5086,
-     908
+     28,
+     6034,
+     924
     ]
    },
    "languages": {
-    "Python": 15607
+    "Python": 25059
    }
   },
   {
@@ -1469,7 +1453,7 @@
   }
  ],
  "private": {
-  "count": 17,
+  "count": 15,
   "languages": {
    "Jupyter Notebook": 45680103,
    "Python": 2897179,

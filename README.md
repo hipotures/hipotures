@@ -23,7 +23,6 @@
 | <img src="assets/size-large.svg" width="10" height="10" alt="Large" title="Python · ~82k lines">&nbsp;[heg](https://github.com/hipotures/heg) | Structural Graph Conjecture Lab: reproducible AI-directed searches for counterexamples to the Erdős–Gyárfás conjecture. | ![Aug](https://img.shields.io/badge/Aug-green "Last active month: 12 commits, +33306/-222 lines") |
 | <img src="assets/size-large.svg" width="10" height="10" alt="Large" title="Python · ~238k lines">&nbsp;[TheML](https://github.com/hipotures/TheML) | Tree Hypothesis Exploration for Machine Learning | ![Jul](https://img.shields.io/badge/Jul-yellow "Last active month: 8 commits, +3160735/-641 lines") |
 | <img src="assets/size-medium.svg" width="10" height="10" alt="Medium" title="Python + Cuda + C++ · ~13k lines">&nbsp;[heg‑gpu‑lab](https://github.com/hipotures/heg-gpu-lab) | CUDA feasibility laboratory benchmarking GPU backends for the HEG score pipeline. | ![Jul](https://img.shields.io/badge/Jul-yellow "Last active month: 7 commits, +1831775/-21249 lines") |
-| <img src="assets/size-small.svg" width="10" height="10" alt="Small" title="No code detected">&nbsp;[capserv](https://github.com/hipotures/capserv) | Codex app server skill | ![Jul](https://img.shields.io/badge/Jul-yellow "Last active month: 1 commits, +121/-0 lines") |
 | <img src="assets/size-small.svg" width="10" height="10" alt="Small" title="Python · ~5k lines">&nbsp;[invariant‑forge](https://github.com/hipotures/invariant-forge) | Graph Invariant Search Lab | ![Jul](https://img.shields.io/badge/Jul-yellow "Last active month: 3 commits, +11535/-451 lines") |
 | <img src="assets/size-medium.svg" width="10" height="10" alt="Medium" title="Python + TypeScript · ~29k lines">&nbsp;[memoria](https://github.com/hipotures/memoria) | Memoria is a personal memory, knowledge, retrieval, and action system. | ![Jun](https://img.shields.io/badge/Jun-yellow "Last active month: 4 commits, +4172/-876 lines") |
 | <img src="assets/size-large.svg" width="10" height="10" alt="Large" title="Python · ~78k lines">&nbsp;[vocatio](https://github.com/hipotures/vocatio) | CLI event media workflow focused on streams (photo, video) synchronization and set detection | ![Apr](https://img.shields.io/badge/Apr-orange "Last active month: 429 commits, +94625/-8974 lines") |
@@ -45,7 +44,7 @@
 | <img src="assets/size-small.svg" width="10" height="10" alt="Small" title="Python · ~2k lines">&nbsp;[remodex](https://github.com/hipotures/remodex) | Remote codex | ![Archived](https://img.shields.io/badge/Archived-lightgrey "No longer developed; last active May 2026") |
 | <img src="assets/size-large.svg" width="10" height="10" alt="Large" title="Python · ~82k lines">&nbsp;[s5e7‑with‑claude](https://github.com/hipotures/s5e7-with-claude) | Kaggle Playground Series S5E7 (introvert/extrovert classification) experiments and analysis with Claude. | ![Archived](https://img.shields.io/badge/Archived-lightgrey "No longer developed; last active Jul 2025") |
 
-<sub>Plus 17 private repositories, ~142k lines of code.</sub>
+<sub>Plus 15 private repositories, ~142k lines of code.</sub>
 <!-- PROJECTS:END -->
 
 ## Modified Forks
