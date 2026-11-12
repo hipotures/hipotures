@@ -1,6 +1,12 @@
 {
   "hide": [],
   "forks": [],
-  "descriptions": {},
-  "sort": "pushed"
+  "external_forks": {
+    "identity": "https://gitlab.gnome.org/YaLTeR/identity"
+  },
+  "descriptions": {
+    "identity": "Image rotation, playback speed control and a path recording mode exporting clicked pixel coordinates as JSON."
+  },
+  "sort": "activity",
+  "activity": {"min_commits": 3, "min_lines": 100}
 }
