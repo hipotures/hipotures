@@ -1,0 +1,1481 @@
+{
+ "user": "hipotures",
+ "repos": [
+  {
+   "name": "37degrees",
+   "html_url": "https://github.com/hipotures/37degrees",
+   "description": "Professional TikTok video generator transforming classic literature into engaging short-form content for Polish youth",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-09-02T10:31:34Z",
+   "monthly": {
+    "2025-07": [
+     196,
+     1162835,
+     711803
+    ],
+    "2025-08": [
+     104,
+     2408117,
+     453565
+    ],
+    "2025-09": [
+     80,
+     1726759,
+     766168
+    ],
+    "2025-10": [
+     105,
+     93955,
+     3717
+    ],
+    "2025-11": [
+     9,
+     58795,
+     36
+    ],
+    "2026-02": [
+     6,
+     13596,
+     3329524
+    ],
+    "2026-08": [
+     1,
+     1,
+     1
+    ]
+   },
+   "languages": {
+    "Python": 1071709,
+    "Shell": 392215,
+    "TypeScript": 255355,
+    "HTML": 198002,
+    "JavaScript": 72589,
+    "CSS": 17858
+   }
+  },
+  {
+   "name": "aideml",
+   "html_url": "https://github.com/hipotures/aideml",
+   "description": "Fork - AIDE: AI-Driven Exploration in the Space of Code. The machine Learning engineering agent that automates AI R&D.",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-08-23T16:47:52Z",
+   "upstream": "WecoAI/aideml",
+   "own_commits": true
+  },
+  {
+   "name": "asquerix",
+   "html_url": "https://github.com/hipotures/asquerix",
+   "description": "NVIDIA Warp proof of concept searching for dense packings of unit squares by wall-driven compression.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-10-10T09:43:12Z",
+   "monthly": {
+    "2026-10": [
+     198,
+     510823,
+     1905
+    ]
+   },
+   "languages": {
+    "HTML": 155536057,
+    "Python": 1281929,
+    "Sass": 293916,
+    "Cuda": 167180,
+    "JavaScript": 32405,
+    "Shell": 1808
+   }
+  },
+  {
+   "name": "autonomous-materials-lab",
+   "html_url": "https://github.com/hipotures/autonomous-materials-lab",
+   "description": "Design repository for AI-guided inverse design of materials, starting with atmospheric-entry working fluids.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-09-11T17:34:23Z",
+   "monthly": {
+    "2026-09": [
+     126,
+     725758,
+     29699
+    ]
+   },
+   "languages": {
+    "Python": 1376277
+   }
+  },
+  {
+   "name": "calendar-mcp",
+   "html_url": "https://github.com/hipotures/calendar-mcp",
+   "description": "This project implements a Python-based MCP (Model Context Protocol) server that acts as an interface between Large Language Models (LLMs) and the Google Calendar API. It enables LLMs to perform calendar operations via natural language requests.",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-03-05T11:05:17Z",
+   "upstream": "deciduus/calendar-mcp",
+   "own_commits": true
+  },
+  {
+   "name": "capserv",
+   "html_url": "https://github.com/hipotures/capserv",
+   "description": "Codex app server skill",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-07-24T10:22:54Z",
+   "monthly": {
+    "2026-07": [
+     1,
+     121,
+     0
+    ]
+   },
+   "languages": {}
+  },
+  {
+   "name": "command-center",
+   "html_url": "https://github.com/hipotures/command-center",
+   "description": "Modern SQLite-based analytics for Claude Code usage with intelligent caching",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-03-02T18:07:25Z",
+   "monthly": {
+    "2025-12": [
+     118,
+     68896,
+     18482
+    ],
+    "2026-01": [
+     2,
+     460,
+     399
+    ],
+    "2026-02": [
+     1,
+     14,
+     12
+    ],
+    "2026-03": [
+     1,
+     309,
+     440
+    ]
+   },
+   "languages": {
+    "TypeScript": 225391,
+    "Python": 203743,
+    "JavaScript": 13692,
+    "Rust": 12810,
+    "CSS": 10764,
+    "Shell": 6586,
+    "HTML": 503
+   }
+  },
+  {
+   "name": "diophantasmagoria",
+   "html_url": "https://github.com/hipotures/diophantasmagoria",
+   "description": "Resumable C++23 searcher for integer solutions of y*z*(y+z) = G(x).",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-10-02T16:04:08Z",
+   "monthly": {
+    "2026-09": [
+     9,
+     9692,
+     181
+    ]
+   },
+   "languages": {
+    "C++": 90296,
+    "Python": 45398,
+    "CMake": 2252
+   }
+  },
+  {
+   "name": "gallerydeluxe",
+   "html_url": "https://github.com/hipotures/gallerydeluxe",
+   "description": "Fast Hugo gallery theme/module suitable for lots of images.",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-04-26T14:10:40Z",
+   "upstream": "bep/gallerydeluxe",
+   "own_commits": false
+  },
+  {
+   "name": "gitiary",
+   "html_url": "https://github.com/hipotures/gitiary",
+   "description": "Personal dashboard for visualizing GitHub commit activity across multiple repositories.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-03-02T18:04:06Z",
+   "monthly": {
+    "2026-02": [
+     83,
+     32809,
+     1702
+    ],
+    "2026-03": [
+     1,
+     183,
+     92
+    ]
+   },
+   "languages": {
+    "Svelte": 114194,
+    "TypeScript": 94679,
+    "HTML": 71352,
+    "JavaScript": 10161,
+    "CSS": 8185
+   }
+  },
+  {
+   "name": "gpu-unlock-ada",
+   "html_url": "https://github.com/hipotures/gpu-unlock-ada",
+   "description": "GPU tensor unlock source for RTX 4090 and experimental RTX 4070 Ti SUPER; firmware generated locally",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-10-24T00:28:02Z",
+   "upstream": "JustAResearcher/gpu-unlock-ada",
+   "own_commits": false
+  },
+  {
+   "name": "graphoratory",
+   "html_url": "https://github.com/hipotures/graphoratory",
+   "description": "Python graph workspace tool and computational laboratory for the Erdős–Gyárfás conjecture.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-08-18T01:35:24Z",
+   "monthly": {
+    "2026-08": [
+     47,
+     125496,
+     2510
+    ]
+   },
+   "languages": {
+    "Python": 2373476,
+    "C++": 15333,
+    "Mako": 593
+   }
+  },
+  {
+   "name": "heg",
+   "html_url": "https://github.com/hipotures/heg",
+   "description": "Structural Graph Conjecture Lab: reproducible AI-directed searches for counterexamples to the Erdős–Gyárfás conjecture.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-08-04T18:05:24Z",
+   "monthly": {
+    "2026-07": [
+     146,
+     417008,
+     7528
+    ],
+    "2026-08": [
+     12,
+     33306,
+     222
+    ]
+   },
+   "languages": {
+    "Python": 2804209,
+    "HTML": 66379,
+    "JavaScript": 48557,
+    "C++": 23283,
+    "CSS": 7915,
+    "Shell": 2779,
+    "Makefile": 1208
+   }
+  },
+  {
+   "name": "heg-gpu-lab",
+   "html_url": "https://github.com/hipotures/heg-gpu-lab",
+   "description": "CUDA feasibility laboratory benchmarking GPU backends for the HEG score pipeline.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-07-27T08:41:00Z",
+   "monthly": {
+    "2026-07": [
+     7,
+     1831775,
+     21249
+    ]
+   },
+   "languages": {
+    "Python": 183627,
+    "Cuda": 142237,
+    "C++": 127442,
+    "CMake": 3939,
+    "C": 869
+   }
+  },
+  {
+   "name": "herdr",
+   "html_url": "https://github.com/hipotures/herdr",
+   "description": "the runtime your coding agents live on",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-10-25T13:26:35Z",
+   "upstream": "herdrdev/herdr",
+   "own_commits": false
+  },
+  {
+   "name": "hipotures",
+   "html_url": "https://github.com/hipotures/hipotures",
+   "description": "GitHub profile README",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-12T14:13:54Z",
+   "monthly": {
+    "2026-11": [
+     7,
+     1088,
+     161
+    ]
+   },
+   "languages": {
+    "Python": 6921
+   }
+  },
+  {
+   "name": "homestack",
+   "html_url": "https://github.com/hipotures/homestack",
+   "description": "Turn Proxmox VE into a developer cloud: disposable-OS workspaces with persistent /home, automated AI coding agent setup, and declarative LXC services",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-12T13:30:44Z",
+   "monthly": {
+    "2026-09": [
+     81,
+     38105,
+     4051
+    ],
+    "2026-10": [
+     1067,
+     486051,
+     241827
+    ],
+    "2026-11": [
+     228,
+     21263,
+     20786
+    ]
+   },
+   "languages": {
+    "Rust": 4380716,
+    "Python": 505904,
+    "JavaScript": 122869,
+    "Shell": 44443,
+    "HTML": 30120,
+    "CSS": 15839,
+    "Dockerfile": 11340,
+    "Go": 4537
+   }
+  },
+  {
+   "name": "homestack-manifests",
+   "html_url": "https://github.com/hipotures/homestack-manifests",
+   "description": "Portable service manifests for deploying third-party applications with HomeStack on Proxmox VE.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-02T22:47:05Z",
+   "monthly": {
+    "2026-11": [
+     32,
+     1515,
+     81
+    ]
+   },
+   "languages": {}
+  },
+  {
+   "name": "HSOF",
+   "html_url": "https://github.com/hipotures/HSOF",
+   "description": "HSOF - Hybrid Search for Optimal Features. A simplified 3-stage feature selection system implemented in Julia.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2025-07-16T20:31:22Z",
+   "monthly": {
+    "2025-07": [
+     227,
+     735438,
+     364075
+    ]
+   },
+   "languages": {
+    "Julia": 5657362,
+    "Shell": 29778,
+    "Python": 20627,
+    "Makefile": 4333,
+    "PLpgSQL": 3946,
+    "Dockerfile": 3603
+   }
+  },
+  {
+   "name": "identity",
+   "html_url": "https://github.com/hipotures/identity",
+   "description": "A program for comparing multiple versions of an image or video. Fork from https://gitlab.gnome.org/YaLTeR/identity.git ",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-06-30T00:39:39Z",
+   "monthly": {
+    "2020-08": [
+     8,
+     2807,
+     518
+    ],
+    "2020-09": [
+     77,
+     6426,
+     1124
+    ],
+    "2020-10": [
+     29,
+     714,
+     386
+    ],
+    "2020-12": [
+     1,
+     181,
+     1
+    ],
+    "2021-01": [
+     9,
+     181,
+     171
+    ],
+    "2021-05": [
+     4,
+     24,
+     27
+    ],
+    "2021-09": [
+     17,
+     2029,
+     128
+    ],
+    "2022-03": [
+     29,
+     13213,
+     8675
+    ],
+    "2022-10": [
+     31,
+     7208,
+     2165
+    ],
+    "2022-11": [
+     13,
+     360,
+     489
+    ],
+    "2023-02": [
+     45,
+     3965,
+     1866
+    ],
+    "2023-03": [
+     57,
+     5623,
+     2716
+    ],
+    "2023-04": [
+     12,
+     3304,
+     2036
+    ],
+    "2023-05": [
+     2,
+     842,
+     413
+    ],
+    "2023-06": [
+     2,
+     440,
+     7
+    ],
+    "2023-07": [
+     5,
+     883,
+     5
+    ],
+    "2023-08": [
+     65,
+     3599,
+     2558
+    ],
+    "2023-09": [
+     12,
+     1194,
+     1055
+    ],
+    "2023-11": [
+     2,
+     535,
+     283
+    ],
+    "2024-01": [
+     2,
+     587,
+     106
+    ],
+    "2024-04": [
+     1,
+     522,
+     424
+    ],
+    "2024-05": [
+     2,
+     451,
+     8
+    ],
+    "2024-07": [
+     7,
+     1772,
+     1208
+    ],
+    "2024-08": [
+     22,
+     1015,
+     766
+    ],
+    "2024-09": [
+     35,
+     2150,
+     1537
+    ],
+    "2024-10": [
+     3,
+     189,
+     116
+    ],
+    "2024-11": [
+     1,
+     127,
+     83
+    ],
+    "2025-01": [
+     1,
+     271,
+     159
+    ],
+    "2025-02": [
+     1,
+     134,
+     83
+    ],
+    "2025-03": [
+     23,
+     1854,
+     1381
+    ],
+    "2025-04": [
+     2,
+     128,
+     108
+    ],
+    "2025-05": [
+     10,
+     255,
+     92
+    ],
+    "2025-06": [
+     1,
+     21,
+     22
+    ],
+    "2025-07": [
+     11,
+     359,
+     367
+    ],
+    "2025-08": [
+     9,
+     1142,
+     1189
+    ],
+    "2025-09": [
+     12,
+     465,
+     441
+    ],
+    "2025-10": [
+     10,
+     1094,
+     1610
+    ],
+    "2026-01": [
+     3,
+     900,
+     462
+    ],
+    "2026-02": [
+     18,
+     2421,
+     236
+    ],
+    "2026-06": [
+     9,
+     1103,
+     212
+    ]
+   },
+   "languages": {
+    "Rust": 239002,
+    "Meson": 6750,
+    "CSS": 3301,
+    "Shell": 1888,
+    "GLSL": 293
+   }
+  },
+  {
+   "name": "integer-mult-bounds",
+   "html_url": "https://github.com/hipotures/integer-mult-bounds",
+   "description": "Conditional improvement to the exponent saving in OpenAI’s integer multiplication result #109",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-10-13T23:10:30Z",
+   "upstream": "CrocSwap/integer-mult-bounds",
+   "own_commits": false
+  },
+  {
+   "name": "intelitex",
+   "html_url": "https://github.com/hipotures/intelitex",
+   "description": "Local LLM workflow for translating EPUB books, with human terminology approval and resumable multi-pass translation",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-08T13:00:16Z",
+   "monthly": {
+    "2026-09": [
+     170,
+     88172,
+     19273
+    ],
+    "2026-10": [
+     62,
+     4326,
+     1636
+    ],
+    "2026-11": [
+     24,
+     1427,
+     85
+    ]
+   },
+   "languages": {
+    "Python": 2349544,
+    "TypeScript": 426936,
+    "JavaScript": 305661,
+    "CSS": 118872,
+    "HTML": 379
+   }
+  },
+  {
+   "name": "invariant-forge",
+   "html_url": "https://github.com/hipotures/invariant-forge",
+   "description": "Graph Invariant Search Lab",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-07-23T17:00:07Z",
+   "monthly": {
+    "2026-07": [
+     3,
+     11535,
+     451
+    ]
+   },
+   "languages": {
+    "Python": 175298,
+    "Shell": 5353,
+    "Makefile": 1978
+   }
+  },
+  {
+   "name": "lumison",
+   "html_url": "https://github.com/hipotures/lumison",
+   "description": "Planned piano/MIDI-driven audiovisual app built on a thin-film visual engine, with an experimental Thin-Film Lab.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-09-16T18:55:58Z",
+   "monthly": {
+    "2026-09": [
+     37,
+     612139,
+     298792
+    ]
+   },
+   "languages": {
+    "HTML": 1118158,
+    "JavaScript": 761027,
+    "CSS": 42479
+   }
+  },
+  {
+   "name": "MathInvasion",
+   "html_url": "https://github.com/hipotures/MathInvasion",
+   "description": "Math Invasion: a Space Invaders and tower defense hybrid game prototype in TypeScript and Phaser 3.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2025-04-28T15:28:18Z",
+   "monthly": {
+    "2025-04": [
+     2,
+     4704,
+     0
+    ]
+   },
+   "languages": {
+    "TypeScript": 3507,
+    "JavaScript": 2865,
+    "HTML": 1686,
+    "Shell": 69
+   }
+  },
+  {
+   "name": "MathInvasion_v2",
+   "html_url": "https://github.com/hipotures/MathInvasion_v2",
+   "description": "Phaser 3 game - Math Invasion v2 (Iteration 2)",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2025-05-21T21:59:22Z",
+   "monthly": {
+    "2025-04": [
+     59,
+     48877,
+     19957
+    ]
+   },
+   "languages": {
+    "TypeScript": 477199,
+    "JavaScript": 5053,
+    "CSS": 2001,
+    "HTML": 356,
+    "Shell": 34
+   }
+  },
+  {
+   "name": "mdm",
+   "html_url": "https://github.com/hipotures/mdm",
+   "description": "A standalone, enterprise-grade dataset management system for machine learning.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2025-07-16T20:10:57Z",
+   "monthly": {
+    "2025-07": [
+     472,
+     551847,
+     326344
+    ]
+   },
+   "languages": {
+    "Python": 3193620,
+    "Shell": 22288
+   }
+  },
+  {
+   "name": "memoria",
+   "html_url": "https://github.com/hipotures/memoria",
+   "description": "Memoria is a personal memory, knowledge, retrieval, and action system.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-07-01T23:59:26Z",
+   "monthly": {
+    "2026-04": [
+     94,
+     58957,
+     4827
+    ],
+    "2026-06": [
+     4,
+     4172,
+     876
+    ]
+   },
+   "languages": {
+    "Python": 721868,
+    "TypeScript": 281909,
+    "CSS": 22902,
+    "HTML": 762,
+    "Mako": 510
+   }
+  },
+  {
+   "name": "minotaur",
+   "html_url": "https://github.com/hipotures/minotaur",
+   "description": "Advanced automated feature engineering system using Monte Carlo Tree Search (MCTS) with enterprise-grade dataset management for agricultural fertilizer prediction.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2025-07-03T11:32:02Z",
+   "monthly": {
+    "2025-06": [
+     240,
+     276019,
+     98348
+    ]
+   },
+   "languages": {
+    "Python": 2191517
+   }
+  },
+  {
+   "name": "mlarena",
+   "html_url": "https://github.com/hipotures/mlarena",
+   "description": "ML Arena - standardized and powerful workflow for participating in Kaggle competitions",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-01-31T07:18:18Z",
+   "monthly": {
+    "2025-11": [
+     263,
+     816054,
+     217847
+    ],
+    "2025-12": [
+     337,
+     2876824,
+     4852898
+    ],
+    "2026-01": [
+     511,
+     95359,
+     20687
+    ]
+   },
+   "languages": {
+    "Python": 3065990,
+    "Shell": 37013
+   }
+  },
+  {
+   "name": "mutation-forge-lab",
+   "html_url": "https://github.com/hipotures/mutation-forge-lab",
+   "description": "LLM-driven evolution of deterministic Python policies that rank graph mutations for HEG.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-10-02T22:52:53Z",
+   "monthly": {
+    "2026-07": [
+     101,
+     271036,
+     1681
+    ],
+    "2026-08": [
+     302,
+     136734,
+     60338
+    ],
+    "2026-09": [
+     1,
+     1144,
+     50
+    ]
+   },
+   "languages": {
+    "Python": 4762408,
+    "Makefile": 341
+   }
+  },
+  {
+   "name": "mypowers",
+   "html_url": "https://github.com/hipotures/mypowers",
+   "description": "Monitor and control an ALLPOWERS S300 power station over Bluetooth: telemetry, Telegram alerts and a Rust TUI.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-10-08T20:34:32Z",
+   "monthly": {
+    "2026-10": [
+     115,
+     591879,
+     74422
+    ]
+   },
+   "languages": {
+    "Rust": 594628,
+    "Python": 433820,
+    "Shell": 4324
+   }
+  },
+  {
+   "name": "piano-practice-analyzer",
+   "html_url": "https://github.com/hipotures/piano-practice-analyzer",
+   "description": "Local tool that estimates piano practice time from MP3/WAV recordings using FFmpeg silence detection.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-08-07T23:45:30Z",
+   "monthly": {
+    "2026-08": [
+     10,
+     43183,
+     2330
+    ]
+   },
+   "languages": {
+    "HTML": 340461,
+    "Python": 154381,
+    "Jinja": 10012,
+    "Shell": 2228
+   }
+  },
+  {
+   "name": "PianoSheets",
+   "html_url": "https://github.com/hipotures/PianoSheets",
+   "description": "Piano sheets from Kyle Landry, vkgoeswild, Beethoven, Yiruma, Zohar002, etc.",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2023-01-18T14:35:00Z",
+   "upstream": "boweihan/PianoSheets",
+   "own_commits": false
+  },
+  {
+   "name": "ProfundaImmersio",
+   "html_url": "https://github.com/hipotures/ProfundaImmersio",
+   "description": "Profunda Immersio - VR falling-block puzzle game inspired by Tetris",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2025-06-05T22:24:37Z",
+   "monthly": {
+    "2025-05": [
+     10,
+     5475,
+     28
+    ],
+    "2025-06": [
+     1,
+     310,
+     5
+    ]
+   },
+   "languages": {
+    "TypeScript": 94952,
+    "HTML": 1621,
+    "CSS": 1523,
+    "JavaScript": 921
+   }
+  },
+  {
+   "name": "project-maya",
+   "html_url": "https://github.com/hipotures/project-maya",
+   "description": "Project Maya - run GLM-5.3-Flash (321B MoE) and DeepSeek-V4.1-Flash-1017 (748B MoE) privately on your own GPU(s), from one card to 16, NVIDIA or AMD, Linux or Windows. Engine, server, dashboard, OpenAI- and Anthropic-compatible API, quant tools.",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-10-20T19:13:01Z",
+   "upstream": "mw00/project-maya",
+   "own_commits": false
+  },
+  {
+   "name": "PufferLib",
+   "html_url": "https://github.com/hipotures/PufferLib",
+   "description": "Puffing up reinforcement learning",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-04-05T18:16:18Z",
+   "upstream": "PufferAI/PufferLib",
+   "own_commits": false
+  },
+  {
+   "name": "quaternion-julia-fractal-explorer",
+   "html_url": "https://github.com/hipotures/quaternion-julia-fractal-explorer",
+   "description": "An interactive 3D explorer for quaternion Julia fractals, allowing real-time navigation through stunning four-dimensional fractal structures. This application uses WebGL through Three.js to render complex quaternion fractals with high performance and implements advanced rendering techniques like adaptive ray marching, ambient occlusion, etc.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2025-06-22T16:43:40Z",
+   "monthly": {
+    "2025-03": [
+     7,
+     4593,
+     583
+    ],
+    "2025-06": [
+     12,
+     4834,
+     2952
+    ]
+   },
+   "languages": {
+    "JavaScript": 229044,
+    "HTML": 3568,
+    "CSS": 118
+   }
+  },
+  {
+   "name": "rad",
+   "html_url": "https://github.com/hipotures/rad",
+   "description": "Research archive for local LLM serving: Qwen benchmarks, hardware characterization, expert-residency experiments and launch scripts.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-04T00:56:31Z",
+   "monthly": {
+    "2026-10": [
+     130,
+     6539837,
+     4633
+    ],
+    "2026-11": [
+     60,
+     175126,
+     2533
+    ]
+   },
+   "languages": {
+    "Python": 18350142,
+    "C++": 1623662,
+    "Cuda": 195484,
+    "Shell": 151071,
+    "CMake": 64495,
+    "TeX": 34193,
+    "HTML": 7731,
+    "C": 5253
+   }
+  },
+  {
+   "name": "ratpoints-gpu",
+   "html_url": "https://github.com/hipotures/ratpoints-gpu",
+   "description": "CUDA rational-point finder compatible with Michael Stoll's ratpoints.",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-09-18T02:40:22Z",
+   "upstream": "wgxli/ratpoints-gpu",
+   "own_commits": true
+  },
+  {
+   "name": "rea",
+   "html_url": "https://github.com/hipotures/rea",
+   "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-10-30T21:45:51Z",
+   "upstream": "morluto/rea",
+   "own_commits": false
+  },
+  {
+   "name": "remodex",
+   "html_url": "https://github.com/hipotures/remodex",
+   "description": "Remote codex",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-06-04T22:28:43Z",
+   "monthly": {
+    "2026-05": [
+     5,
+     3886,
+     945
+    ]
+   },
+   "languages": {
+    "Python": 74854,
+    "Shell": 5176
+   }
+  },
+  {
+   "name": "s5e7-with-claude",
+   "html_url": "https://github.com/hipotures/s5e7-with-claude",
+   "description": "Kaggle Playground Series S5E7 (introvert/extrovert classification) experiments and analysis with Claude.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2025-07-20T10:18:39Z",
+   "monthly": {
+    "2025-06": [
+     36,
+     404207,
+     222
+    ],
+    "2025-07": [
+     14,
+     8949283,
+     1175198
+    ]
+   },
+   "languages": {
+    "HTML": 136573634,
+    "Python": 2863478,
+    "Shell": 4313
+   }
+  },
+  {
+   "name": "scriptoza",
+   "html_url": "https://github.com/hipotures/scriptoza",
+   "description": "Collection of small utility scripts organized by category",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-12T14:13:52Z",
+   "monthly": {
+    "2025-11": [
+     68,
+     7626,
+     3789
+    ],
+    "2025-12": [
+     215,
+     35979,
+     31095
+    ],
+    "2026-01": [
+     28,
+     2178,
+     450
+    ],
+    "2026-02": [
+     15,
+     452,
+     114
+    ],
+    "2026-03": [
+     22,
+     28384,
+     15452
+    ],
+    "2026-04": [
+     2,
+     41,
+     21
+    ],
+    "2026-05": [
+     5,
+     460,
+     140
+    ],
+    "2026-06": [
+     12,
+     1972,
+     61
+    ],
+    "2026-08": [
+     20,
+     1143,
+     194
+    ],
+    "2026-09": [
+     2,
+     51,
+     3
+    ],
+    "2026-10": [
+     115,
+     16268,
+     4775
+    ],
+    "2026-11": [
+     34,
+     67224,
+     47352
+    ]
+   },
+   "languages": {
+    "Python": 1030555,
+    "JavaScript": 94342,
+    "Shell": 15304,
+    "CSS": 559
+   }
+  },
+  {
+   "name": "snaptag",
+   "html_url": "https://github.com/hipotures/snaptag",
+   "description": "SnapTag is a local-first screenshot memory system for a single user.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-06-04T23:42:25Z",
+   "monthly": {
+    "2026-03": [
+     38,
+     10800,
+     341
+    ]
+   },
+   "languages": {
+    "Python": 257893,
+    "Shell": 10044,
+    "Mako": 549
+   }
+  },
+  {
+   "name": "sonus",
+   "html_url": "https://github.com/hipotures/sonus",
+   "description": "Sonus is a scalable, cloud-native automated transcription and diarization system built on Google Cloud Pla tform (GCP). It utilizes **WhisperX** to provide high-accuracy speech-to-text conversion with speaker iden tification (diarization).",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-02-13T12:00:58Z",
+   "monthly": {
+    "2026-02": [
+     4,
+     9771,
+     5
+    ]
+   },
+   "languages": {
+    "Python": 86983,
+    "HCL": 42643,
+    "Dockerfile": 1234
+   }
+  },
+  {
+   "name": "squares",
+   "html_url": "https://github.com/hipotures/squares",
+   "description": "New results and AI-powered research on the square packing problem",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-10-17T22:30:34Z",
+   "upstream": "jlevy/squares",
+   "own_commits": true
+  },
+  {
+   "name": "tenerix",
+   "html_url": "https://github.com/hipotures/tenerix",
+   "description": "Alpine Linux and hardware investigation for the NETGEAR ReadyNAS RN426, replacing its end-of-life factory software.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-05T09:43:20Z",
+   "monthly": {
+    "2026-10": [
+     30,
+     25142,
+     82
+    ],
+    "2026-11": [
+     41,
+     12325,
+     3213
+    ]
+   },
+   "languages": {
+    "C": 234528,
+    "Python": 228119,
+    "Shell": 37917,
+    "Makefile": 1194,
+    "Dockerfile": 1147
+   }
+  },
+  {
+   "name": "TheML",
+   "html_url": "https://github.com/hipotures/TheML",
+   "description": "Tree Hypothesis Exploration for Machine Learning",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-07-27T10:15:01Z",
+   "monthly": {
+    "2026-06": [
+     336,
+     501549,
+     416454
+    ],
+    "2026-07": [
+     8,
+     3160735,
+     641
+    ]
+   },
+   "languages": {
+    "Python": 8298784,
+    "Jinja": 18432
+   }
+  },
+  {
+   "name": "tklivetracker",
+   "html_url": "https://github.com/hipotures/tklivetracker",
+   "description": "Self-hosted TikTok live-stream monitoring, recording, and management dashboard.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-09-28T09:01:07Z",
+   "monthly": {
+    "2026-08": [
+     9,
+     36901,
+     49
+    ],
+    "2026-09": [
+     41,
+     5596,
+     2009
+    ]
+   },
+   "languages": {
+    "Python": 1198157,
+    "JavaScript": 145146,
+    "HTML": 58207,
+    "CSS": 40242,
+    "Shell": 17635
+   }
+  },
+  {
+   "name": "todoit",
+   "html_url": "https://github.com/hipotures/todoit",
+   "description": "Intelligent Task Management System with MCP and CLI Integration",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2025-10-30T10:20:08Z",
+   "monthly": {
+    "2025-08": [
+     423,
+     214603,
+     82305
+    ],
+    "2025-09": [
+     19,
+     4201,
+     869
+    ],
+    "2025-10": [
+     9,
+     2149,
+     295
+    ]
+   },
+   "languages": {
+    "Python": 1672044,
+    "JavaScript": 135458,
+    "CSS": 43884,
+    "HTML": 7203
+   }
+  },
+  {
+   "name": "tutor",
+   "html_url": "https://github.com/hipotures/tutor",
+   "description": "Personal fork of Vaultwarden, used for deployment and management through HomeStack. All credit goes to the upstream project.",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-10-23T16:09:26Z",
+   "upstream": "dani-garcia/vaultwarden",
+   "own_commits": true
+  },
+  {
+   "name": "twister",
+   "html_url": "https://github.com/hipotures/twister",
+   "description": "Modular monolith MVP for collecting tweets from X/Twitter",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-03-02T18:08:05Z",
+   "monthly": {
+    "2026-02": [
+     27,
+     12155,
+     445
+    ],
+    "2026-03": [
+     2,
+     267,
+     43
+    ]
+   },
+   "languages": {
+    "Python": 203909,
+    "HTML": 60257
+   }
+  },
+  {
+   "name": "vbc",
+   "html_url": "https://github.com/hipotures/vbc",
+   "description": "Event-driven video batch compression tool with AV1, metadata preservation, and live dashboard.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-10T23:52:51Z",
+   "monthly": {
+    "2025-12": [
+     51,
+     23008,
+     2350
+    ],
+    "2026-01": [
+     66,
+     7683,
+     1764
+    ],
+    "2026-02": [
+     85,
+     9353,
+     2832
+    ],
+    "2026-03": [
+     5,
+     491,
+     34
+    ],
+    "2026-04": [
+     11,
+     802,
+     103
+    ],
+    "2026-05": [
+     6,
+     1868,
+     223
+    ],
+    "2026-06": [
+     3,
+     517,
+     117
+    ],
+    "2026-07": [
+     59,
+     15871,
+     2380
+    ],
+    "2026-08": [
+     7,
+     397,
+     35
+    ],
+    "2026-09": [
+     5,
+     870,
+     225
+    ],
+    "2026-10": [
+     4,
+     860,
+     860
+    ],
+    "2026-11": [
+     256,
+     109442,
+     118689
+    ]
+   },
+   "languages": {
+    "Python": 1084893,
+    "Shell": 7299,
+    "Dockerfile": 6129
+   }
+  },
+  {
+   "name": "vdl",
+   "html_url": "https://github.com/hipotures/vdl",
+   "description": "Recurring yt-dlp downloads with a Rich terminal UI and a mobile-first web interface.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-09-28T19:58:21Z",
+   "monthly": {
+    "2026-09": [
+     23,
+     5944,
+     2704
+    ]
+   },
+   "languages": {
+    "Python": 105979,
+    "JavaScript": 11887,
+    "HTML": 3137
+   }
+  },
+  {
+   "name": "vocatio",
+   "html_url": "https://github.com/hipotures/vocatio",
+   "description": "CLI event media workflow focused on streams (photo, video) synchronization and set detection",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-04-22T00:01:46Z",
+   "monthly": {
+    "2026-03": [
+     14,
+     14729,
+     482
+    ],
+    "2026-04": [
+     429,
+     94625,
+     8974
+    ]
+   },
+   "languages": {
+    "Python": 2735346
+   }
+  }
+ ]
+}

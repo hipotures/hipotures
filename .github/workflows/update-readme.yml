@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python3 github_profile_readme.py README.md --config profile.json --run
+      - run: python3 github_profile_readme.py README.md --config profile.json --data profile-data.json --refresh --run
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          git diff --quiet && exit 0
+          test -z "$(git status --porcelain)" && exit 0
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "Update profile README"
+          git add -A && git commit -m "Update profile README"
           git push

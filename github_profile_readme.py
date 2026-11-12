@@ -6,7 +6,9 @@ Only the text between the marker pairs is replaced:
     <!-- PROJECTS:START --> ... <!-- PROJECTS:END -->
     <!-- FORKS:START -->    ... <!-- FORKS:END -->
 
-Everything else in the README is left untouched. Changes are written only with --run.
+Collecting data and rendering are separate steps: with --data, raw API data is cached in a
+JSON file and the README is rendered from it, so layout and config changes need no API calls.
+Everything else in the README is left untouched. Files are written only with --run.
 """
 
 from __future__ import annotations
@@ -32,16 +34,21 @@ ACTIVITY_COLORS = [(1, "brightgreen"), (3, "green"), (6, "yellow"), (12, "orange
 SETTLED_COLOR = "blue"
 DEFAULT_MIN_COMMITS = 3
 DEFAULT_MIN_LINES = 100
+NAME_CHAR_EM = 0.51
+HEADER_CHAR_EM = 0.63
+NBSP_EM = 0.28
+REPO_FIELDS = ("name", "html_url", "description", "fork", "archived", "pushed_at")
 
 JsonFetcher = Callable[[str], Any]
+Sleeper = Callable[[float], None]
 
 
 @dataclass
 class Activity:
     month: str
     commits: int
-    additions: int | None
-    deletions: int | None
+    additions: int
+    deletions: int
 
 
 def make_fetcher(token: str | None) -> JsonFetcher:
@@ -63,6 +70,13 @@ def make_fetcher(token: str | None) -> JsonFetcher:
     return fetch
 
 
+def fetch_or_none(fetch: JsonFetcher, path: str) -> Any:
+    try:
+        return fetch(path)
+    except urllib.error.URLError:
+        return None
+
+
 def list_public_repos(fetch: JsonFetcher, user: str) -> list[dict[str, Any]]:
     repos: list[dict[str, Any]] = []
     page = 1
@@ -74,105 +88,83 @@ def list_public_repos(fetch: JsonFetcher, user: str) -> list[dict[str, Any]]:
         page += 1
 
 
-def has_own_commits(fetch: JsonFetcher, user: str, repo: dict[str, Any]) -> bool:
-    """Being ahead is not enough: a fork can carry other people's commits from its network."""
-    try:
-        detail = fetch(f"/repos/{user}/{repo['name']}")
-        parent = detail["parent"]
-        base = f"{parent['full_name']}/compare/{parent['default_branch']}"
-        head = f"{user}:{detail['default_branch']}"
-        comparison = fetch(f"/repos/{base}...{head}")
-    except (urllib.error.URLError, KeyError):
-        return False
-    return any(
-        ((commit.get("author") or {}).get("login") or "").lower() == user.lower()
-        for commit in comparison.get("commits", [])
+def fork_info(fetch: JsonFetcher, user: str, name: str) -> tuple[str | None, bool]:
+    """Return the upstream and whether the fork has commits authored by the user.
+
+    Being ahead is not enough: a fork can carry other people's commits from its network.
+    """
+    detail = fetch_or_none(fetch, f"/repos/{user}/{name}")
+    if not detail or "parent" not in detail:
+        return None, False
+    parent = detail["parent"]
+    comparison = fetch_or_none(
+        fetch,
+        f"/repos/{parent['full_name']}/compare/{parent['default_branch']}"
+        f"...{user}:{detail['default_branch']}",
     )
+    own = any(
+        ((commit.get("author") or {}).get("login") or "").lower() == user.lower()
+        for commit in (comparison or {}).get("commits", [])
+    )
+    return parent["full_name"], own
 
 
-def upstream_of(fetch: JsonFetcher, user: str, repo: dict[str, Any]) -> str:
-    try:
-        return fetch(f"/repos/{user}/{repo['name']}")["parent"]["full_name"]
-    except (urllib.error.URLError, KeyError):
-        return ""
-
-
-def monthly_lines(
-    fetch: JsonFetcher,
-    user: str,
-    name: str,
-    attempts: int = 6,
-    delay: float = 3.0,
-    sleep: Callable[[float], None] = time.sleep,
-) -> dict[str, tuple[int, int]] | None:
-    """Return {"YYYY-MM": (additions, deletions)}; GitHub answers 202 while it computes stats."""
+def monthly_stats(
+    fetch: JsonFetcher, user: str, name: str, attempts: int = 6, delay: float = 3.0, sleep: Sleeper = time.sleep
+) -> dict[str, list[int]] | None:
+    """Return {"YYYY-MM": [commits, additions, deletions]}; GitHub answers 202 while computing."""
     for attempt in range(attempts):
-        try:
-            weeks = fetch(f"/repos/{user}/{name}/stats/code_frequency")
-        except urllib.error.URLError:
-            return None
-        if isinstance(weeks, list):
-            months: dict[str, tuple[int, int]] = {}
-            for timestamp, additions, deletions in weeks:
-                month = datetime.fromtimestamp(timestamp, timezone.utc).strftime("%Y-%m")
-                added, deleted = months.get(month, (0, 0))
-                months[month] = (added + additions, deleted - deletions)
-            return months
+        contributors = fetch_or_none(fetch, f"/repos/{user}/{name}/stats/contributors")
+        if isinstance(contributors, list):
+            months: dict[str, list[int]] = {}
+            for contributor in contributors:
+                for week in contributor.get("weeks", []):
+                    if not (week["c"] or week["a"] or week["d"]):
+                        continue
+                    month = datetime.fromtimestamp(week["w"], timezone.utc).strftime("%Y-%m")
+                    totals = months.setdefault(month, [0, 0, 0])
+                    totals[0] += week["c"]
+                    totals[1] += week["a"]
+                    totals[2] += week["d"]
+            return dict(sorted(months.items()))
         if attempt < attempts - 1:
             sleep(delay)
     return None
 
 
-def last_active_month(
-    fetch: JsonFetcher,
-    user: str,
-    name: str,
-    config: dict[str, Any],
-    sleep: Callable[[float], None] = time.sleep,
-) -> Activity | None:
-    """Find the newest month with enough commits and changed lines to count as real work."""
+def collect(
+    fetch: JsonFetcher, user: str, previous: dict[str, Any] | None = None, sleep: Sleeper = time.sleep
+) -> dict[str, Any]:
+    """Fetch raw data for all public repositories, independent of config and layout."""
+    old = {repo["name"]: repo for repo in (previous or {}).get("repos", [])}
+    repos = [{field: repo.get(field) for field in REPO_FIELDS} for repo in list_public_repos(fetch, user)]
+    sources = [repo for repo in repos if not repo["fork"]]
+    for repo in sources:
+        fetch_or_none(fetch, f"/repos/{user}/{repo['name']}/stats/contributors")
+    for repo in repos:
+        name = repo["name"]
+        if repo["fork"]:
+            repo["upstream"], repo["own_commits"] = fork_info(fetch, user, name)
+            continue
+        monthly = monthly_stats(fetch, user, name, sleep=sleep)
+        repo["monthly"] = monthly if monthly is not None else old.get(name, {}).get("monthly")
+        repo["languages"] = fetch_or_none(fetch, f"/repos/{user}/{name}/languages") or {}
+    return {"user": user, "repos": sorted(repos, key=lambda repo: repo["name"].lower())}
+
+
+def last_active_month(monthly: dict[str, list[int]] | None, config: dict[str, Any]) -> Activity | None:
+    """Newest month with enough commits and changed lines to count as real work."""
+    if not monthly:
+        return None
     settings = config.get("activity", {})
     min_commits = settings.get("min_commits", DEFAULT_MIN_COMMITS)
     min_lines = settings.get("min_lines", DEFAULT_MIN_LINES)
-    lines = monthly_lines(fetch, user, name, sleep=sleep)
-
-    def activity(month: str) -> Activity:
-        added, deleted = lines.get(month, (0, 0)) if lines is not None else (None, None)
-        return Activity(month, commits[month], added, deleted)
-
-    def qualifies(month: str) -> bool:
-        if commits[month] < min_commits:
-            return False
-        return lines is None or sum(lines.get(month, (0, 0))) >= min_lines
-
-    commits: dict[str, int] = {}
-    page = 1
-    while True:
-        try:
-            batch = fetch(f"/repos/{user}/{name}/commits?per_page=100&page={page}") or []
-        except urllib.error.URLError:
-            batch = []
-        for commit in batch:
-            month = commit["commit"]["committer"]["date"][:7]
-            commits[month] = commits.get(month, 0) + 1
-        finished = len(batch) < 100
-        oldest_seen = min(commits) if commits else ""
-        for month in sorted(commits, reverse=True):
-            if not finished and month <= oldest_seen:
-                break
-            if qualifies(month):
-                return activity(month)
-        if finished:
-            break
-        page += 1
-
-    if not commits:
-        return None
-    if lines is not None:
-        busiest = max(commits, key=lambda month: (sum(lines.get(month, (0, 0))), month))
-    else:
-        busiest = max(commits, key=lambda month: (commits[month], month))
-    return activity(busiest)
+    for month in sorted(monthly, reverse=True):
+        commits, additions, deletions = monthly[month]
+        if commits >= min_commits and additions + deletions >= min_lines:
+            return Activity(month, commits, additions, deletions)
+    month = max(monthly, key=lambda key: (monthly[key][1] + monthly[key][2], monthly[key][0], key))
+    return Activity(month, *monthly[month])
 
 
 def months_between(month: str, today: date) -> int:
@@ -187,9 +179,7 @@ def activity_badge(activity: Activity | None, today: date) -> str:
     label = MONTH_NAMES[number - 1] + ("" if year == today.year else f" {year}")
     age = months_between(activity.month, today)
     color = next((color for limit, color in ACTIVITY_COLORS if age <= limit), SETTLED_COLOR)
-    details = f"{activity.commits} commits"
-    if activity.additions is not None:
-        details += f", +{activity.additions}/-{activity.deletions} lines"
+    details = f"{activity.commits} commits, +{activity.additions}/-{activity.deletions} lines"
     url = f"https://img.shields.io/badge/{label.replace(' ', '_')}-{color}"
     return f'![{label}]({url} "Last active month: {details}")'
 
@@ -215,12 +205,12 @@ def repo_link(repo: dict[str, Any]) -> str:
     return f"[{nowrap(repo['name'])}]({repo['html_url']})"
 
 
-def name_header(names: list[str], title: str = "Repository") -> str:
+def name_header(names: list[str], config: dict[str, Any], title: str = "Repository") -> str:
     """Pad the header with non-breaking spaces so name columns of all tables share one width."""
+    char_em = config.get("layout", {}).get("name_char_em", NAME_CHAR_EM)
     longest = max((len(name) for name in names), default=0)
-    padding = max(0, math.ceil((longest * 0.6 - len(title) * 0.63) / 0.28))
-    left = "&nbsp;" * (padding // 2)
-    return left + title + "&nbsp;" * (padding - padding // 2)
+    padding = max(0, math.ceil((longest * char_em - len(title) * HEADER_CHAR_EM) / NBSP_EM))
+    return "&nbsp;" * (padding // 2) + title + "&nbsp;" * (padding - padding // 2)
 
 
 def description_for(repo: dict[str, Any], config: dict[str, Any]) -> str:
@@ -229,9 +219,7 @@ def description_for(repo: dict[str, Any], config: dict[str, Any]) -> str:
 
 
 def sort_repos(
-    repos: list[dict[str, Any]],
-    config: dict[str, Any],
-    activities: dict[str, Activity | None],
+    repos: list[dict[str, Any]], config: dict[str, Any], activities: dict[str, Activity | None]
 ) -> list[dict[str, Any]]:
     order = config.get("sort", "activity")
     if order == "name":
@@ -245,48 +233,32 @@ def sort_repos(
     return sorted(repos, key=lambda repo: repo.get("pushed_at") or "", reverse=True)
 
 
-def build_sections(
-    fetch: JsonFetcher,
-    user: str,
-    config: dict[str, Any],
-    today: date | None = None,
-    sleep: Callable[[float], None] = time.sleep,
-) -> dict[str, str]:
+def render(data: dict[str, Any], config: dict[str, Any], today: date | None = None) -> dict[str, str]:
     today = today or date.today()
+    user = data["user"]
     hidden = set(config.get("hide", []))
     forced_forks = set(config.get("forks", []))
+    external_forks: dict[str, str] = config.get("external_forks", {})
     repos = [
         repo
-        for repo in list_public_repos(fetch, user)
-        if repo["name"] not in hidden
-        and not repo.get("archived")
-        and repo["name"].lower() != user.lower()
+        for repo in data["repos"]
+        if repo["name"] not in hidden and not repo.get("archived") and repo["name"].lower() != user.lower()
     ]
-    external_forks: dict[str, str] = config.get("external_forks", {})
-    own = [repo for repo in repos if not repo.get("fork") and repo["name"] not in external_forks]
-    forks = [repo for repo in repos if repo.get("fork") or repo["name"] in external_forks]
 
-    for repo in own:
-        try:
-            fetch(f"/repos/{user}/{repo['name']}/stats/code_frequency")
-        except urllib.error.URLError:
-            pass
-    activities = {
-        repo["name"]: last_active_month(fetch, user, repo["name"], config, sleep) for repo in own
-    }
+    own = [repo for repo in repos if not repo["fork"] and repo["name"] not in external_forks]
+    activities = {repo["name"]: last_active_month(repo.get("monthly"), config) for repo in own}
 
     shown_forks: list[tuple[dict[str, Any], str]] = []
-    for repo in sort_repos(forks, {"sort": "pushed"}, {}):
+    for repo in sort_repos([repo for repo in repos if repo not in own], {"sort": "pushed"}, {}):
         if repo["name"] in external_forks:
             url = external_forks[repo["name"]].rstrip("/").removesuffix(".git")
-            label = "/".join(url.split("/")[-2:])
-            shown_forks.append((repo, f"[{nowrap(label)}]({url})"))
-        elif repo["name"] in forced_forks or has_own_commits(fetch, user, repo):
-            upstream = upstream_of(fetch, user, repo)
+            shown_forks.append((repo, f"[{nowrap('/'.join(url.split('/')[-2:]))}]({url})"))
+        elif repo["name"] in forced_forks or repo.get("own_commits"):
+            upstream = repo.get("upstream")
             cell = f"[{nowrap(upstream)}](https://github.com/{upstream})" if upstream else ""
             shown_forks.append((repo, cell))
 
-    header = name_header([repo["name"] for repo in own] + [repo["name"] for repo, _ in shown_forks])
+    header = name_header([repo["name"] for repo in own] + [repo["name"] for repo, _ in shown_forks], config)
     own_rows = [
         [repo_link(repo), description_for(repo, config), activity_badge(activities[repo["name"]], today)]
         for repo in sort_repos(own, config, activities)
@@ -308,8 +280,8 @@ def replace_between_markers(text: str, name: str, content: str) -> str:
     return text[: start_index + len(start)] + "\n" + content + "\n" + text[end_index:]
 
 
-def load_config(path: Path | None) -> dict[str, Any]:
-    if path is None:
+def load_json(path: Path | None) -> dict[str, Any]:
+    if path is None or not path.exists():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -322,34 +294,44 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=os.environ.get("GITHUB_REPOSITORY_OWNER"),
         help="GitHub login (default: $GITHUB_REPOSITORY_OWNER)",
     )
-    parser.add_argument(
-        "--config",
-        type=Path,
-        help="JSON file with hide, forks, descriptions, sort and activity settings",
-    )
-    parser.add_argument("--run", action="store_true", help="write the README (default: dry run)")
-    args = parser.parse_args(argv)
-    if not args.user:
-        parser.error("--user is required when GITHUB_REPOSITORY_OWNER is not set")
-    return args
+    parser.add_argument("--config", type=Path, help="JSON file with hide, forks, descriptions and layout settings")
+    parser.add_argument("--data", type=Path, help="JSON cache of raw API data; render from it without API calls")
+    parser.add_argument("--refresh", action="store_true", help="fetch from the API even if --data exists")
+    parser.add_argument("--run", action="store_true", help="write the README and data (default: dry run)")
+    return parser.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     if not args.run:
-        print("DRY RUN: README will not be modified. Use --run to apply changes.")
+        print("DRY RUN: no files will be modified. Use --run to apply changes.")
 
     try:
         text = args.readme.read_text(encoding="utf-8")
-        config = load_config(args.config)
-        fetch = make_fetcher(os.environ.get("GITHUB_TOKEN"))
-        sections = build_sections(fetch, args.user, config)
+        config = load_json(args.config)
+        cached = load_json(args.data)
+        if cached and not args.refresh:
+            data = cached
+            print(f"Rendering from {args.data}; use --refresh to fetch from the API.")
+        else:
+            if not args.user:
+                print("Error: --user is required when GITHUB_REPOSITORY_OWNER is not set", file=sys.stderr)
+                return 2
+            data = collect(make_fetcher(os.environ.get("GITHUB_TOKEN")), args.user, cached)
+        sections = render(data, config)
         updated = text
         for name, content in sections.items():
             updated = replace_between_markers(updated, name, content)
     except (OSError, ValueError, urllib.error.URLError) as error:
         print(f"Error: {error}", file=sys.stderr)
         return 1
+
+    new_data = json.dumps(data, indent=1, ensure_ascii=False) + "\n"
+    if args.data and data is not cached and args.run:
+        args.data.write_text(new_data, encoding="utf-8")
+        print(f"Saved {args.data}")
+    elif args.data and data is not cached:
+        print(f"DRY RUN: would save {args.data}")
 
     if updated == text:
         print("README is already up to date.")
