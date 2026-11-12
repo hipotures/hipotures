@@ -276,16 +276,27 @@ def description_for(repo: dict[str, Any], config: dict[str, Any]) -> str:
 def sort_repos(
     repos: list[dict[str, Any]], config: dict[str, Any], activities: dict[str, Activity | None]
 ) -> list[dict[str, Any]]:
+    """Order by the configured key; archived repositories always go last."""
     order = config.get("sort", "activity")
     if order == "name":
-        return sorted(repos, key=lambda repo: repo["name"].lower())
-    if order == "activity":
+        ordered = sorted(repos, key=lambda repo: repo["name"].lower())
+    elif order == "activity":
         def key(repo: dict[str, Any]) -> tuple[str, str]:
             activity = activities.get(repo["name"])
             return (activity.month if activity else "", repo.get("pushed_at") or "")
 
-        return sorted(repos, key=key, reverse=True)
-    return sorted(repos, key=lambda repo: repo.get("pushed_at") or "", reverse=True)
+        ordered = sorted(repos, key=key, reverse=True)
+    else:
+        ordered = sorted(repos, key=lambda repo: repo.get("pushed_at") or "", reverse=True)
+    return sorted(ordered, key=lambda repo: bool(repo.get("archived")))
+
+
+def archived_badge(activity: Activity | None) -> str:
+    tooltip = "No longer developed"
+    if activity is not None:
+        year, number = (int(part) for part in activity.month.split("-"))
+        tooltip += f"; last active {MONTH_NAMES[number - 1]} {year}"
+    return f'![Archived](https://img.shields.io/badge/Archived-lightgrey "{tooltip}")'
 
 
 def render(data: dict[str, Any], config: dict[str, Any], today: date | None = None) -> dict[str, str]:
@@ -297,7 +308,7 @@ def render(data: dict[str, Any], config: dict[str, Any], today: date | None = No
     repos = [
         repo
         for repo in data["repos"]
-        if repo["name"] not in hidden and not repo.get("archived") and repo["name"].lower() != user.lower()
+        if repo["name"] not in hidden and repo["name"].lower() != user.lower()
     ]
 
     own = [repo for repo in repos if not repo["fork"] and repo["name"] not in external_forks]
@@ -320,7 +331,9 @@ def render(data: dict[str, Any], config: dict[str, Any], today: date | None = No
         [
             size_badge(repo.get("languages"), config) + "&nbsp;" + repo_link(repo),
             description_for(repo, config),
-            activity_badge(activities[repo["name"]], today),
+            archived_badge(activities[repo["name"]])
+            if repo.get("archived")
+            else activity_badge(activities[repo["name"]], today),
         ]
         for repo in sort_repos(own, config, activities)
     ]

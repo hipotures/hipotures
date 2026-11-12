@@ -43,6 +43,7 @@
 | <img src="assets/size-small.svg" width="10" height="10" alt="Small" title="TypeScript · ~3k lines">&nbsp;[ProfundaImmersio](https://github.com/hipotures/ProfundaImmersio) | Profunda Immersio - VR falling-block puzzle game inspired by Tetris | ![May 2025](https://img.shields.io/badge/May_2025-blue "Last active month: 10 commits, +5475/-28 lines") |
 | <img src="assets/size-medium.svg" width="10" height="10" alt="Medium" title="TypeScript · ~14k lines">&nbsp;[MathInvasion_v2](https://github.com/hipotures/MathInvasion_v2) | Phaser 3 game - Math Invasion v2 (Iteration 2) | ![Apr 2025](https://img.shields.io/badge/Apr_2025-blue "Last active month: 59 commits, +48877/-19957 lines") |
 | <img src="assets/size-small.svg" width="10" height="10" alt="Small" title="TypeScript + JavaScript · ~180 lines">&nbsp;[MathInvasion](https://github.com/hipotures/MathInvasion) | Math Invasion: a Space Invaders and tower defense hybrid game prototype in TypeScript and Phaser 3. | ![Apr 2025](https://img.shields.io/badge/Apr_2025-blue "Last active month: 2 commits, +4704/-0 lines") |
+| <img src="assets/size-small.svg" width="10" height="10" alt="Small" title="Python · ~2k lines">&nbsp;[remodex](https://github.com/hipotures/remodex) | Remote codex | ![Archived](https://img.shields.io/badge/Archived-lightgrey "No longer developed; last active May 2026") |
 <!-- PROJECTS:END -->
 
 ## Modified Forks
