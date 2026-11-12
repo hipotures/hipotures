@@ -314,7 +314,7 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-12T14:43:07Z",
+   "pushed_at": "2026-11-12T14:52:20Z",
    "monthly": {
     "2026-11": [
      17,
@@ -1041,7 +1041,7 @@
    "html_url": "https://github.com/hipotures/remodex",
    "description": "Remote codex",
    "fork": false,
-   "archived": false,
+   "archived": true,
    "pushed_at": "2026-06-04T22:28:43Z",
    "monthly": {
     "2026-05": [

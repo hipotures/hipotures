@@ -8,6 +8,7 @@ Only the text between the marker pairs is replaced:
 
 Collecting data and rendering are separate steps: with --data, raw API data is cached in a
 JSON file and the README is rendered from it, so layout and config changes need no API calls.
+With --only REPO [REPO ...], only the named repositories are re-fetched; the rest come from --data.
 A dot before each project name shows code size in three shades of one colour from code bytes reported by /languages
 (config "size": {"limits_kb": [...], "exclude_languages": [...]}); it is not a quality measure.
 Everything else in the README is left untouched. Files are written only with --run.
@@ -140,15 +141,29 @@ def monthly_stats(
 
 
 def collect(
-    fetch: JsonFetcher, user: str, previous: dict[str, Any] | None = None, sleep: Sleeper = time.sleep
+    fetch: JsonFetcher,
+    user: str,
+    previous: dict[str, Any] | None = None,
+    sleep: Sleeper = time.sleep,
+    only: set[str] | None = None,
 ) -> dict[str, Any]:
-    """Fetch raw data for all public repositories, independent of config and layout."""
+    """Fetch raw data for all public repositories, independent of config and layout.
+
+    With `only`, the repository list is still fetched, but per-repository details are fetched
+    only for the named repositories and for ones missing from `previous`; the rest are reused.
+    """
     old = {repo["name"]: repo for repo in (previous or {}).get("repos", [])}
     repos = [{field: repo.get(field) for field in REPO_FIELDS} for repo in list_public_repos(fetch, user)]
-    sources = [repo for repo in repos if not repo["fork"]]
-    for repo in sources:
-        fetch_or_none(fetch, f"/repos/{user}/{repo['name']}/stats/contributors")
+    stale: list[dict[str, Any]] = []
     for repo in repos:
+        if only is None or repo["name"] in only or repo["name"] not in old:
+            stale.append(repo)
+        else:
+            repo.update({key: value for key, value in old[repo["name"]].items() if key not in REPO_FIELDS})
+    for repo in stale:
+        if not repo["fork"]:
+            fetch_or_none(fetch, f"/repos/{user}/{repo['name']}/stats/contributors")
+    for repo in stale:
         name = repo["name"]
         if repo["fork"]:
             repo["upstream"], repo["own_commits"] = fork_info(fetch, user, name)
@@ -343,6 +358,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--config", type=Path, help="JSON file with hide, forks, descriptions and layout settings")
     parser.add_argument("--data", type=Path, help="JSON cache of raw API data; render from it without API calls")
     parser.add_argument("--refresh", action="store_true", help="fetch from the API even if --data exists")
+    parser.add_argument(
+        "--only",
+        nargs="+",
+        metavar="REPO",
+        help="refresh details of these repositories only and reuse --data for the rest (implies --refresh)",
+    )
     parser.add_argument("--run", action="store_true", help="write the README and data (default: dry run)")
     return parser.parse_args(argv)
 
@@ -356,14 +377,18 @@ def main(argv: list[str] | None = None) -> int:
         text = args.readme.read_text(encoding="utf-8")
         config = load_json(args.config)
         cached = load_json(args.data)
-        if cached and not args.refresh:
+        if cached and not args.refresh and not args.only:
             data = cached
-            print(f"Rendering from {args.data}; use --refresh to fetch from the API.")
+            print(f"Rendering from {args.data}; use --refresh or --only to fetch from the API.")
         else:
             if not args.user:
                 print("Error: --user is required when GITHUB_REPOSITORY_OWNER is not set", file=sys.stderr)
                 return 2
-            data = collect(make_fetcher(os.environ.get("GITHUB_TOKEN")), args.user, cached)
+            only = set(args.only) if args.only else None
+            data = collect(make_fetcher(os.environ.get("GITHUB_TOKEN")), args.user, cached, only=only)
+            missing = sorted((only or set()) - {repo["name"] for repo in data["repos"]})
+            if missing:
+                print(f"Warning: not public repositories of {args.user}: {', '.join(missing)}", file=sys.stderr)
         sections = render(data, config)
         updated = text
         for name, content in sections.items():
