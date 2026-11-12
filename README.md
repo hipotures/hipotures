@@ -56,5 +56,4 @@
 | [ratpoints‑gpu](https://github.com/hipotures/ratpoints-gpu) | CUDA rational-point finder compatible with Michael Stoll's ratpoints. | [wgxli/⁠ratpoints‑gpu](https://github.com/wgxli/ratpoints-gpu) |
 | [aideml](https://github.com/hipotures/aideml) | Heavily reworked for Kaggle Playground: research-generated root hypotheses, AutoGluon preprocessing and reruns, code-ahead execution queue, TUI and web dashboard of the solution tree, submission blender and Telegram notifications. | [WecoAI/⁠aideml](https://github.com/WecoAI/aideml) |
 | [identity](https://github.com/hipotures/identity) | Image rotation, playback speed control and a path recording mode exporting clicked pixel coordinates as JSON. | [YaLTeR/⁠identity](https://gitlab.gnome.org/YaLTeR/identity) |
-| [calendar‑mcp](https://github.com/hipotures/calendar-mcp) | This project implements a Python-based MCP (Model Context Protocol) server that acts as an interface between Large Language Models (LLMs) and the Google Calendar API. It enables LLMs to perform calendar operations via natural language requests. | [deciduus/⁠calendar‑mcp](https://github.com/deciduus/calendar-mcp) |
 <!-- FORKS:END -->
