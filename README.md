@@ -44,7 +44,7 @@
 | <img src="assets/size-small.svg" width="10" height="10" alt="Small" title="Python · ~2k lines">&nbsp;[remodex](https://github.com/hipotures/remodex) | Remote codex | ![Archived](https://img.shields.io/badge/Archived-lightgrey "No longer developed; last active May 2026") |
 | <img src="assets/size-large.svg" width="10" height="10" alt="Large" title="Python · ~82k lines">&nbsp;[s5e7‑with‑claude](https://github.com/hipotures/s5e7-with-claude) | Kaggle Playground Series S5E7 (introvert/extrovert classification) experiments and analysis with Claude. | ![Archived](https://img.shields.io/badge/Archived-lightgrey "No longer developed; last active Jul 2025") |
 
-<sub>Plus 15 private repositories, ~142k lines of code.</sub>
+<sub>Plus 14 private repositories, ~142k lines of code.</sub>
 <!-- PROJECTS:END -->
 
 ## Modified Forks
