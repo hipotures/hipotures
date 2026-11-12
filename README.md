@@ -55,6 +55,7 @@
 | [tutor](https://github.com/hipotures/tutor) | Personal fork of Vaultwarden, used for deployment and management through HomeStack. All credit goes to the upstream project. | [dani‑garcia/⁠vaultwarden](https://github.com/dani-garcia/vaultwarden) |
 | [squares](https://github.com/hipotures/squares) | New results and AI-powered research on the square packing problem | [jlevy/⁠squares](https://github.com/jlevy/squares) |
 | [ratpoints‑gpu](https://github.com/hipotures/ratpoints-gpu) | CUDA rational-point finder compatible with Michael Stoll's ratpoints. | [wgxli/⁠ratpoints‑gpu](https://github.com/wgxli/ratpoints-gpu) |
+| [aideml](https://github.com/hipotures/aideml) | Heavily reworked for Kaggle Playground: research-generated root hypotheses, AutoGluon preprocessing and reruns, code-ahead execution queue, TUI and web dashboard of the solution tree, submission blender and Telegram notifications. | [WecoAI/⁠aideml](https://github.com/WecoAI/aideml) |
 | [identity](https://github.com/hipotures/identity) | Image rotation, playback speed control and a path recording mode exporting clicked pixel coordinates as JSON. | [YaLTeR/⁠identity](https://gitlab.gnome.org/YaLTeR/identity) |
 <!-- FORKS:END -->
 

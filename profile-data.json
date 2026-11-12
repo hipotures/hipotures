@@ -62,7 +62,7 @@
    "archived": false,
    "pushed_at": "2026-08-23T16:47:52Z",
    "upstream": "WecoAI/aideml",
-   "own_commits": false
+   "own_commits": true
   },
   {
    "name": "asquerix",
@@ -298,12 +298,12 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-12T17:52:07Z",
+   "pushed_at": "2026-11-12T17:57:58Z",
    "monthly": {
     "2026-11": [
-     34,
-     6066,
-     988
+     37,
+     6079,
+     996
     ]
    },
    "languages": {
