@@ -3,7 +3,7 @@
 <!-- PROJECTS:START -->
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Repository&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Description | Activity |
 | --- | --- | --- |
-| [scriptoza](https://github.com/hipotures/scriptoza) | Collection of small utility scripts organized by category | ![Nov](https://img.shields.io/badge/Nov-brightgreen "Last active month: 34 commits, +67224/-47352 lines") |
+| [scriptoza](https://github.com/hipotures/scriptoza) | Collection of small utility scripts organized by category | ![Nov](https://img.shields.io/badge/Nov-brightgreen "Last active month: 36 commits, +67762/-47862 lines") |
 | [homestack](https://github.com/hipotures/homestack) | Turn Proxmox VE into a developer cloud: disposable-OS workspaces with persistent /home, automated AI coding agent setup, and declarative LXC services | ![Nov](https://img.shields.io/badge/Nov-brightgreen "Last active month: 228 commits, +21263/-20786 lines") |
 | [vbc](https://github.com/hipotures/vbc) | Event-driven video batch compression tool with AV1, metadata preservation, and live dashboard. | ![Nov](https://img.shields.io/badge/Nov-brightgreen "Last active month: 256 commits, +109442/-118689 lines") |
 | [intelitex](https://github.com/hipotures/intelitex) | Local LLM workflow for translating EPUB books, with human terminology approval and resumable multi-pass translation | ![Nov](https://img.shields.io/badge/Nov-brightgreen "Last active month: 24 commits, +1427/-85 lines") |
