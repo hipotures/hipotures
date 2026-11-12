@@ -176,6 +176,9 @@ def collect(
     private = private_summary(fetch, user)
     if private is None:
         private = (previous or {}).get("private")
+        print("Private repositories: token cannot list them, keeping cached totals.")
+    else:
+        print(f"Private repositories: refreshed ({private['count']}).")
     contributions = collect_contributions(fetch, user)
     if contributions is None:
         contributions = (previous or {}).get("contributions", [])
