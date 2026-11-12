@@ -8,17 +8,17 @@
 | [vbc](https://github.com/hipotures/vbc) | Event-driven video batch compression tool with AV1, metadata preservation, and live dashboard. | 2026-11-10 |
 | [intelitex](https://github.com/hipotures/intelitex) | Local LLM workflow for translating EPUB books, with human terminology approval and resumable multi-pass translation | 2026-11-08 |
 | [tenerix](https://github.com/hipotures/tenerix) | Alpine Linux and hardware investigation for the NETGEAR ReadyNAS RN426, replacing its end-of-life factory software. | 2026-11-05 |
-| [rad](https://github.com/hipotures/rad) | RaD | 2026-11-04 |
+| [rad](https://github.com/hipotures/rad) | Research archive for local LLM serving: Qwen benchmarks, hardware characterization, expert-residency experiments and launch scripts. | 2026-11-04 |
 | [homestack-manifests](https://github.com/hipotures/homestack-manifests) | Portable service manifests for deploying third-party applications with HomeStack on Proxmox VE. | 2026-11-02 |
-| [field-laboratory](https://github.com/hipotures/field-laboratory) | field-laboratory | 2026-10-12 |
-| [asquerix](https://github.com/hipotures/asquerix) | Asquerix | 2026-10-10 |
-| [mypowers](https://github.com/hipotures/mypowers) | MyPowers | 2026-10-08 |
-| [mutation-forge-lab](https://github.com/hipotures/mutation-forge-lab) | Mutation Forge Lab | 2026-10-02 |
-| [diophantasmagoria](https://github.com/hipotures/diophantasmagoria) | diophantasmagoria | 2026-10-02 |
-| [vdl](https://github.com/hipotures/vdl) | vdl | 2026-09-28 |
+| [field-laboratory](https://github.com/hipotures/field-laboratory) | Hugo static site for armum.eu with posts and project pages, based on the hugo-coder theme. | 2026-10-12 |
+| [asquerix](https://github.com/hipotures/asquerix) | NVIDIA Warp proof of concept searching for dense packings of unit squares by wall-driven compression. | 2026-10-10 |
+| [mypowers](https://github.com/hipotures/mypowers) | Monitor and control an ALLPOWERS S300 power station over Bluetooth: telemetry, Telegram alerts and a Rust TUI. | 2026-10-08 |
+| [mutation-forge-lab](https://github.com/hipotures/mutation-forge-lab) | LLM-driven evolution of deterministic Python policies that rank graph mutations for HEG. | 2026-10-02 |
+| [diophantasmagoria](https://github.com/hipotures/diophantasmagoria) | Resumable C++23 searcher for integer solutions of y*z*(y+z) = G(x). | 2026-10-02 |
+| [vdl](https://github.com/hipotures/vdl) | Recurring yt-dlp downloads with a Rich terminal UI and a mobile-first web interface. | 2026-09-28 |
 | [tklivetracker](https://github.com/hipotures/tklivetracker) | Self-hosted TikTok live-stream monitoring, recording, and management dashboard. | 2026-09-28 |
 | [lumison](https://github.com/hipotures/lumison) | Planned piano/MIDI-driven audiovisual app built on a thin-film visual engine, with an experimental Thin-Film Lab. | 2026-09-16 |
-| [autonomous-materials-lab](https://github.com/hipotures/autonomous-materials-lab) | AML | 2026-09-11 |
+| [autonomous-materials-lab](https://github.com/hipotures/autonomous-materials-lab) | Design repository for AI-guided inverse design of materials, starting with atmospheric-entry working fluids. | 2026-09-11 |
 | [37degrees](https://github.com/hipotures/37degrees) | Professional TikTok video generator transforming classic literature into engaging short-form content for Polish youth | 2026-09-02 |
 | [graphoratory](https://github.com/hipotures/graphoratory) | Python graph workspace tool and computational laboratory for the Erdős–Gyárfás conjecture. | 2026-08-18 |
 | [piano-practice-analyzer](https://github.com/hipotures/piano-practice-analyzer) | Local tool that estimates piano practice time from MP3/WAV recordings using FFmpeg silence detection. | 2026-08-07 |
@@ -38,7 +38,6 @@
 | [command-center](https://github.com/hipotures/command-center) | Modern SQLite-based analytics for Claude Code usage with intelligent caching | 2026-03-02 |
 | [gitiary](https://github.com/hipotures/gitiary) | Personal dashboard for visualizing GitHub commit activity across multiple repositories. | 2026-03-02 |
 | [sonus](https://github.com/hipotures/sonus) | Sonus is a scalable, cloud-native automated transcription and diarization system built on Google Cloud Pla tform (GCP). It utilizes **WhisperX** to provide high-accuracy speech-to-text conversion with speaker iden tification (diarization). | 2026-02-13 |
-| [capax](https://github.com/hipotures/capax) | AI Skills | 2026-02-05 |
 | [mlarena](https://github.com/hipotures/mlarena) | ML Arena - standardized and powerful workflow for participating in Kaggle competitions | 2026-01-31 |
 | [todoit](https://github.com/hipotures/todoit) | Intelligent Task Management System with MCP and CLI Integration | 2025-10-30 |
 | [s5e7-with-claude](https://github.com/hipotures/s5e7-with-claude) | Kaggle Playground Series S5E7 (introvert/extrovert classification) experiments and analysis with Claude. | 2025-07-20 |
