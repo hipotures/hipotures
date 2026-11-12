@@ -8,7 +8,7 @@ Only the text between the marker pairs is replaced:
 
 Collecting data and rendering are separate steps: with --data, raw API data is cached in a
 JSON file and the README is rendered from it, so layout and config changes need no API calls.
-The Size column shows three shades of one colour from code bytes reported by /languages
+A dot before each project name shows code size in three shades of one colour from code bytes reported by /languages
 (config "size": {"limits_kb": [...], "exclude_languages": [...]}); it is not a quality measure.
 Everything else in the README is left untouched. Files are written only with --run.
 """
@@ -36,7 +36,7 @@ ACTIVITY_COLORS = [(1, "brightgreen"), (3, "green"), (6, "yellow"), (12, "orange
 SETTLED_COLOR = "blue"
 DEFAULT_MIN_COMMITS = 3
 DEFAULT_MIN_LINES = 100
-SIZE_LEVELS = [("Small", "c4b5fd"), ("Medium", "8b5cf6"), ("Large", "5b21b6")]
+SIZE_LEVELS = ["Small", "Medium", "Large"]  # dots in assets/size-*.svg, light to dark
 DEFAULT_SIZE_LIMITS_KB = [300, 2048]
 DEFAULT_SIZE_EXCLUDED = ["HTML", "Jupyter Notebook", "CSS", "SCSS", "TeX"]
 NAME_CHAR_EM = 0.51
@@ -196,8 +196,8 @@ def size_badge(languages: dict[str, int] | None, config: dict[str, Any]) -> str:
     limits = settings.get("limits_kb", DEFAULT_SIZE_LIMITS_KB)
     code_kb = sum(size for language, size in (languages or {}).items() if language not in excluded) / 1024
     index = next((index for index, limit in enumerate(limits) if code_kb < limit), len(limits))
-    label, color = SIZE_LEVELS[index]
-    return f"![{label}](https://img.shields.io/badge/{label}-{color})"
+    label = SIZE_LEVELS[index]
+    return f'<img src="assets/size-{label.lower()}.svg" width="10" height="10" alt="{label}" title="{label} codebase">'
 
 
 def escape_cell(text: str) -> str:
@@ -274,19 +274,20 @@ def render(data: dict[str, Any], config: dict[str, Any], today: date | None = No
             cell = f"[{nowrap(upstream)}](https://github.com/{upstream})" if upstream else ""
             shown_forks.append((repo, cell))
 
-    header = name_header([repo["name"] for repo in own] + [repo["name"] for repo, _ in shown_forks], config)
+    # The size dot before own project names takes about two characters of width.
+    names = [repo["name"] + "xx" for repo in own] + [repo["name"] for repo, _ in shown_forks]
+    header = name_header(names, config)
     own_rows = [
         [
-            repo_link(repo),
+            size_badge(repo.get("languages"), config) + "&nbsp;" + repo_link(repo),
             description_for(repo, config),
             activity_badge(activities[repo["name"]], today),
-            size_badge(repo.get("languages"), config),
         ]
         for repo in sort_repos(own, config, activities)
     ]
     fork_rows = [[repo_link(repo), description_for(repo, config), cell] for repo, cell in shown_forks]
     return {
-        PROJECTS_MARKER: render_table([header, "Description", "Activity", "Size"], own_rows),
+        PROJECTS_MARKER: render_table([header, "Description", "Activity"], own_rows),
         FORKS_MARKER: render_table([header, "My modifications", "Upstream"], fork_rows),
     }
 
