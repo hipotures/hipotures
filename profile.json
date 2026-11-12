@@ -5,8 +5,25 @@
     "identity": "https://gitlab.gnome.org/YaLTeR/identity"
   },
   "descriptions": {
-    "identity": "Image rotation, playback speed control and a path recording mode exporting clicked pixel coordinates as JSON."
+    "identity": "Image rotation, playback speed control and a path recording mode exporting clicked pixel coordinates as JSON.",
+    "aideml": "Heavily reworked for Kaggle Playground: research-generated root hypotheses, AutoGluon preprocessing and reruns, code-ahead execution queue, TUI and web dashboard of the solution tree, submission blender and Telegram notifications."
   },
   "sort": "activity",
-  "activity": {"min_commits": 3, "min_lines": 100}
+  "activity": {
+    "min_commits": 3,
+    "min_lines": 100
+  },
+  "size": {
+    "limits_kb": [
+      300,
+      2048
+    ],
+    "exclude_languages": [
+      "HTML",
+      "Jupyter Notebook",
+      "CSS",
+      "SCSS",
+      "TeX"
+    ]
+  }
 }
