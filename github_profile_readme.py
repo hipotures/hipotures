@@ -479,7 +479,7 @@ def render_contributions(items: list[dict[str, Any]], config: dict[str, Any]) ->
             for repo, entries in ordered
         ]
         parts.append(
-            "Projects where I opened pull requests or issues, or joined a discussion:\n\n"
+            "Opened pull requests or issues, or joined a discussion:\n\n"
             + render_table(["Project", "Years", "Involvement"], rows)
         )
     return "\n\n".join(parts)

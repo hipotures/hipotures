@@ -70,7 +70,7 @@
 | [CrocSwap/⁠integer‑mult‑bounds](https://github.com/CrocSwap/integer-mult-bounds) | [Alternating pair-block networks for conditional κ = 4.034168124 × 10⁻⁵ > 2⁻¹⁵](https://github.com/CrocSwap/integer-mult-bounds/pull/41) | ![closed](https://img.shields.io/badge/closed-lightgrey) |
 | [CrocSwap/⁠integer‑mult‑bounds](https://github.com/CrocSwap/integer-mult-bounds) | [Source-framed h53 conditional witness above 2^-20: attributed research record](https://github.com/CrocSwap/integer-mult-bounds/pull/20) | ![open](https://img.shields.io/badge/open-1f883d) |
 
-Projects where I opened pull requests or issues, or joined a discussion:
+Opened pull requests or issues, or joined a discussion:
 
 | Project | Years | Involvement |
 | --- | --- | --- |
