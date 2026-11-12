@@ -23,6 +23,7 @@ import os
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from dataclasses import dataclass
 from datetime import date, datetime, timezone
@@ -32,6 +33,7 @@ from typing import Any, Callable
 API_URL = "https://api.github.com"
 PROJECTS_MARKER = "PROJECTS"
 FORKS_MARKER = "FORKS"
+CONTRIBUTIONS_MARKER = "CONTRIBUTIONS"  # optional section
 MONTH_NAMES = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
 ACTIVITY_COLORS = [(1, "brightgreen"), (3, "green"), (6, "yellow"), (12, "orange")]
 SETTLED_COLOR = "blue"
@@ -174,7 +176,51 @@ def collect(
     private = private_summary(fetch, user)
     if private is None:
         private = (previous or {}).get("private")
-    return {"user": user, "repos": sorted(repos, key=lambda repo: repo["name"].lower()), "private": private}
+    contributions = collect_contributions(fetch, user)
+    if contributions is None:
+        contributions = (previous or {}).get("contributions", [])
+    return {
+        "user": user,
+        "repos": sorted(repos, key=lambda repo: repo["name"].lower()),
+        "private": private,
+        "contributions": contributions,
+    }
+
+
+CONTRIBUTION_QUERIES = {
+    "authored": "author:{user} -user:{user}",
+    "commented": "commenter:{user} -author:{user} -user:{user}",
+}
+
+
+def collect_contributions(fetch: JsonFetcher, user: str) -> list[dict[str, Any]] | None:
+    """Issues and pull requests in other people's repositories that the user opened or commented on."""
+    items: list[dict[str, Any]] = []
+    for role, query in CONTRIBUTION_QUERIES.items():
+        q = urllib.parse.quote(query.format(user=user))
+        page = 1
+        while True:
+            result = fetch_or_none(fetch, f"/search/issues?q={q}&per_page=100&page={page}")
+            if not isinstance(result, dict):
+                return None
+            batch = result.get("items", [])
+            for item in batch:
+                pull = item.get("pull_request")
+                items.append(
+                    {
+                        "repo": item["repository_url"].split("/repos/", 1)[1],
+                        "kind": "pr" if pull else "issue",
+                        "role": role,
+                        "state": "merged" if pull and pull.get("merged_at") else item["state"],
+                        "created": item["created_at"][:10],
+                        "title": item["title"],
+                        "url": item["html_url"],
+                    }
+                )
+            if len(batch) < 100 or page * 100 >= result.get("total_count", 0):
+                break
+            page += 1
+    return sorted(items, key=lambda item: item["created"], reverse=True)
 
 
 def private_summary(fetch: JsonFetcher, user: str) -> dict[str, Any] | None:
@@ -386,7 +432,61 @@ def render(data: dict[str, Any], config: dict[str, Any], today: date | None = No
         PROJECTS_MARKER: render_table([header, "Description", "Activity"], own_rows)
         + private_note(data.get("private"), config),
         FORKS_MARKER: render_table([header, "My modifications", "Upstream"], fork_rows),
+        CONTRIBUTIONS_MARKER: render_contributions(data.get("contributions", []), config),
     }
+
+
+PR_STATE_COLORS = {"merged": "8250df", "open": "1f883d", "closed": "lightgrey"}
+
+
+def render_contributions(items: list[dict[str, Any]], config: dict[str, Any]) -> str:
+    """Pull requests as a table, then one row per project with years and kinds of involvement."""
+    hidden = set(config.get("hide_contributions", []))
+    items = [item for item in items if item["repo"] not in hidden]
+    parts: list[str] = []
+
+    pulls = [item for item in items if item["kind"] == "pr" and item["role"] == "authored"]
+    if pulls:
+        rows = []
+        newest_first = sorted(pulls, key=lambda item: item["created"], reverse=True)
+        for item in sorted(newest_first, key=lambda item: item["state"] != "merged"):
+            state = item["state"]
+            badge = f"![{state}](https://img.shields.io/badge/{state}-{PR_STATE_COLORS.get(state, 'lightgrey')})"
+            repo = f"[{nowrap(item['repo'])}](https://github.com/{item['repo']})"
+            rows.append([repo, f"[{escape_cell(item['title'])}]({item['url']})", badge])
+        parts.append(render_table(["Project", "Pull request", "Status"], rows))
+
+    projects: dict[str, list[dict[str, Any]]] = {}
+    for item in items:
+        projects.setdefault(item["repo"], []).append(item)
+    if projects:
+        def summary(entries: list[dict[str, Any]]) -> str:
+            counts = {
+                "PR": sum(e["kind"] == "pr" and e["role"] == "authored" for e in entries),
+                "issue": sum(e["kind"] == "issue" and e["role"] == "authored" for e in entries),
+                "discussion": sum(e["role"] == "commented" for e in entries),
+            }
+            return ", ".join(f"{count} {noun}{'s' if count > 1 else ''}" for noun, count in counts.items() if count)
+
+        def years(entries: list[dict[str, Any]]) -> str:
+            first = min(e["created"][:4] for e in entries)
+            last = max(e["created"][:4] for e in entries)
+            return first if first == last else f"{first}–{last}"
+
+        ordered = sorted(projects.items(), key=lambda pair: max(e["created"] for e in pair[1]), reverse=True)
+        rows = [
+            [f"[{nowrap(repo)}](https://github.com/{repo})", years(entries), summary(entries)]
+            for repo, entries in ordered
+        ]
+        parts.append(
+            "Projects where I opened pull requests or issues, or joined a discussion:\n\n"
+            + render_table(["Project", "Years", "Involvement"], rows)
+        )
+    return "\n\n".join(parts)
+
+
+def has_markers(text: str, name: str) -> bool:
+    return f"<!-- {name}:START -->" in text and f"<!-- {name}:END -->" in text
 
 
 def replace_between_markers(text: str, name: str, content: str) -> str:
@@ -450,6 +550,8 @@ def main(argv: list[str] | None = None) -> int:
         sections = render(data, config)
         updated = text
         for name, content in sections.items():
+            if name == CONTRIBUTIONS_MARKER and not has_markers(updated, name):
+                continue
             updated = replace_between_markers(updated, name, content)
     except (OSError, ValueError, urllib.error.URLError) as error:
         print(f"Error: {error}", file=sys.stderr)

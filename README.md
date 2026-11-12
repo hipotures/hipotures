@@ -59,3 +59,41 @@
 | [aideml](https://github.com/hipotures/aideml) | Heavily reworked for Kaggle Playground: research-generated root hypotheses, AutoGluon preprocessing and reruns, code-ahead execution queue, TUI and web dashboard of the solution tree, submission blender and Telegram notifications. | [WecoAI/⁠aideml](https://github.com/WecoAI/aideml) |
 | [identity](https://github.com/hipotures/identity) | Image rotation, playback speed control and a path recording mode exporting clicked pixel coordinates as JSON. | [YaLTeR/⁠identity](https://gitlab.gnome.org/YaLTeR/identity) |
 <!-- FORKS:END -->
+
+## Contributions
+
+<!-- CONTRIBUTIONS:START -->
+| Project | Pull request | Status |
+| --- | --- | --- |
+| [CrocSwap/⁠integer‑mult‑bounds](https://github.com/CrocSwap/integer-mult-bounds) | [Enlarged positive-frame networks: conditional kappa = 4.171211781e-5 > 2^-15](https://github.com/CrocSwap/integer-mult-bounds/pull/51) | ![merged](https://img.shields.io/badge/merged-8250df) |
+| [CrocSwap/⁠integer‑mult‑bounds](https://github.com/CrocSwap/integer-mult-bounds) | [Scoped negative result: PR589's bit word is exactly transport-locally optimal (no new kappa)](https://github.com/CrocSwap/integer-mult-bounds/pull/1345) | ![open](https://img.shields.io/badge/open-1f883d) |
+| [CrocSwap/⁠integer‑mult‑bounds](https://github.com/CrocSwap/integer-mult-bounds) | [Alternating pair-block networks for conditional κ = 4.034168124 × 10⁻⁵ > 2⁻¹⁵](https://github.com/CrocSwap/integer-mult-bounds/pull/41) | ![closed](https://img.shields.io/badge/closed-lightgrey) |
+| [CrocSwap/⁠integer‑mult‑bounds](https://github.com/CrocSwap/integer-mult-bounds) | [Source-framed h53 conditional witness above 2^-20: attributed research record](https://github.com/CrocSwap/integer-mult-bounds/pull/20) | ![open](https://img.shields.io/badge/open-1f883d) |
+
+Projects where I opened pull requests or issues, or joined a discussion:
+
+| Project | Years | Involvement |
+| --- | --- | --- |
+| [CrocSwap/⁠integer‑mult‑bounds](https://github.com/CrocSwap/integer-mult-bounds) | 2026 | 4 PRs |
+| [Niko1221/⁠Strata](https://github.com/Niko1221/Strata) | 2026 | 1 issue |
+| [google‑deepmind/⁠funsearch](https://github.com/google-deepmind/funsearch) | 2026 | 1 issue |
+| [herdrdev/⁠herdr](https://github.com/herdrdev/herdr) | 2026 | 1 discussion |
+| [openai/⁠codex](https://github.com/openai/codex) | 2026 | 2 issues, 1 discussion |
+| [resemble‑ai/⁠chatterbox](https://github.com/resemble-ai/chatterbox) | 2025 | 1 discussion |
+| [google‑gemini/⁠gemini‑cli](https://github.com/google-gemini/gemini-cli) | 2025 | 1 discussion |
+| [ccusage/⁠ccusage](https://github.com/ccusage/ccusage) | 2025 | 1 issue |
+| [anomalyco/⁠opencode](https://github.com/anomalyco/opencode) | 2025 | 1 discussion |
+| [eyaltoledano/⁠claude‑task‑master](https://github.com/eyaltoledano/claude-task-master) | 2025 | 1 discussion |
+| [jwdj/⁠EasyABC](https://github.com/jwdj/EasyABC) | 2025 | 1 issue |
+| [Aider‑AI/⁠aider](https://github.com/Aider-AI/aider) | 2025 | 1 issue |
+| [huggingface/⁠smolagents](https://github.com/huggingface/smolagents) | 2025 | 2 issues, 1 discussion |
+| [cline/⁠cline](https://github.com/cline/cline) | 2025 | 1 discussion |
+| [BerriAI/⁠litellm](https://github.com/BerriAI/litellm) | 2025 | 1 issue |
+| [FlowiseAI/⁠Flowise](https://github.com/FlowiseAI/Flowise) | 2024 | 1 discussion |
+| [pycaret/⁠pycaret](https://github.com/pycaret/pycaret) | 2023 | 1 issue |
+| [ClickHouse/⁠ClickHouse](https://github.com/ClickHouse/ClickHouse) | 2022 | 1 discussion |
+| [clearml/⁠clearml](https://github.com/clearml/clearml) | 2022 | 1 issue |
+| [OpenTSDB/⁠opentsdb](https://github.com/OpenTSDB/opentsdb) | 2020 | 1 issue |
+| [rspamd/⁠rspamd](https://github.com/rspamd/rspamd) | 2018–2019 | 8 issues |
+| [joyieldInc/⁠predixy](https://github.com/joyieldInc/predixy) | 2018 | 1 issue |
+<!-- CONTRIBUTIONS:END -->

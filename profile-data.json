@@ -314,12 +314,12 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-12T14:53:42Z",
+   "pushed_at": "2026-11-12T15:03:04Z",
    "monthly": {
     "2026-11": [
-     17,
-     4820,
-     846
+     24,
+     5086,
+     908
     ]
    },
    "languages": {
@@ -1484,5 +1484,331 @@
    "SCSS": 21151,
    "Makefile": 1463
   }
- }
+ },
+ "contributions": [
+  {
+   "repo": "CrocSwap/integer-mult-bounds",
+   "kind": "pr",
+   "role": "authored",
+   "state": "open",
+   "created": "2026-10-13",
+   "title": "Scoped negative result: PR589's bit word is exactly transport-locally optimal (no new kappa)",
+   "url": "https://github.com/CrocSwap/integer-mult-bounds/pull/1345"
+  },
+  {
+   "repo": "CrocSwap/integer-mult-bounds",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-10-08",
+   "title": "Enlarged positive-frame networks: conditional kappa = 4.171211781e-5 > 2^-15",
+   "url": "https://github.com/CrocSwap/integer-mult-bounds/pull/51"
+  },
+  {
+   "repo": "CrocSwap/integer-mult-bounds",
+   "kind": "pr",
+   "role": "authored",
+   "state": "closed",
+   "created": "2026-10-08",
+   "title": "Alternating pair-block networks for conditional κ = 4.034168124 × 10⁻⁵ > 2⁻¹⁵",
+   "url": "https://github.com/CrocSwap/integer-mult-bounds/pull/41"
+  },
+  {
+   "repo": "CrocSwap/integer-mult-bounds",
+   "kind": "pr",
+   "role": "authored",
+   "state": "open",
+   "created": "2026-10-08",
+   "title": "Source-framed h53 conditional witness above 2^-20: attributed research record",
+   "url": "https://github.com/CrocSwap/integer-mult-bounds/pull/20"
+  },
+  {
+   "repo": "Niko1221/Strata",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2026-10-05",
+   "title": "CPU expert-pool 20 ms spin can hurt GPU-heavy decode; 100 µs gives ~15% higher TG and ~4× lower CPU usage on dual RTX 4090",
+   "url": "https://github.com/Niko1221/Strata/issues/921"
+  },
+  {
+   "repo": "google-deepmind/funsearch",
+   "kind": "issue",
+   "role": "authored",
+   "state": "open",
+   "created": "2026-07-28",
+   "title": "Fix misspelled author name “Matthew” to “Mathew” in cyclic graphs notebook",
+   "url": "https://github.com/google-deepmind/funsearch/issues/11"
+  },
+  {
+   "repo": "herdrdev/herdr",
+   "kind": "issue",
+   "role": "commented",
+   "state": "closed",
+   "created": "2026-07-09",
+   "title": "claude code is setting up the monitor and waiting, but the agent state in the header shows 'complete' instead of 'in-progress'",
+   "url": "https://github.com/herdrdev/herdr/issues/1217"
+  },
+  {
+   "repo": "openai/codex",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2026-05-02",
+   "title": "Sandboxed command execution hangs without output for simple commands",
+   "url": "https://github.com/openai/codex/issues/20807"
+  },
+  {
+   "repo": "openai/codex",
+   "kind": "issue",
+   "role": "authored",
+   "state": "open",
+   "created": "2026-05-01",
+   "title": "Background terminal commands hang indefinitely in Codex sandbox.",
+   "url": "https://github.com/openai/codex/issues/20611"
+  },
+  {
+   "repo": "openai/codex",
+   "kind": "issue",
+   "role": "commented",
+   "state": "open",
+   "created": "2026-04-28",
+   "title": "Codex CLI shell commands hang indefinitely during bwrap sandbox initialization on autofs-backed mounts",
+   "url": "https://github.com/openai/codex/issues/20017"
+  },
+  {
+   "repo": "resemble-ai/chatterbox",
+   "kind": "issue",
+   "role": "commented",
+   "state": "open",
+   "created": "2025-09-15",
+   "title": "Polish Language is Very BAD",
+   "url": "https://github.com/resemble-ai/chatterbox/issues/286"
+  },
+  {
+   "repo": "google-gemini/gemini-cli",
+   "kind": "issue",
+   "role": "commented",
+   "state": "closed",
+   "created": "2025-09-06",
+   "title": "✕ [API Error: Model stream ended with an invalid chunk or missing finish reason.]",
+   "url": "https://github.com/google-gemini/gemini-cli/issues/7851"
+  },
+  {
+   "repo": "ccusage/ccusage",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2025-08-07",
+   "title": "Probably new, lower limits for MAX100",
+   "url": "https://github.com/ccusage/ccusage/issues/436"
+  },
+  {
+   "repo": "anomalyco/opencode",
+   "kind": "issue",
+   "role": "commented",
+   "state": "closed",
+   "created": "2025-07-19",
+   "title": "Unable to select text with the mouse from the open code interface",
+   "url": "https://github.com/anomalyco/opencode/issues/1152"
+  },
+  {
+   "repo": "eyaltoledano/claude-task-master",
+   "kind": "issue",
+   "role": "commented",
+   "state": "closed",
+   "created": "2025-07-13",
+   "title": "bug: Cannot use task-master in claude code, neither MCP nor command line",
+   "url": "https://github.com/eyaltoledano/claude-task-master/issues/963"
+  },
+  {
+   "repo": "jwdj/EasyABC",
+   "kind": "issue",
+   "role": "authored",
+   "state": "open",
+   "created": "2025-04-19",
+   "title": "xml2abc.py ValueError: wrong direction type",
+   "url": "https://github.com/jwdj/EasyABC/issues/128"
+  },
+  {
+   "repo": "Aider-AI/aider",
+   "kind": "issue",
+   "role": "authored",
+   "state": "open",
+   "created": "2025-04-15",
+   "title": "openrouter/optimus-alpha retirement",
+   "url": "https://github.com/Aider-AI/aider/issues/3810"
+  },
+  {
+   "repo": "huggingface/smolagents",
+   "kind": "issue",
+   "role": "authored",
+   "state": "open",
+   "created": "2025-02-03",
+   "title": "LLM-ready documentation",
+   "url": "https://github.com/huggingface/smolagents/issues/485"
+  },
+  {
+   "repo": "cline/cline",
+   "kind": "pr",
+   "role": "commented",
+   "state": "merged",
+   "created": "2025-02-03",
+   "title": "feat: add LiteLLM API provider support",
+   "url": "https://github.com/cline/cline/pull/1618"
+  },
+  {
+   "repo": "BerriAI/litellm",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2025-01-31",
+   "title": "[Bug]: custom_llm_provider deepseek - unhealthy health status / invalid base_url",
+   "url": "https://github.com/BerriAI/litellm/issues/8146"
+  },
+  {
+   "repo": "huggingface/smolagents",
+   "kind": "pr",
+   "role": "commented",
+   "state": "merged",
+   "created": "2025-01-15",
+   "title": "Document OpenTelemetry usage",
+   "url": "https://github.com/huggingface/smolagents/pull/204"
+  },
+  {
+   "repo": "huggingface/smolagents",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2025-01-07",
+   "title": "[enhancement] Observability ",
+   "url": "https://github.com/huggingface/smolagents/issues/103"
+  },
+  {
+   "repo": "FlowiseAI/Flowise",
+   "kind": "issue",
+   "role": "commented",
+   "state": "closed",
+   "created": "2024-06-14",
+   "title": "[BUG] blank response on chat UI",
+   "url": "https://github.com/FlowiseAI/Flowise/issues/2641"
+  },
+  {
+   "repo": "pycaret/pycaret",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2023-06-01",
+   "title": "[BUG]: use_train_data=True/False",
+   "url": "https://github.com/pycaret/pycaret/issues/3583"
+  },
+  {
+   "repo": "ClickHouse/ClickHouse",
+   "kind": "issue",
+   "role": "commented",
+   "state": "closed",
+   "created": "2022-10-05",
+   "title": "MaterializedMySQL  high CPU usage and load averages",
+   "url": "https://github.com/ClickHouse/ClickHouse/issues/42105"
+  },
+  {
+   "repo": "clearml/clearml",
+   "kind": "issue",
+   "role": "authored",
+   "state": "open",
+   "created": "2022-03-23",
+   "title": "pipeline_controller.py - file does not exist",
+   "url": "https://github.com/clearml/clearml/issues/619"
+  },
+  {
+   "repo": "OpenTSDB/opentsdb",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2020-01-16",
+   "title": "The Central Repository no longer supports insecure communication over plain HTTP",
+   "url": "https://github.com/OpenTSDB/opentsdb/issues/1899"
+  },
+  {
+   "repo": "rspamd/rspamd",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2019-04-18",
+   "title": "[BUG] clickhouse vs action incompatibility",
+   "url": "https://github.com/rspamd/rspamd/issues/2861"
+  },
+  {
+   "repo": "rspamd/rspamd",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2018-12-05",
+   "title": "Sentinel - choose only good read servers",
+   "url": "https://github.com/rspamd/rspamd/issues/2667"
+  },
+  {
+   "repo": "rspamd/rspamd",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2018-12-04",
+   "title": "Sentinel - refresh sentinel list on redis error",
+   "url": "https://github.com/rspamd/rspamd/issues/2665"
+  },
+  {
+   "repo": "rspamd/rspamd",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2018-12-04",
+   "title": "Sentinel - replace read servers with new list",
+   "url": "https://github.com/rspamd/rspamd/issues/2664"
+  },
+  {
+   "repo": "rspamd/rspamd",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2018-12-04",
+   "title": "Sentinel - read/write servers",
+   "url": "https://github.com/rspamd/rspamd/issues/2663"
+  },
+  {
+   "repo": "rspamd/rspamd",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2018-11-29",
+   "title": "clickhouse database",
+   "url": "https://github.com/rspamd/rspamd/issues/2655"
+  },
+  {
+   "repo": "rspamd/rspamd",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2018-11-27",
+   "title": "bayes_expiry.lua:336: cannot perform expiry step",
+   "url": "https://github.com/rspamd/rspamd/issues/2651"
+  },
+  {
+   "repo": "rspamd/rspamd",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2018-10-10",
+   "title": "Clickhouse arrays elements",
+   "url": "https://github.com/rspamd/rspamd/issues/2582"
+  },
+  {
+   "repo": "joyieldInc/predixy",
+   "kind": "issue",
+   "role": "authored",
+   "state": "closed",
+   "created": "2018-08-17",
+   "title": "hget & hexists",
+   "url": "https://github.com/joyieldInc/predixy/issues/45"
+  }
+ ]
 }
