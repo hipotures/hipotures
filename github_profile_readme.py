@@ -37,6 +37,8 @@ SETTLED_COLOR = "blue"
 DEFAULT_MIN_COMMITS = 3
 DEFAULT_MIN_LINES = 100
 SIZE_LEVELS = ["Small", "Medium", "Large"]  # dots in assets/size-*.svg, light to dark
+DEFAULT_MAIN_LANGUAGES_SHARE = 0.8
+DEFAULT_BYTES_PER_LINE = 35
 DEFAULT_SIZE_LIMITS_KB = [300, 2048]
 DEFAULT_SIZE_EXCLUDED = ["HTML", "Jupyter Notebook", "CSS", "SCSS", "TeX"]
 NAME_CHAR_EM = 0.51
@@ -194,10 +196,32 @@ def size_badge(languages: dict[str, int] | None, config: dict[str, Any]) -> str:
     settings = config.get("size", {})
     excluded = set(settings.get("exclude_languages", DEFAULT_SIZE_EXCLUDED))
     limits = settings.get("limits_kb", DEFAULT_SIZE_LIMITS_KB)
-    code_kb = sum(size for language, size in (languages or {}).items() if language not in excluded) / 1024
-    index = next((index for index, limit in enumerate(limits) if code_kb < limit), len(limits))
+    code = {language: size for language, size in (languages or {}).items() if language not in excluded}
+    total = sum(code.values())
+    index = next((index for index, limit in enumerate(limits) if total / 1024 < limit), len(limits))
     label = SIZE_LEVELS[index]
-    return f'<img src="assets/size-{label.lower()}.svg" width="10" height="10" alt="{label}" title="{label} codebase">'
+    return (
+        f'<img src="assets/size-{label.lower()}.svg" width="10" height="10" alt="{label}" '
+        f'title="{size_tooltip(code, settings)}">'
+    )
+
+
+def size_tooltip(code: dict[str, int], settings: dict[str, Any]) -> str:
+    """Leading languages covering most of the code, plus a line estimate from byte counts."""
+    total = sum(code.values())
+    if not total:
+        return "No code detected"
+    share = settings.get("main_languages_share", DEFAULT_MAIN_LANGUAGES_SHARE)
+    leading: list[str] = []
+    covered = 0
+    for language, size in sorted(code.items(), key=lambda item: -item[1])[:3]:
+        leading.append(language)
+        covered += size
+        if covered >= share * total:
+            break
+    lines = total / settings.get("bytes_per_line", DEFAULT_BYTES_PER_LINE)
+    estimate = f"~{lines / 1000:.0f}k" if lines >= 1000 else f"~{max(10, round(lines, -1)):.0f}"
+    return f"{' + '.join(leading)} · {estimate} lines"
 
 
 def escape_cell(text: str) -> str:
