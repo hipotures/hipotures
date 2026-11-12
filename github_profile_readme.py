@@ -171,7 +171,36 @@ def collect(
         monthly = monthly_stats(fetch, user, name, sleep=sleep)
         repo["monthly"] = monthly if monthly is not None else old.get(name, {}).get("monthly")
         repo["languages"] = fetch_or_none(fetch, f"/repos/{user}/{name}/languages") or {}
-    return {"user": user, "repos": sorted(repos, key=lambda repo: repo["name"].lower())}
+    private = private_summary(fetch, user)
+    if private is None:
+        private = (previous or {}).get("private")
+    return {"user": user, "repos": sorted(repos, key=lambda repo: repo["name"].lower()), "private": private}
+
+
+def private_summary(fetch: JsonFetcher, user: str) -> dict[str, Any] | None:
+    """Count the user's own private non-fork repositories and sum their language bytes.
+
+    Only totals are kept, never names. Returns None when the token cannot list the user's
+    private repositories (for example the Actions GITHUB_TOKEN), so the caller can keep old data.
+    """
+    me = fetch_or_none(fetch, "/user")
+    if not isinstance(me, dict) or (me.get("login") or "").lower() != user.lower():
+        return None
+    names: list[str] = []
+    page = 1
+    while True:
+        batch = fetch_or_none(fetch, f"/user/repos?visibility=private&affiliation=owner&per_page=100&page={page}")
+        if not isinstance(batch, list):
+            return None
+        names.extend(repo["full_name"] for repo in batch if not repo.get("fork"))
+        if len(batch) < 100:
+            break
+        page += 1
+    languages: dict[str, int] = {}
+    for full_name in names:
+        for language, size in (fetch_or_none(fetch, f"/repos/{full_name}/languages") or {}).items():
+            languages[language] = languages.get(language, 0) + size
+    return {"count": len(names), "languages": dict(sorted(languages.items(), key=lambda item: -item[1]))}
 
 
 def last_active_month(monthly: dict[str, list[int]] | None, config: dict[str, Any]) -> Activity | None:
@@ -234,9 +263,24 @@ def size_tooltip(code: dict[str, int], settings: dict[str, Any]) -> str:
         covered += size
         if covered >= share * total:
             break
-    lines = total / settings.get("bytes_per_line", DEFAULT_BYTES_PER_LINE)
-    estimate = f"~{lines / 1000:.0f}k" if lines >= 1000 else f"~{max(10, round(lines, -1)):.0f}"
-    return f"{' + '.join(leading)} · {estimate} lines"
+    return f"{' + '.join(leading)} · {estimate_lines(total, settings)} lines"
+
+
+def estimate_lines(code_bytes: int, settings: dict[str, Any]) -> str:
+    lines = code_bytes / settings.get("bytes_per_line", DEFAULT_BYTES_PER_LINE)
+    return f"~{lines / 1000:.0f}k" if lines >= 1000 else f"~{max(10, round(lines, -1)):.0f}"
+
+
+def private_note(private: dict[str, Any] | None, config: dict[str, Any]) -> str:
+    """One line under the projects table: how many private repositories and their code size, no names."""
+    if not private or not private.get("count"):
+        return ""
+    settings = config.get("size", {})
+    excluded = set(settings.get("exclude_languages", DEFAULT_SIZE_EXCLUDED))
+    code_bytes = sum(size for language, size in private.get("languages", {}).items() if language not in excluded)
+    count = private["count"]
+    noun = "repository" if count == 1 else "repositories"
+    return f"\n\n<sub>Plus {count} private {noun}, {estimate_lines(code_bytes, settings)} lines of code.</sub>"
 
 
 def escape_cell(text: str) -> str:
@@ -339,7 +383,8 @@ def render(data: dict[str, Any], config: dict[str, Any], today: date | None = No
     ]
     fork_rows = [[repo_link(repo), description_for(repo, config), cell] for repo, cell in shown_forks]
     return {
-        PROJECTS_MARKER: render_table([header, "Description", "Activity"], own_rows),
+        PROJECTS_MARKER: render_table([header, "Description", "Activity"], own_rows)
+        + private_note(data.get("private"), config),
         FORKS_MARKER: render_table([header, "My modifications", "Upstream"], fork_rows),
     }
 

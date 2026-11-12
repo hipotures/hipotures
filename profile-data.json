@@ -314,7 +314,7 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-12T14:52:20Z",
+   "pushed_at": "2026-11-12T14:53:42Z",
    "monthly": {
     "2026-11": [
      17,
@@ -1060,7 +1060,7 @@
    "html_url": "https://github.com/hipotures/s5e7-with-claude",
    "description": "Kaggle Playground Series S5E7 (introvert/extrovert classification) experiments and analysis with Claude.",
    "fork": false,
-   "archived": false,
+   "archived": true,
    "pushed_at": "2025-07-20T10:18:39Z",
    "monthly": {
     "2025-06": [
@@ -1467,5 +1467,22 @@
     "Python": 2735346
    }
   }
- ]
+ ],
+ "private": {
+  "count": 17,
+  "languages": {
+   "Jupyter Notebook": 45680103,
+   "Python": 2897179,
+   "Rust": 816346,
+   "JavaScript": 503031,
+   "Svelte": 430267,
+   "Jinja": 205435,
+   "HTML": 115284,
+   "CSS": 96220,
+   "TypeScript": 63266,
+   "Shell": 41748,
+   "SCSS": 21151,
+   "Makefile": 1463
+  }
+ }
 }
