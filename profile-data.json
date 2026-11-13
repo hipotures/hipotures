@@ -298,16 +298,16 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-12T17:57:58Z",
+   "pushed_at": "2026-11-12T17:59:02Z",
    "monthly": {
     "2026-11": [
-     37,
-     6079,
-     996
+     38,
+     6085,
+     1001
     ]
    },
    "languages": {
-    "Python": 25059
+    "Python": 25227
    }
   },
   {
@@ -617,7 +617,7 @@
    "description": "Local LLM workflow for translating EPUB books, with human terminology approval and resumable multi-pass translation",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-08T13:00:16Z",
+   "pushed_at": "2026-11-12T23:15:42Z",
    "monthly": {
     "2026-09": [
      170,
@@ -630,14 +630,14 @@
      1636
     ],
     "2026-11": [
-     24,
-     1427,
-     85
+     26,
+     2707,
+     103
     ]
    },
    "languages": {
-    "Python": 2349544,
-    "TypeScript": 426936,
+    "Python": 2379340,
+    "TypeScript": 433500,
     "JavaScript": 305661,
     "CSS": 118872,
     "HTML": 379
@@ -1067,7 +1067,7 @@
   {
    "name": "scriptoza",
    "html_url": "https://github.com/hipotures/scriptoza",
-   "description": "Collection of small utility scripts organized by category",
+   "description": "Collection of small personal utility scripts organized by category",
    "fork": false,
    "archived": false,
    "pushed_at": "2026-11-12T14:50:24Z",
