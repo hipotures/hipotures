@@ -9,10 +9,11 @@ Only the text between the marker pairs is replaced:
 Collecting data and rendering are separate steps: with --data, raw API data is cached in a
 JSON file and the README is rendered from it, so layout and config changes need no API calls.
 With --only REPO [REPO ...], only the named repositories are re-fetched; the rest come from --data.
-Projects are grouped under a row per year of their last active month. The Activity column shows that calendar year
-as a strip (one square per month, shade = commits) from assets/activity-<repo>.svg, written next to the README
-together with assets/strip-months.svg, the month scale under the Activity header; grey strips mark archived projects
-(config "activity": {"style": "badge"} restores one table with month badges).
+Projects are ordered by their last active month. The Activity column stacks one strip per calendar year, newest on
+top, from the first year with real work (at most "activity": {"max_years": 3}); a strip has one square per month,
+shade = commits. Strips come from assets/activity-<repo>.svg, written next to the README together with
+assets/strip-months.svg, the month scale under the Activity header; grey strips mark archived projects
+(config "activity": {"style": "badge"} restores month badges).
 A dot before each project name shows code size in three shades of one colour from code bytes reported by /languages
 (config "size": {"limits_kb": [...], "exclude_languages": [...]}); it is not a quality measure.
 Everything else in the README is left untouched. Files are written only with --run.
@@ -43,7 +44,7 @@ CONTRIBUTIONS_MARKER = "CONTRIBUTIONS"  # optional section
 MONTH_NAMES = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
 ACTIVITY_COLORS = [(1, "brightgreen"), (3, "green"), (6, "yellow"), (12, "orange")]
 SETTLED_COLOR = "blue"
-DEFAULT_ACTIVITY_STYLE = "strip"  # "strip": year rows and calendar-year SVG strips; "badge": shields.io month badge
+DEFAULT_ACTIVITY_STYLE = "strip"  # "strip": stacked calendar-year SVG strips; "badge": shields.io month badge
 STRIP_MONTHS = 12
 STRIP_SCALE_FILE = "strip-months.svg"
 STRIP_FUTURE_OPACITY = 0.3
@@ -56,6 +57,7 @@ STRIP_EMPTY_OPACITY = 0.25
 STRIP_CELL = 8
 STRIP_GAP = 2
 STRIP_WIDTH = STRIP_MONTHS * (STRIP_CELL + STRIP_GAP) - STRIP_GAP
+DEFAULT_MAX_YEARS = 3  # strips stacked per project, newest on top
 DEFAULT_MIN_COMMITS = 3
 DEFAULT_MIN_LINES = 100
 SIZE_LEVELS = ["Small", "Medium", "Large"]  # dots in assets/size-*.svg, light to dark
@@ -316,6 +318,9 @@ def year_commits(monthly: dict[str, list[int]] | None, year: int) -> list[int]:
     return [(monthly or {}).get(f"{year}-{number:02d}", [0])[0] for number in range(1, STRIP_MONTHS + 1)]
 
 
+FONT = 'font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="8" font-weight="600"'
+
+
 def strip_svg(commits: list[int], future_from: int = STRIP_MONTHS, archived: bool = False) -> str:
     """One square per month of a calendar year; more commits give a more opaque square of the same colour.
 
@@ -343,47 +348,75 @@ def strip_svg(commits: list[int], future_from: int = STRIP_MONTHS, archived: boo
 
 
 def strip_scale_svg() -> str:
-    """Month initials centred over the squares of a strip, shown in the year rows."""
+    """Month initials centred over the squares of a strip, shown under the Activity header."""
     letters = "".join(
-        f'<text x="{index * (STRIP_CELL + STRIP_GAP) + STRIP_CELL / 2}" y="{STRIP_CELL - 1}">{name[0]}</text>'
+        f'<text x="{index * (STRIP_CELL + STRIP_GAP) + STRIP_CELL / 2}" y="{STRIP_CELL - 1}">'
+        f"{name[0]}</text>"
         for index, name in enumerate(MONTH_NAMES)
     )
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{STRIP_WIDTH}" height="{STRIP_CELL}" '
-        f'viewBox="0 0 {STRIP_WIDTH} {STRIP_CELL}"><g fill="{STRIP_EMPTY_COLOR}" text-anchor="middle" '
-        f'font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="8" font-weight="600">'
+        f'viewBox="0 0 {STRIP_WIDTH} {STRIP_CELL}"><g fill="{STRIP_EMPTY_COLOR}" text-anchor="middle" {FONT}>'
         f"{letters}</g></svg>\n"
     )
 
 
-def strip_file(name: str) -> str:
-    return f"activity-{name}.svg"
+def strip_file(name: str, year: int) -> str:
+    return f"activity-{name}-{year}.svg"
 
 
-def strip_for(repo: dict[str, Any], activity: Activity, today: date) -> str:
-    year = int(activity.month[:4])
-    future_from = today.month if year == today.year else STRIP_MONTHS
-    return strip_svg(year_commits(repo.get("monthly"), year), future_from, bool(repo.get("archived")))
+def active_years(monthly: dict[str, list[int]] | None, activity: Activity, config: dict[str, Any]) -> list[int]:
+    """Years to draw, newest first: from the first year with real work up to the last active one.
+
+    Real work uses the same thresholds as the last active month; years in between are kept even when quiet,
+    so the strips of one project always form an unbroken run of years.
+    """
+    settings = config.get("activity", {})
+    min_commits = settings.get("min_commits", DEFAULT_MIN_COMMITS)
+    min_lines = settings.get("min_lines", DEFAULT_MIN_LINES)
+    last = int(activity.month[:4])
+    first = min(
+        (
+            int(month[:4])
+            for month, (commits, additions, deletions) in (monthly or {}).items()
+            if commits >= min_commits and additions + deletions >= min_lines
+        ),
+        default=last,
+    )
+    first = max(first, last - settings.get("max_years", DEFAULT_MAX_YEARS) + 1)
+    return list(range(last, min(first, last) - 1, -1))
+
+
+def strips_for(repo: dict[str, Any], activity: Activity, today: date, config: dict[str, Any]) -> dict[str, str]:
+    """{file name: SVG} with one strip per active year of the project."""
+    return {
+        strip_file(repo["name"], year): strip_svg(
+            year_commits(repo.get("monthly"), year),
+            today.month if year == today.year else STRIP_MONTHS,
+            bool(repo.get("archived")),
+        )
+        for year in active_years(repo.get("monthly"), activity, config)
+    }
 
 
 def activity_cell(repo: dict[str, Any], activity: Activity | None, today: date, config: dict[str, Any]) -> str:
-    """Activity column: the calendar year of the last active month as a strip."""
+    """Activity column: one strip per active year, newest on top."""
     if not strip_style(config):
         return archived_badge(activity) if repo.get("archived") else activity_badge(activity, today)
     if activity is None:
         return '<sub title="No longer developed">Archived</sub>' if repo.get("archived") else ""
-    year = int(activity.month[:4])
+    archived = "Archived, no longer developed. " if repo.get("archived") else ""
     label = month_label(activity.month, date.min)
-    tooltip = (
-        f"Last active {label}: {activity.commits} commits, +{activity.additions}/-{activity.deletions} lines"
-        f" · {sum(year_commits(repo.get('monthly'), year))} commits in {year}"
-    )
-    if repo.get("archived"):
-        tooltip = "Archived, no longer developed. " + tooltip
-    return (
-        f'<img src="assets/{strip_file(repo["name"])}" width="{STRIP_WIDTH}" height="{STRIP_CELL}" '
-        f'alt="{"Archived, " if repo.get("archived") else ""}{label}" title="{tooltip}">'
-    )
+    images = []
+    for year in active_years(repo.get("monthly"), activity, config):
+        commits = sum(year_commits(repo.get("monthly"), year))
+        tooltip = f"{'' if images else archived}{commits} commits in {year}"
+        alt = f"{archived}{label}" if not images else str(year)
+        images.append(
+            f'<img src="assets/{strip_file(repo["name"], year)}" width="{STRIP_WIDTH}" height="{STRIP_CELL}" '
+            f'alt="{alt}" title="{tooltip}">'
+        )
+    return "<br>".join(images)
 
 
 def activity_header(config: dict[str, Any], title: str = "Activity") -> str:
@@ -403,7 +436,8 @@ def activity_legend(config: dict[str, Any]) -> str:
         return ""
     return (
         '\n\n<sub><img src="assets/size-medium.svg" width="10" height="10" alt=""> code size in three shades'
-        " · Activity: one square per month, stronger colour means more commits, grey means archived.</sub>"
+        " · Activity: one row per year, one square per month, stronger colour means more commits,"
+        " grey means archived.</sub>"
     )
 
 
@@ -573,7 +607,7 @@ def activity_strips(data: dict[str, Any], config: dict[str, Any], today: date | 
     for repo in own_projects(data, config):
         activity = last_active_month(repo.get("monthly"), config)
         if activity is not None:
-            strips[strip_file(repo["name"])] = strip_for(repo, activity, today)
+            strips.update(strips_for(repo, activity, today, config))
     return strips
 
 
@@ -600,21 +634,10 @@ def render(data: dict[str, Any], config: dict[str, Any], today: date | None = No
     names = [repo["name"] + "xx" for repo in own] + [repo["name"] for repo, _ in shown_forks]
     header = name_header(names, config)
     ordered = sort_repos(own, config, activities)
-    if strip_style(config):
-        # Newest year first; a stable sort keeps the configured order (archived last) within each year.
-        def year_of(repo: dict[str, Any]) -> int:
-            activity = activities[repo["name"]]
-            return int(activity.month[:4]) if activity else 0
-
-        ordered = sorted(ordered, key=year_of, reverse=True)
     strips = strip_style(config)
     own_rows: list[list[str] | str] = []
-    shown_year = None
     for repo in ordered:
         activity = activities[repo["name"]]
-        if strips and activity and int(activity.month[:4]) != shown_year:
-            shown_year = int(activity.month[:4])
-            own_rows.append(str(shown_year))
         description = description_for(repo, config)
         own_rows.append(
             [
