@@ -11,7 +11,7 @@ JSON file and the README is rendered from it, so layout and config changes need 
 With --only REPO [REPO ...], only the named repositories are re-fetched; the rest come from --data.
 Projects are grouped under a row per year of their last active month. The Activity column shows that calendar year
 as a strip (one square per month, shade = commits) from assets/activity-<repo>.svg, written next to the README
-together with assets/strip-months.svg, the month scale of the year rows; grey strips mark archived projects
+together with assets/strip-months.svg, the month scale under the Activity header; grey strips mark archived projects
 (config "activity": {"style": "badge"} restores one table with month badges).
 A dot before each project name shows code size in three shades of one colour from code bytes reported by /languages
 (config "size": {"limits_kb": [...], "exclude_languages": [...]}); it is not a quality measure.
@@ -21,9 +21,11 @@ Everything else in the README is left untouched. Files are written only with --r
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import math
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -384,17 +386,16 @@ def activity_cell(repo: dict[str, Any], activity: Activity | None, today: date, 
     )
 
 
-def year_row(year: int) -> list[str]:
-    scale = f'<img src="assets/{STRIP_SCALE_FILE}" width="{STRIP_WIDTH}" height="{STRIP_CELL}" alt="Jan to Dec">'
-    return [f"**{year}**", "", scale]
-
-
 def activity_header(config: dict[str, Any], title: str = "Activity") -> str:
-    """Pad the header so the column is at least as wide as a strip; GitHub shrinks images to fit otherwise."""
+    """Pad the header so the column is at least as wide as a strip; GitHub shrinks images to fit otherwise.
+
+    With strips, the month scale sits under the title so it lines up with every strip below.
+    """
     if not strip_style(config):
         return title
     padding = max(0, math.ceil((STRIP_WIDTH / 16 - len(title) * HEADER_CHAR_EM) / NBSP_EM))
-    return "&nbsp;" * (padding // 2) + title + "&nbsp;" * (padding - padding // 2)
+    scale = f'<img src="assets/{STRIP_SCALE_FILE}" width="{STRIP_WIDTH}" height="{STRIP_CELL}" alt="Jan to Dec">'
+    return "&nbsp;" * (padding // 2) + title + "&nbsp;" * (padding - padding // 2) + "<br>" + scale
 
 
 def activity_legend(config: dict[str, Any]) -> str:
@@ -464,6 +465,26 @@ def render_table(headers: list[str], rows: list[list[str]]) -> str:
         "|" + "|".join(" --- " for _ in headers) + "|",
     ]
     lines.extend("| " + " | ".join(row) + " |" for row in rows)
+    return "\n".join(lines)
+
+
+MARKDOWN_LINK = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
+
+
+def html_cell(text: str) -> str:
+    """Markdown links become anchors; GitHub does not parse Markdown inside a single-line HTML cell."""
+    return MARKDOWN_LINK.sub(r'<a href="\2">\1</a>', text)
+
+
+def render_html_table(headers: list[str], rows: list[list[str] | str]) -> str:
+    """An HTML table, so a string row can span every column as a centred group title."""
+    lines = ["<table>", "<thead><tr>" + "".join(f"<th>{header}</th>" for header in headers) + "</tr></thead>", "<tbody>"]
+    for row in rows:
+        if isinstance(row, str):
+            lines.append(f'<tr><td colspan="{len(headers)}" align="center"><b>{row}</b></td></tr>')
+        else:
+            lines.append("<tr>" + "".join(f"<td>{html_cell(cell)}</td>" for cell in row) + "</tr>")
+    lines += ["</tbody>", "</table>"]
     return "\n".join(lines)
 
 
@@ -571,23 +592,27 @@ def render(data: dict[str, Any], config: dict[str, Any], today: date | None = No
             return int(activity.month[:4]) if activity else 0
 
         ordered = sorted(ordered, key=year_of, reverse=True)
-    own_rows: list[list[str]] = []
+    strips = strip_style(config)
+    own_rows: list[list[str] | str] = []
     shown_year = None
     for repo in ordered:
         activity = activities[repo["name"]]
-        if strip_style(config) and activity and int(activity.month[:4]) != shown_year:
+        if strips and activity and int(activity.month[:4]) != shown_year:
             shown_year = int(activity.month[:4])
-            own_rows.append(year_row(shown_year))
+            own_rows.append(str(shown_year))
+        description = description_for(repo, config)
         own_rows.append(
             [
                 size_badge(repo.get("languages"), config) + "&nbsp;" + repo_link(repo),
-                description_for(repo, config),
+                html.escape(description.replace("\\|", "|"), quote=False) if strips else description,
                 activity_cell(repo, activity, today, config),
             ]
         )
     fork_rows = [[repo_link(repo), description_for(repo, config), cell] for repo, cell in shown_forks]
     return {
-        PROJECTS_MARKER: render_table([header, "Description", activity_header(config)], own_rows)
+        PROJECTS_MARKER: (render_html_table if strips else render_table)(
+            [header, "Description", activity_header(config)], own_rows
+        )
         + activity_legend(config)
         + private_note(data.get("private"), config),
         FORKS_MARKER: render_table([header, "My modifications", "Upstream"], fork_rows),
