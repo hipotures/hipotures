@@ -9,6 +9,10 @@ Only the text between the marker pairs is replaced:
 Collecting data and rendering are separate steps: with --data, raw API data is cached in a
 JSON file and the README is rendered from it, so layout and config changes need no API calls.
 With --only REPO [REPO ...], only the named repositories are re-fetched; the rest come from --data.
+Projects are grouped under a row per year of their last active month. The Activity column shows that calendar year
+as a strip (one square per month, shade = commits) from assets/activity-<repo>.svg, written next to the README
+together with assets/strip-months.svg, the month scale of the year rows; grey strips mark archived projects
+(config "activity": {"style": "badge"} restores one table with month badges).
 A dot before each project name shows code size in three shades of one colour from code bytes reported by /languages
 (config "size": {"limits_kb": [...], "exclude_languages": [...]}); it is not a quality measure.
 Everything else in the README is left untouched. Files are written only with --run.
@@ -37,6 +41,19 @@ CONTRIBUTIONS_MARKER = "CONTRIBUTIONS"  # optional section
 MONTH_NAMES = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
 ACTIVITY_COLORS = [(1, "brightgreen"), (3, "green"), (6, "yellow"), (12, "orange")]
 SETTLED_COLOR = "blue"
+DEFAULT_ACTIVITY_STYLE = "strip"  # "strip": year rows and calendar-year SVG strips; "badge": shields.io month badge
+STRIP_MONTHS = 12
+STRIP_SCALE_FILE = "strip-months.svg"
+STRIP_FUTURE_OPACITY = 0.3
+STRIP_LEVELS = [1, 10, 50, 150]  # commits in a month needed for each of the four shades
+STRIP_OPACITIES = [0.4, 0.6, 0.8, 1.0]  # one hue; opacity reads on light and dark themes alike
+STRIP_ARCHIVED_OPACITIES = [0.55, 0.7, 0.85, 1.0]  # grey squares of archived projects
+STRIP_COLOR = "#2da44e"
+STRIP_EMPTY_COLOR = "#8b949e"
+STRIP_EMPTY_OPACITY = 0.25
+STRIP_CELL = 8
+STRIP_GAP = 2
+STRIP_WIDTH = STRIP_MONTHS * (STRIP_CELL + STRIP_GAP) - STRIP_GAP
 DEFAULT_MIN_COMMITS = 3
 DEFAULT_MIN_LINES = 100
 SIZE_LEVELS = ["Small", "Medium", "Large"]  # dots in assets/size-*.svg, light to dark
@@ -284,6 +301,111 @@ def activity_badge(activity: Activity | None, today: date) -> str:
     return f'![{label}]({url} "Last active month: {details}")'
 
 
+def month_label(month: str, today: date) -> str:
+    year, number = (int(part) for part in month.split("-"))
+    return MONTH_NAMES[number - 1] + ("" if year == today.year else f" {year}")
+
+
+def strip_style(config: dict[str, Any]) -> bool:
+    return config.get("activity", {}).get("style", DEFAULT_ACTIVITY_STYLE) != "badge"
+
+
+def year_commits(monthly: dict[str, list[int]] | None, year: int) -> list[int]:
+    return [(monthly or {}).get(f"{year}-{number:02d}", [0])[0] for number in range(1, STRIP_MONTHS + 1)]
+
+
+def strip_svg(commits: list[int], future_from: int = STRIP_MONTHS, archived: bool = False) -> str:
+    """One square per month of a calendar year; more commits give a more opaque square of the same colour.
+
+    Months from index `future_from` on have not happened yet and are drawn as outlines.
+    """
+    cells = []
+    for index, count in enumerate(commits):
+        x = index * (STRIP_CELL + STRIP_GAP)
+        if index >= future_from:
+            cells.append(
+                f'<rect x="{x + 0.5}" y="0.5" width="{STRIP_CELL - 1}" height="{STRIP_CELL - 1}" rx="1.5" '
+                f'fill="none" stroke="{STRIP_EMPTY_COLOR}" stroke-opacity="{STRIP_FUTURE_OPACITY}"/>'
+            )
+            continue
+        level = sum(count >= limit for limit in STRIP_LEVELS)
+        color = STRIP_COLOR if level and not archived else STRIP_EMPTY_COLOR
+        opacity = (STRIP_ARCHIVED_OPACITIES if archived else STRIP_OPACITIES)[level - 1] if level else STRIP_EMPTY_OPACITY
+        cells.append(
+            f'<rect x="{x}" width="{STRIP_CELL}" height="{STRIP_CELL}" rx="2" fill="{color}" fill-opacity="{opacity}"/>'
+        )
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{STRIP_WIDTH}" height="{STRIP_CELL}" '
+        f'viewBox="0 0 {STRIP_WIDTH} {STRIP_CELL}">{"".join(cells)}</svg>\n'
+    )
+
+
+def strip_scale_svg() -> str:
+    """Month initials centred over the squares of a strip, shown in the year rows."""
+    letters = "".join(
+        f'<text x="{index * (STRIP_CELL + STRIP_GAP) + STRIP_CELL / 2}" y="{STRIP_CELL - 1}">{name[0]}</text>'
+        for index, name in enumerate(MONTH_NAMES)
+    )
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{STRIP_WIDTH}" height="{STRIP_CELL}" '
+        f'viewBox="0 0 {STRIP_WIDTH} {STRIP_CELL}"><g fill="{STRIP_EMPTY_COLOR}" text-anchor="middle" '
+        f'font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="8" font-weight="600">'
+        f"{letters}</g></svg>\n"
+    )
+
+
+def strip_file(name: str) -> str:
+    return f"activity-{name}.svg"
+
+
+def strip_for(repo: dict[str, Any], activity: Activity, today: date) -> str:
+    year = int(activity.month[:4])
+    future_from = today.month if year == today.year else STRIP_MONTHS
+    return strip_svg(year_commits(repo.get("monthly"), year), future_from, bool(repo.get("archived")))
+
+
+def activity_cell(repo: dict[str, Any], activity: Activity | None, today: date, config: dict[str, Any]) -> str:
+    """Activity column: the calendar year of the last active month as a strip."""
+    if not strip_style(config):
+        return archived_badge(activity) if repo.get("archived") else activity_badge(activity, today)
+    if activity is None:
+        return '<sub title="No longer developed">Archived</sub>' if repo.get("archived") else ""
+    year = int(activity.month[:4])
+    label = month_label(activity.month, date.min)
+    tooltip = (
+        f"Last active {label}: {activity.commits} commits, +{activity.additions}/-{activity.deletions} lines"
+        f" · {sum(year_commits(repo.get('monthly'), year))} commits in {year}"
+    )
+    if repo.get("archived"):
+        tooltip = "Archived, no longer developed. " + tooltip
+    return (
+        f'<img src="assets/{strip_file(repo["name"])}" width="{STRIP_WIDTH}" height="{STRIP_CELL}" '
+        f'alt="{"Archived, " if repo.get("archived") else ""}{label}" title="{tooltip}">'
+    )
+
+
+def year_row(year: int) -> list[str]:
+    scale = f'<img src="assets/{STRIP_SCALE_FILE}" width="{STRIP_WIDTH}" height="{STRIP_CELL}" alt="Jan to Dec">'
+    return [f"**{year}**", "", scale]
+
+
+def activity_header(config: dict[str, Any], title: str = "Activity") -> str:
+    """Pad the header so the column is at least as wide as a strip; GitHub shrinks images to fit otherwise."""
+    if not strip_style(config):
+        return title
+    padding = max(0, math.ceil((STRIP_WIDTH / 16 - len(title) * HEADER_CHAR_EM) / NBSP_EM))
+    return "&nbsp;" * (padding // 2) + title + "&nbsp;" * (padding - padding // 2)
+
+
+def activity_legend(config: dict[str, Any]) -> str:
+    if not strip_style(config):
+        return ""
+    return (
+        '\n\n<sub><img src="assets/size-medium.svg" width="10" height="10" alt=""> code size in three shades'
+        " · Activity: one square per month, stronger colour means more commits, grey means archived.</sub>"
+    )
+
+
 def size_badge(languages: dict[str, int] | None, config: dict[str, Any]) -> str:
     """Three shades of one hue: lighter means a smaller codebase, not a better or worse one."""
     settings = config.get("size", {})
@@ -329,7 +451,7 @@ def private_note(private: dict[str, Any] | None, config: dict[str, Any]) -> str:
     code_bytes = sum(size for language, size in private.get("languages", {}).items() if language not in excluded)
     count = private["count"]
     noun = "repository" if count == 1 else "repositories"
-    return f"\n\n<sub>Plus {count} private {noun}, {estimate_lines(code_bytes, settings)} lines of code.</sub>"
+    return f"<br>\n<sub>Plus {count} private {noun}, {estimate_lines(code_bytes, settings)} lines of code.</sub>"
 
 
 def escape_cell(text: str) -> str:
@@ -392,19 +514,40 @@ def archived_badge(activity: Activity | None) -> str:
     return f'![Archived](https://img.shields.io/badge/Archived-lightgrey "{tooltip}")'
 
 
-def render(data: dict[str, Any], config: dict[str, Any], today: date | None = None) -> dict[str, str]:
-    today = today or date.today()
-    user = data["user"]
+def visible_repos(data: dict[str, Any], config: dict[str, Any]) -> list[dict[str, Any]]:
     hidden = set(config.get("hide", []))
-    forced_forks = set(config.get("forks", []))
-    external_forks: dict[str, str] = config.get("external_forks", {})
-    repos = [
+    return [
         repo
         for repo in data["repos"]
-        if repo["name"] not in hidden and repo["name"].lower() != user.lower()
+        if repo["name"] not in hidden and repo["name"].lower() != data["user"].lower()
     ]
 
-    own = [repo for repo in repos if not repo["fork"] and repo["name"] not in external_forks]
+
+def own_projects(data: dict[str, Any], config: dict[str, Any]) -> list[dict[str, Any]]:
+    external_forks = config.get("external_forks", {})
+    return [repo for repo in visible_repos(data, config) if not repo["fork"] and repo["name"] not in external_forks]
+
+
+def activity_strips(data: dict[str, Any], config: dict[str, Any], today: date | None = None) -> dict[str, str]:
+    """{file name: SVG} for the month scale and every project with recorded activity."""
+    today = today or date.today()
+    if not strip_style(config):
+        return {}
+    strips = {STRIP_SCALE_FILE: strip_scale_svg()}
+    for repo in own_projects(data, config):
+        activity = last_active_month(repo.get("monthly"), config)
+        if activity is not None:
+            strips[strip_file(repo["name"])] = strip_for(repo, activity, today)
+    return strips
+
+
+def render(data: dict[str, Any], config: dict[str, Any], today: date | None = None) -> dict[str, str]:
+    today = today or date.today()
+    forced_forks = set(config.get("forks", []))
+    external_forks: dict[str, str] = config.get("external_forks", {})
+    repos = visible_repos(data, config)
+
+    own = own_projects(data, config)
     activities = {repo["name"]: last_active_month(repo.get("monthly"), config) for repo in own}
 
     shown_forks: list[tuple[dict[str, Any], str]] = []
@@ -420,19 +563,32 @@ def render(data: dict[str, Any], config: dict[str, Any], today: date | None = No
     # The size dot before own project names takes about two characters of width.
     names = [repo["name"] + "xx" for repo in own] + [repo["name"] for repo, _ in shown_forks]
     header = name_header(names, config)
-    own_rows = [
-        [
-            size_badge(repo.get("languages"), config) + "&nbsp;" + repo_link(repo),
-            description_for(repo, config),
-            archived_badge(activities[repo["name"]])
-            if repo.get("archived")
-            else activity_badge(activities[repo["name"]], today),
-        ]
-        for repo in sort_repos(own, config, activities)
-    ]
+    ordered = sort_repos(own, config, activities)
+    if strip_style(config):
+        # Newest year first; a stable sort keeps the configured order (archived last) within each year.
+        def year_of(repo: dict[str, Any]) -> int:
+            activity = activities[repo["name"]]
+            return int(activity.month[:4]) if activity else 0
+
+        ordered = sorted(ordered, key=year_of, reverse=True)
+    own_rows: list[list[str]] = []
+    shown_year = None
+    for repo in ordered:
+        activity = activities[repo["name"]]
+        if strip_style(config) and activity and int(activity.month[:4]) != shown_year:
+            shown_year = int(activity.month[:4])
+            own_rows.append(year_row(shown_year))
+        own_rows.append(
+            [
+                size_badge(repo.get("languages"), config) + "&nbsp;" + repo_link(repo),
+                description_for(repo, config),
+                activity_cell(repo, activity, today, config),
+            ]
+        )
     fork_rows = [[repo_link(repo), description_for(repo, config), cell] for repo, cell in shown_forks]
     return {
-        PROJECTS_MARKER: render_table([header, "Description", "Activity"], own_rows)
+        PROJECTS_MARKER: render_table([header, "Description", activity_header(config)], own_rows)
+        + activity_legend(config)
         + private_note(data.get("private"), config),
         FORKS_MARKER: render_table([header, "My modifications", "Upstream"], fork_rows),
         CONTRIBUTIONS_MARKER: render_contributions(data.get("contributions", []), config),
@@ -550,7 +706,9 @@ def main(argv: list[str] | None = None) -> int:
             missing = sorted((only or set()) - {repo["name"] for repo in data["repos"]})
             if missing:
                 print(f"Warning: not public repositories of {args.user}: {', '.join(missing)}", file=sys.stderr)
-        sections = render(data, config)
+        today = date.today()
+        sections = render(data, config, today)
+        strips = activity_strips(data, config, today)
         updated = text
         for name, content in sections.items():
             if name == CONTRIBUTIONS_MARKER and not has_markers(updated, name):
@@ -566,6 +724,25 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Saved {args.data}")
     elif args.data and data is not cached:
         print(f"DRY RUN: would save {args.data}")
+
+    assets = args.readme.parent / "assets"
+    changed = {
+        name: svg
+        for name, svg in strips.items()
+        if not (assets / name).exists() or (assets / name).read_text(encoding="utf-8") != svg
+    }
+    stale = [path for path in sorted(assets.glob("activity-*.svg")) if path.name not in strips] if strips else []
+    if args.run:
+        if changed:
+            assets.mkdir(parents=True, exist_ok=True)
+        for name, svg in changed.items():
+            (assets / name).write_text(svg, encoding="utf-8")
+        for path in stale:
+            path.unlink()
+        if changed or stale:
+            print(f"Activity strips in {assets}: {len(changed)} written, {len(stale)} removed.")
+    elif changed or stale:
+        print(f"DRY RUN: would write {len(changed)} and remove {len(stale)} activity strips in {assets}.")
 
     if updated == text:
         print("README is already up to date.")
