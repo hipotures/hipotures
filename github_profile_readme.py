@@ -476,6 +476,21 @@ def html_cell(text: str) -> str:
     return MARKDOWN_LINK.sub(r'<a href="\2">\1</a>', text)
 
 
+INLINE_MARKDOWN = [
+    (re.compile(r"`([^`]+)`"), r"<code>\1</code>"),
+    (re.compile(r"\*\*(\S(?:.*?\S)?)\*\*"), r"<b>\1</b>"),
+    (re.compile(r"(?<![\w*])\*(\S(?:.*?\S)?)\*(?![\w*])"), r"<i>\1</i>"),
+]
+
+
+def html_text(text: str) -> str:
+    """Escape a plain description for an HTML cell, keeping its inline Markdown (bold, italics, code)."""
+    text = html.escape(text.replace("\\|", "|"), quote=False)
+    for pattern, replacement in INLINE_MARKDOWN:
+        text = pattern.sub(replacement, text)
+    return text
+
+
 def render_html_table(headers: list[str], rows: list[list[str] | str]) -> str:
     """An HTML table, so a string row can span every column as a centred group title."""
     lines = ["<table>", "<thead><tr>" + "".join(f"<th>{header}</th>" for header in headers) + "</tr></thead>", "<tbody>"]
@@ -604,7 +619,7 @@ def render(data: dict[str, Any], config: dict[str, Any], today: date | None = No
         own_rows.append(
             [
                 size_badge(repo.get("languages"), config) + "&nbsp;" + repo_link(repo),
-                html.escape(description.replace("\\|", "|"), quote=False) if strips else description,
+                html_text(description) if strips else description,
                 activity_cell(repo, activity, today, config),
             ]
         )
