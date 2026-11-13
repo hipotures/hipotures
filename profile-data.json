@@ -298,16 +298,16 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-12T17:59:02Z",
+   "pushed_at": "2026-11-13T02:24:16Z",
    "monthly": {
     "2026-11": [
-     38,
-     6085,
-     1001
+     48,
+     7179,
+     1517
     ]
    },
    "languages": {
-    "Python": 25227
+    "Python": 36137
    }
   },
   {
@@ -614,7 +614,7 @@
   {
    "name": "intelitex",
    "html_url": "https://github.com/hipotures/intelitex",
-   "description": "Local LLM workflow for translating EPUB books, with human terminology approval and resumable multi-pass translation",
+   "description": "A multi-stage process for translating books in EPUB format using a local large language model, incorporating terminology verification.",
    "fork": false,
    "archived": false,
    "pushed_at": "2026-11-12T23:15:42Z",
@@ -1163,7 +1163,7 @@
   {
    "name": "sonus",
    "html_url": "https://github.com/hipotures/sonus",
-   "description": "Sonus is a scalable, cloud-native automated transcription and diarization system built on Google Cloud Pla tform (GCP). It utilizes **WhisperX** to provide high-accuracy speech-to-text conversion with speaker iden tification (diarization).",
+   "description": "Sonus is a scalable, cloud-native automated transcription and diarization system built on Google Cloud Platform (GCP). It utilizes **WhisperX** to provide high-accuracy speech-to-text conversion with speaker identification (diarization).",
    "fork": false,
    "archived": false,
    "pushed_at": "2026-02-13T12:00:58Z",
