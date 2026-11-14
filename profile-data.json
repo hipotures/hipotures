@@ -106,6 +106,31 @@
    }
   },
   {
+   "name": "collatz-lab",
+   "html_url": "https://github.com/hipotures/collatz-lab",
+   "description": null,
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-14T12:24:54Z",
+   "monthly": {
+    "2026-05": [
+     1,
+     121,
+     0
+    ],
+    "2026-11": [
+     13,
+     16957,
+     170
+    ]
+   },
+   "languages": {
+    "Lean": 428875,
+    "Rust": 316673,
+    "Python": 57943
+   }
+  },
+  {
    "name": "command-center",
    "html_url": "https://github.com/hipotures/command-center",
    "description": "Modern SQLite-based analytics for Claude Code usage with intelligent caching",
@@ -298,12 +323,12 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-13T02:24:16Z",
+   "pushed_at": "2026-11-13T13:42:49Z",
    "monthly": {
     "2026-11": [
-     48,
-     7179,
-     1517
+     49,
+     7188,
+     1526
     ]
    },
    "languages": {
@@ -316,7 +341,7 @@
    "description": "Turn Proxmox VE into a developer cloud: disposable-OS workspaces with persistent /home, automated AI coding agent setup, and declarative LXC services",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-12T13:30:44Z",
+   "pushed_at": "2026-11-13T21:35:14Z",
    "monthly": {
     "2026-09": [
      81,
@@ -329,13 +354,13 @@
      241827
     ],
     "2026-11": [
-     228,
-     21263,
-     20786
+     233,
+     22422,
+     20847
     ]
    },
    "languages": {
-    "Rust": 4380716,
+    "Rust": 4421502,
     "Python": 505904,
     "JavaScript": 122869,
     "Shell": 44443,
@@ -1453,7 +1478,7 @@
   }
  ],
  "private": {
-  "count": 14,
+  "count": 13,
   "languages": {
    "Jupyter Notebook": 45680103,
    "Python": 2897179,
