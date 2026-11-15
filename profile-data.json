@@ -111,7 +111,7 @@
    "description": null,
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-14T12:24:54Z",
+   "pushed_at": "2026-11-15T13:05:16Z",
    "monthly": {
     "2026-05": [
      1,
@@ -119,15 +119,17 @@
      0
     ],
     "2026-11": [
-     13,
-     16957,
-     170
+     15,
+     17111,
+     190
     ]
    },
    "languages": {
-    "Lean": 428875,
+    "Lean": 683470,
     "Rust": 316673,
-    "Python": 57943
+    "Python": 126079,
+    "TeX": 63885,
+    "Shell": 2985
    }
   },
   {
@@ -205,7 +207,7 @@
    "description": "Personal dashboard for visualizing GitHub commit activity across multiple repositories.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-03-02T18:04:06Z",
+   "pushed_at": "2026-11-15T11:01:25Z",
    "monthly": {
     "2026-02": [
      83,
@@ -225,6 +227,16 @@
     "JavaScript": 10161,
     "CSS": 8185
    }
+  },
+  {
+   "name": "gpu-burn",
+   "html_url": "https://github.com/hipotures/gpu-burn",
+   "description": "Multi-GPU CUDA stress test",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-11-15T02:51:20Z",
+   "upstream": "wilicc/gpu-burn",
+   "own_commits": false
   },
   {
    "name": "gpu-unlock-ada",
@@ -323,12 +335,12 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-13T13:42:49Z",
+   "pushed_at": "2026-11-14T12:46:33Z",
    "monthly": {
     "2026-11": [
-     49,
-     7188,
-     1526
+     50,
+     7227,
+     1538
     ]
    },
    "languages": {
@@ -341,7 +353,7 @@
    "description": "Turn Proxmox VE into a developer cloud: disposable-OS workspaces with persistent /home, automated AI coding agent setup, and declarative LXC services",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-13T21:35:14Z",
+   "pushed_at": "2026-11-15T11:46:39Z",
    "monthly": {
     "2026-09": [
      81,
@@ -642,7 +654,7 @@
    "description": "A multi-stage process for translating books in EPUB format using a local large language model, incorporating terminology verification.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-12T23:15:42Z",
+   "pushed_at": "2026-11-15T11:08:13Z",
    "monthly": {
     "2026-09": [
      170,
@@ -655,16 +667,16 @@
      1636
     ],
     "2026-11": [
-     26,
-     2707,
-     103
+     41,
+     4051,
+     425
     ]
    },
    "languages": {
-    "Python": 2379340,
-    "TypeScript": 433500,
-    "JavaScript": 305661,
-    "CSS": 118872,
+    "Python": 2392073,
+    "TypeScript": 446141,
+    "JavaScript": 321009,
+    "CSS": 119810,
     "HTML": 379
    }
   },
