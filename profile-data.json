@@ -111,7 +111,7 @@
    "description": null,
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-15T13:05:16Z",
+   "pushed_at": "2026-11-16T10:57:35Z",
    "monthly": {
     "2026-05": [
      1,
@@ -119,17 +119,17 @@
      0
     ],
     "2026-11": [
-     15,
-     17111,
-     190
+     24,
+     17583,
+     194
     ]
    },
    "languages": {
-    "Lean": 683470,
+    "Lean": 775418,
+    "Python": 356320,
     "Rust": 316673,
-    "Python": 126079,
     "TeX": 63885,
-    "Shell": 2985
+    "Shell": 19537
    }
   },
   {
@@ -335,12 +335,12 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-14T12:46:33Z",
+   "pushed_at": "2026-11-15T13:14:32Z",
    "monthly": {
     "2026-11": [
-     50,
-     7227,
-     1538
+     51,
+     7262,
+     1561
     ]
    },
    "languages": {
@@ -353,7 +353,7 @@
    "description": "Turn Proxmox VE into a developer cloud: disposable-OS workspaces with persistent /home, automated AI coding agent setup, and declarative LXC services",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-15T11:46:39Z",
+   "pushed_at": "2026-11-16T09:51:33Z",
    "monthly": {
     "2026-09": [
      81,
@@ -366,18 +366,18 @@
      241827
     ],
     "2026-11": [
-     233,
-     22422,
-     20847
+     252,
+     24830,
+     21169
     ]
    },
    "languages": {
-    "Rust": 4421502,
+    "Rust": 4421189,
     "Python": 505904,
-    "JavaScript": 122869,
+    "JavaScript": 123659,
+    "HTML": 56723,
     "Shell": 44443,
-    "HTML": 30120,
-    "CSS": 15839,
+    "CSS": 39145,
     "Dockerfile": 11340,
     "Go": 4537
    }
@@ -654,7 +654,7 @@
    "description": "A multi-stage process for translating books in EPUB format using a local large language model, incorporating terminology verification.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-15T11:08:13Z",
+   "pushed_at": "2026-11-15T14:20:46Z",
    "monthly": {
     "2026-09": [
      170,
@@ -667,17 +667,17 @@
      1636
     ],
     "2026-11": [
-     41,
-     4051,
-     425
+     93,
+     14137,
+     6331
     ]
    },
    "languages": {
     "Python": 2392073,
-    "TypeScript": 446141,
-    "JavaScript": 321009,
-    "CSS": 119810,
-    "HTML": 379
+    "TypeScript": 447418,
+    "JavaScript": 390042,
+    "CSS": 134130,
+    "HTML": 26690
    }
   },
   {
@@ -1252,6 +1252,26 @@
     "Shell": 37917,
     "Makefile": 1194,
     "Dockerfile": 1147
+   }
+  },
+  {
+   "name": "the-mechanics",
+   "html_url": "https://github.com/hipotures/the-mechanics",
+   "description": null,
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-16T12:57:35Z",
+   "monthly": {
+    "2026-11": [
+     55,
+     16161,
+     1250
+    ]
+   },
+   "languages": {
+    "JavaScript": 243035,
+    "CSS": 152326,
+    "HTML": 11895
    }
   },
   {
