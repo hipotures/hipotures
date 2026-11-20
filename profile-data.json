@@ -111,7 +111,7 @@
    "description": "What about Collatz conjecture",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-19T00:07:42Z",
+   "pushed_at": "2026-11-20T10:58:09Z",
    "monthly": {
     "2026-05": [
      1,
@@ -119,15 +119,15 @@
      0
     ],
     "2026-11": [
-     25,
-     30320,
-     208
+     28,
+     73550,
+     269
     ]
    },
    "languages": {
     "Lean": 802838,
-    "Rust": 443351,
-    "Python": 407251,
+    "Rust": 461869,
+    "Python": 412174,
     "TeX": 63885,
     "Shell": 19537
    }
@@ -335,12 +335,12 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-18T14:53:06Z",
+   "pushed_at": "2026-11-19T14:59:22Z",
    "monthly": {
     "2026-11": [
-     54,
-     7359,
-     1635
+     55,
+     7399,
+     1675
     ]
    },
    "languages": {
@@ -1107,7 +1107,7 @@
    "description": "Collection of small personal utility scripts organized by category",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-19T06:01:04Z",
+   "pushed_at": "2026-11-19T23:34:04Z",
    "monthly": {
     "2025-11": [
      68,
@@ -1165,16 +1165,37 @@
      4775
     ],
     "2026-11": [
-     43,
-     69012,
-     74324
+     49,
+     69821,
+     74476
     ]
    },
    "languages": {
     "Python": 545540,
-    "JavaScript": 134839,
-    "Shell": 17051,
+    "JavaScript": 159757,
+    "Shell": 17114,
     "CSS": 1036
+   }
+  },
+  {
+   "name": "sistars",
+   "html_url": "https://github.com/hipotures/sistars",
+   "description": null,
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-20T12:34:55Z",
+   "monthly": {
+    "2026-11": [
+     1,
+     21,
+     0
+    ]
+   },
+   "languages": {
+    "Rust": 207263,
+    "TypeScript": 187259,
+    "HTML": 18826,
+    "CSS": 15464
    }
   },
   {
