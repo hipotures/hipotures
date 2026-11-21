@@ -65,6 +65,16 @@
    "own_commits": true
   },
   {
+   "name": "alpoge-rh-replay",
+   "html_url": "https://github.com/hipotures/alpoge-rh-replay",
+   "description": "Independent replay of Alpöge’s claimed RH proof. Claim Lean modules and submit reproducible evidence.",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-11-21T13:53:15Z",
+   "upstream": "rohanarun/alpoge-rh-replay",
+   "own_commits": false
+  },
+  {
    "name": "asquerix",
    "html_url": "https://github.com/hipotures/asquerix",
    "description": "NVIDIA Warp proof of concept searching for dense packings of unit squares by wall-driven compression.",
@@ -111,7 +121,7 @@
    "description": "What about Collatz conjecture",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-20T10:58:09Z",
+   "pushed_at": "2026-11-20T18:20:08Z",
    "monthly": {
     "2026-05": [
      1,
@@ -119,15 +129,15 @@
      0
     ],
     "2026-11": [
-     28,
-     73550,
-     269
+     29,
+     74472,
+     295
     ]
    },
    "languages": {
     "Lean": 802838,
-    "Rust": 461869,
-    "Python": 412174,
+    "Rust": 468209,
+    "Python": 418061,
     "TeX": 63885,
     "Shell": 19537
    }
@@ -335,12 +345,12 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-19T14:59:22Z",
+   "pushed_at": "2026-11-20T14:40:56Z",
    "monthly": {
     "2026-11": [
-     55,
-     7399,
-     1675
+     56,
+     7440,
+     1693
     ]
    },
    "languages": {
@@ -388,11 +398,11 @@
    "description": "Portable service manifests for deploying third-party applications with HomeStack on Proxmox VE.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-02T22:47:05Z",
+   "pushed_at": "2026-11-20T22:12:35Z",
    "monthly": {
     "2026-11": [
-     32,
-     1515,
+     34,
+     1585,
      81
     ]
    },
@@ -1183,7 +1193,7 @@
    "description": null,
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-20T12:34:55Z",
+   "pushed_at": "2026-11-21T11:35:34Z",
    "monthly": {
     "2026-11": [
      1,
@@ -1192,10 +1202,10 @@
     ]
    },
    "languages": {
-    "Rust": 207263,
-    "TypeScript": 187259,
-    "HTML": 18826,
-    "CSS": 15464
+    "TypeScript": 269282,
+    "Rust": 250879,
+    "HTML": 21840,
+    "CSS": 19845
    }
   },
   {
@@ -1528,6 +1538,26 @@
    },
    "languages": {
     "Python": 2735346
+   }
+  },
+  {
+   "name": "vriemann",
+   "html_url": "https://github.com/hipotures/vriemann",
+   "description": null,
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-21T12:31:46Z",
+   "monthly": {
+    "2026-11": [
+     35,
+     9619,
+     460
+    ]
+   },
+   "languages": {
+    "JavaScript": 204880,
+    "Python": 36336,
+    "HTML": 2439
    }
   }
  ],
