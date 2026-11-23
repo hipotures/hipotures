@@ -25,5 +25,8 @@
       "SCSS",
       "TeX"
     ]
-  }
+  },
+  "hide_pull_requests": [
+    "https://github.com/rohanarun/alpoge-rh-replay/pull/20401"
+  ]
 }

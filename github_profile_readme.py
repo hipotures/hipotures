@@ -676,7 +676,8 @@ PR_STATE_COLORS = {"merged": "8250df", "open": "1f883d", "closed": "lightgrey"}
 def render_contributions(items: list[dict[str, Any]], config: dict[str, Any]) -> str:
     """Pull requests as a table, then one row per project with years and kinds of involvement."""
     hidden = set(config.get("hide_contributions", []))
-    items = [item for item in items if item["repo"] not in hidden]
+    hidden_urls = set(config.get("hide_pull_requests", []))
+    items = [item for item in items if item["repo"] not in hidden and item["url"] not in hidden_urls]
     parts: list[str] = []
 
     pulls = [item for item in items if item["kind"] == "pr" and item["role"] == "authored"]

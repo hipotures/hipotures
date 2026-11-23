@@ -73,7 +73,6 @@
 | Project | Pull request | Status |
 | --- | --- | --- |
 | [rohanarun/⁠riemann‑hypothesis](https://github.com/rohanarun/riemann-hypothesis) | [Fix OrbSumFibreEquiv](https://github.com/rohanarun/riemann-hypothesis/pull/49) | ![merged](https://img.shields.io/badge/merged-8250df) |
-| [rohanarun/⁠alpoge‑rh‑replay](https://github.com/rohanarun/alpoge-rh-replay) | [Remove hipotures from paused-claimants.txt](https://github.com/rohanarun/alpoge-rh-replay/pull/20401) | ![merged](https://img.shields.io/badge/merged-8250df) |
 | [CrocSwap/⁠integer‑mult‑bounds](https://github.com/CrocSwap/integer-mult-bounds) | [Enlarged positive-frame networks: conditional kappa = 4.171211781e-5 > 2^-15](https://github.com/CrocSwap/integer-mult-bounds/pull/51) | ![merged](https://img.shields.io/badge/merged-8250df) |
 | [leanprover‑community/⁠riemann‑hypothesis](https://github.com/leanprover-community/riemann-hypothesis) | [Drop with_unfolding_all on two fields of inGeo_tr in OmPinsTr (−23% module build time)](https://github.com/leanprover-community/riemann-hypothesis/pull/230) | ![open](https://img.shields.io/badge/open-1f883d) |
 | [wilicc/⁠gpu‑burn](https://github.com/wilicc/gpu-burn) | [Fix temperature reporting for selected GPUs using device UUIDs](https://github.com/wilicc/gpu-burn/pull/163) | ![open](https://img.shields.io/badge/open-1f883d) |
@@ -87,7 +86,7 @@ Opened pull requests or issues, or joined a discussion:
 | --- | --- | --- |
 | [rohanarun/⁠riemann‑hypothesis](https://github.com/rohanarun/riemann-hypothesis) | 2026 | 1 PR |
 | [leanprover‑community/⁠riemann‑hypothesis](https://github.com/leanprover-community/riemann-hypothesis) | 2026 | 1 PR |
-| [rohanarun/⁠alpoge‑rh‑replay](https://github.com/rohanarun/alpoge-rh-replay) | 2026 | 1 PR, 475 issues |
+| [rohanarun/⁠alpoge‑rh‑replay](https://github.com/rohanarun/alpoge-rh-replay) | 2026 | 475 issues |
 | [wilicc/⁠gpu‑burn](https://github.com/wilicc/gpu-burn) | 2026 | 1 PR |
 | [CrocSwap/⁠integer‑mult‑bounds](https://github.com/CrocSwap/integer-mult-bounds) | 2026 | 4 PRs |
 | [Niko1221/⁠Strata](https://github.com/Niko1221/Strata) | 2026 | 1 issue |
