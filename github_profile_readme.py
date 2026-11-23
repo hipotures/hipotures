@@ -169,6 +169,7 @@ def collect(
     previous: dict[str, Any] | None = None,
     sleep: Sleeper = time.sleep,
     only: set[str] | None = None,
+    anonymous: JsonFetcher | None = None,
 ) -> dict[str, Any]:
     """Fetch raw data for all public repositories, independent of config and layout.
 
@@ -201,8 +202,15 @@ def collect(
     else:
         print(f"Private repositories: refreshed ({private['count']}).")
     contributions = collect_contributions(fetch, user)
+    if contributions is None and anonymous is not None:
+        # Fine-grained tokens get 422 from issue search; the results are public anyway.
+        print("Contributions: retrying the search without a token.")
+        contributions = collect_contributions(anonymous, user)
     if contributions is None:
         contributions = (previous or {}).get("contributions", [])
+        print("Contributions: search failed, keeping cached list.")
+    else:
+        print(f"Contributions: refreshed ({len(contributions)}).")
     return {
         "user": user,
         "repos": sorted(repos, key=lambda repo: repo["name"].lower()),
@@ -769,7 +777,9 @@ def main(argv: list[str] | None = None) -> int:
                 print("Error: --user is required when GITHUB_REPOSITORY_OWNER is not set", file=sys.stderr)
                 return 2
             only = set(args.only) if args.only else None
-            data = collect(make_fetcher(os.environ.get("GITHUB_TOKEN")), args.user, cached, only=only)
+            data = collect(
+                make_fetcher(os.environ.get("GITHUB_TOKEN")), args.user, cached, only=only, anonymous=make_fetcher(None)
+            )
             missing = sorted((only or set()) - {repo["name"] for repo in data["repos"]})
             if missing:
                 print(f"Warning: not public repositories of {args.user}: {', '.join(missing)}", file=sys.stderr)
