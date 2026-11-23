@@ -70,7 +70,7 @@
    "description": "Independent replay of Alpöge’s claimed RH proof. Claim Lean modules and submit reproducible evidence.",
    "fork": true,
    "archived": false,
-   "pushed_at": "2026-11-23T02:57:09Z",
+   "pushed_at": "2026-11-23T07:31:07Z",
    "upstream": "rohanarun/alpoge-rh-replay",
    "own_commits": false
   },
@@ -345,16 +345,16 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-23T05:33:04Z",
+   "pushed_at": "2026-11-23T05:42:35Z",
    "monthly": {
     "2026-11": [
-     65,
-     7594,
-     1776
+     68,
+     11931,
+     1788
     ]
    },
    "languages": {
-    "Python": 36137
+    "Python": 36950
    }
   },
   {
@@ -1092,7 +1092,7 @@
    "description": "Independent Comparator setup for the Lean formalization of the Riemann Hypothesis (Alpöge, 2026-11-20)",
    "fork": true,
    "archived": false,
-   "pushed_at": "2026-11-23T03:56:01Z",
+   "pushed_at": "2026-11-23T07:33:54Z",
    "upstream": "leanprover-community/riemann-hypothesis",
    "own_commits": false
   },
@@ -1203,17 +1203,17 @@
    "description": "Deterministic 4X space strategy simulation engine in Rust/WASM with a WebGPU/Canvas2D spectator UI and an HTTP/WebSocket + MCP arena server where LLM agents (Claude, Gemini, GPT) compete against built-in AI Governors.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-23T05:26:50Z",
+   "pushed_at": "2026-11-23T06:14:59Z",
    "monthly": {
     "2026-11": [
-     109,
-     59424,
-     7190
+     111,
+     59461,
+     7199
     ]
    },
    "languages": {
     "Rust": 919954,
-    "TypeScript": 452043,
+    "TypeScript": 453163,
     "HTML": 42265,
     "Python": 39735,
     "CSS": 38569
@@ -1557,17 +1557,17 @@
    "description": "Live 3D/VR visualization of the Lean verification of Alpöge's Riemann Hypothesis proof: 175,187 modules as a tower, helix or lightning-like proof spine.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-23T05:16:12Z",
+   "pushed_at": "2026-11-23T06:15:35Z",
    "monthly": {
     "2026-11": [
-     69,
-     12877,
-     984
+     71,
+     12881,
+     988
     ]
    },
    "languages": {
     "JavaScript": 241393,
-    "Python": 60546,
+    "Python": 60635,
     "HTML": 2756
    }
   }
@@ -1590,6 +1590,186 @@
   }
  },
  "contributions": [
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix CutGCoreGTSSAdj",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/141"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix DivisorProofs.Bundle0608",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/140"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "closed",
+   "created": "2026-11-23",
+   "title": "Fix CrystallinePeriodEqCechDeRhamPeriod",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/137"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix PolynomialSiteTraces.AdmissibleMap",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/136"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix HermitianCurvatureProofs.Bundle0180",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/135"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix GaugeLatticeShifts.Bundle0039",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/133"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix DivisibilityProofs.Bundle0016",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/124"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix HighestWeightBelow",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/122"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "closed",
+   "created": "2026-11-23",
+   "title": "Fix ExistsIterateDerivative",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/121"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "closed",
+   "created": "2026-11-23",
+   "title": "Fix GJFEInducedLevi",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/117"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "closed",
+   "created": "2026-11-23",
+   "title": "Fix LocDensHL",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/116"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix RootLatticeThresholds.Bundle0023 and PairTiesPf",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/112"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix GenusApproximationProofs.Bundle0001",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/111"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix FlagMeasures.Bundle0211",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/109"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "closed",
+   "created": "2026-11-23",
+   "title": "Fix LocalUnitaryOrbits.Bundle0003",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/108"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "closed",
+   "created": "2026-11-23",
+   "title": "Fix BrauerDivisor",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/101"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix PolyDerivConstMul",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/98"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix JetHarmonics.Bundle0116",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/97"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix HermitianCurvatureProofs.Bundle0112",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/95"
+  },
+  {
+   "repo": "rohanarun/riemann-hypothesis",
+   "kind": "pr",
+   "role": "authored",
+   "state": "merged",
+   "created": "2026-11-23",
+   "title": "Fix TailIntegrals.Bundle0018",
+   "url": "https://github.com/rohanarun/riemann-hypothesis/pull/93"
+  },
   {
    "repo": "rohanarun/riemann-hypothesis",
    "kind": "pr",
