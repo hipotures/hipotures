@@ -70,7 +70,7 @@
    "description": "Independent replay of Alpöge’s claimed RH proof. Claim Lean modules and submit reproducible evidence.",
    "fork": true,
    "archived": false,
-   "pushed_at": "2026-11-22T13:44:43Z",
+   "pushed_at": "2026-11-23T02:57:09Z",
    "upstream": "rohanarun/alpoge-rh-replay",
    "own_commits": false
   },
@@ -345,12 +345,12 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-21T13:57:33Z",
+   "pushed_at": "2026-11-22T13:51:11Z",
    "monthly": {
     "2026-11": [
-     57,
-     7493,
-     1714
+     58,
+     7512,
+     1733
     ]
    },
    "languages": {
@@ -398,11 +398,11 @@
    "description": "Portable service manifests for deploying third-party applications with HomeStack on Proxmox VE.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-20T22:12:35Z",
+   "pushed_at": "2026-11-22T21:48:04Z",
    "monthly": {
     "2026-11": [
-     34,
-     1585,
+     36,
+     1655,
      81
     ]
    },
@@ -1087,6 +1087,16 @@
    }
   },
   {
+   "name": "riemann-hypothesis",
+   "html_url": "https://github.com/hipotures/riemann-hypothesis",
+   "description": "Independent Comparator setup for the Lean formalization of the Riemann Hypothesis (Alpöge, 2026-11-20)",
+   "fork": true,
+   "archived": false,
+   "pushed_at": "2026-11-23T03:56:01Z",
+   "upstream": "leanprover-community/riemann-hypothesis",
+   "own_commits": false
+  },
+  {
    "name": "s5e7-with-claude",
    "html_url": "https://github.com/hipotures/s5e7-with-claude",
    "description": "Kaggle Playground Series S5E7 (introvert/extrovert classification) experiments and analysis with Claude.",
@@ -1190,10 +1200,10 @@
   {
    "name": "sistars",
    "html_url": "https://github.com/hipotures/sistars",
-   "description": null,
+   "description": "Deterministic 4X space strategy simulation engine in Rust/WASM with a WebGPU/Canvas2D spectator UI and an HTTP/WebSocket + MCP arena server where LLM agents (Claude, Gemini, GPT) compete against built-in AI Governors.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-22T07:34:33Z",
+   "pushed_at": "2026-11-23T05:16:26Z",
    "monthly": {
     "2026-11": [
      1,
@@ -1202,10 +1212,11 @@
     ]
    },
    "languages": {
-    "TypeScript": 370246,
-    "Rust": 324317,
-    "HTML": 32311,
-    "CSS": 27917
+    "Rust": 919954,
+    "TypeScript": 452043,
+    "HTML": 42265,
+    "Python": 39735,
+    "CSS": 38569
    }
   },
   {
@@ -1543,20 +1554,20 @@
   {
    "name": "vriemann",
    "html_url": "https://github.com/hipotures/vriemann",
-   "description": null,
+   "description": "Live 3D/VR visualization of the Lean verification of Alpöge's Riemann Hypothesis proof: 175,187 modules as a tower, helix or lightning-like proof spine.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-21T21:13:16Z",
+   "pushed_at": "2026-11-23T05:16:12Z",
    "monthly": {
     "2026-11": [
-     45,
-     10481,
-     522
+     69,
+     12877,
+     984
     ]
    },
    "languages": {
-    "JavaScript": 205603,
-    "Python": 40336,
+    "JavaScript": 241393,
+    "Python": 60546,
     "HTML": 2756
    }
   }
