@@ -224,7 +224,11 @@ def collect_contributions(fetch: JsonFetcher, user: str) -> list[dict[str, Any]]
         q = urllib.parse.quote(query.format(user=user))
         page = 1
         while True:
-            result = fetch_or_none(fetch, f"/search/issues?q={q}&per_page=100&page={page}")
+            try:
+                result = fetch(f"/search/issues?q={q}&per_page=100&page={page}")
+            except urllib.error.URLError as error:
+                print(f"warning: contribution search ({role}, page {page}) failed: {error}", file=sys.stderr)
+                return None
             if not isinstance(result, dict):
                 return None
             batch = result.get("items", [])
