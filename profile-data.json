@@ -345,12 +345,12 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-22T13:51:11Z",
+   "pushed_at": "2026-11-23T05:22:43Z",
    "monthly": {
     "2026-11": [
-     58,
-     7512,
-     1733
+     59,
+     7548,
+     1758
     ]
    },
    "languages": {
@@ -1203,12 +1203,12 @@
    "description": "Deterministic 4X space strategy simulation engine in Rust/WASM with a WebGPU/Canvas2D spectator UI and an HTTP/WebSocket + MCP arena server where LLM agents (Claude, Gemini, GPT) compete against built-in AI Governors.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-23T05:16:26Z",
+   "pushed_at": "2026-11-23T05:26:50Z",
    "monthly": {
     "2026-11": [
-     1,
-     21,
-     0
+     109,
+     59424,
+     7190
     ]
    },
    "languages": {
