@@ -116,6 +116,26 @@
    }
   },
   {
+   "name": "b-ring",
+   "html_url": "https://github.com/hipotures/b-ring",
+   "description": "Self-hosted hybrid file space for Linux and Android built in Rust. Smart LAN sync, BLAKE3-verified size-based offloading, on-demand video streaming, and multi-channel pairing.",
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-24T13:59:22Z",
+   "monthly": {
+    "2026-11": [
+     39,
+     43153,
+     1004
+    ]
+   },
+   "languages": {
+    "Rust": 401000,
+    "Kotlin": 120460,
+    "Shell": 1956
+   }
+  },
+  {
    "name": "collatz-lab",
    "html_url": "https://github.com/hipotures/collatz-lab",
    "description": "What about Collatz conjecture",
@@ -345,12 +365,12 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-23T05:42:35Z",
+   "pushed_at": "2026-11-23T16:57:44Z",
    "monthly": {
     "2026-11": [
-     68,
-     11931,
-     1788
+     69,
+     12151,
+     1808
     ]
    },
    "languages": {
@@ -363,7 +383,7 @@
    "description": "Turn Proxmox VE into a developer cloud: disposable-OS workspaces with persistent /home, automated AI coding agent setup, and declarative LXC services",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-19T03:47:16Z",
+   "pushed_at": "2026-11-24T11:44:52Z",
    "monthly": {
     "2026-09": [
      81,
@@ -376,13 +396,13 @@
      241827
     ],
     "2026-11": [
-     308,
-     53192,
-     37741
+     312,
+     53310,
+     37753
     ]
    },
    "languages": {
-    "Rust": 4424384,
+    "Rust": 4426899,
     "Python": 506305,
     "JavaScript": 166794,
     "Shell": 44443,
@@ -1127,7 +1147,7 @@
    "description": "Collection of small personal utility scripts organized by category",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-19T23:34:04Z",
+   "pushed_at": "2026-11-24T06:25:48Z",
    "monthly": {
     "2025-11": [
      68,
@@ -1185,15 +1205,16 @@
      4775
     ],
     "2026-11": [
-     49,
-     69821,
-     74476
+     59,
+     79519,
+     79526
     ]
    },
    "languages": {
-    "Python": 545540,
-    "JavaScript": 159757,
-    "Shell": 17114,
+    "Python": 550581,
+    "JavaScript": 160635,
+    "Luau": 57239,
+    "Shell": 20639,
     "CSS": 1036
    }
   },
@@ -1203,20 +1224,21 @@
    "description": "Deterministic 4X space strategy simulation engine in Rust/WASM with a WebGPU/Canvas2D spectator UI and an HTTP/WebSocket + MCP arena server where LLM agents (Claude, Gemini, GPT) compete against built-in AI Governors.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-23T06:14:59Z",
+   "pushed_at": "2026-11-24T08:47:20Z",
    "monthly": {
     "2026-11": [
-     111,
-     59461,
-     7199
+     169,
+     73639,
+     10081
     ]
    },
    "languages": {
-    "Rust": 919954,
-    "TypeScript": 453163,
-    "HTML": 42265,
+    "Rust": 1042676,
+    "TypeScript": 503708,
+    "HTML": 48590,
+    "CSS": 42260,
     "Python": 39735,
-    "CSS": 38569
+    "Shell": 542
    }
   },
   {
@@ -1514,18 +1536,25 @@
    "description": "Recurring yt-dlp downloads with a Rich terminal UI and a mobile-first web interface.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-09-28T19:58:21Z",
+   "pushed_at": "2026-11-23T22:26:27Z",
    "monthly": {
     "2026-09": [
      23,
      5944,
      2704
+    ],
+    "2026-11": [
+     13,
+     9621,
+     5040
     ]
    },
    "languages": {
-    "Python": 105979,
-    "JavaScript": 11887,
-    "HTML": 3137
+    "Rust": 160511,
+    "JavaScript": 11871,
+    "HTML": 3137,
+    "Shell": 2411,
+    "Dockerfile": 1222
    }
   },
   {
@@ -1783,7 +1812,7 @@
    "repo": "leanprover-community/riemann-hypothesis",
    "kind": "pr",
    "role": "authored",
-   "state": "open",
+   "state": "closed",
    "created": "2026-11-23",
    "title": "Drop with_unfolding_all on two fields of inGeo_tr in OmPinsTr (−23% module build time)",
    "url": "https://github.com/leanprover-community/riemann-hypothesis/pull/230"
@@ -2278,7 +2307,7 @@
    "repo": "rohanarun/alpoge-rh-replay",
    "kind": "issue",
    "role": "authored",
-   "state": "open",
+   "state": "closed",
    "created": "2026-11-22",
    "title": "Claim M164958",
    "url": "https://github.com/rohanarun/alpoge-rh-replay/issues/34579"
