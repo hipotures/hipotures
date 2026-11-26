@@ -37,13 +37,14 @@ EXT = {
     ".vue": "Vue", ".jinja": "Jinja", ".j2": "Jinja", ".sql": "SQL",
 }
 # Data / config / docs / binary: not counted as code.
-DATA_EXT = {".md", ".json", ".yml", ".yaml", ".toml", ".txt", ".csv", ".lock", ".svg", ".png", ".jpg",
+DATA_EXT = {".html", ".htm", ".md", ".json", ".yml", ".yaml", ".toml", ".txt", ".csv", ".lock", ".svg", ".png", ".jpg",
             ".xml", ".ini", ".cfg", ".log", ".jsonl", ".patch", ".diff", ".rst"}
 SKIP_NAMES = {"package-lock.json", "Cargo.lock", "yarn.lock", "pnpm-lock.yaml", "poetry.lock", "uv.lock"}
 # Vendored, generated, fixture and experiment-output paths.
 BAD = re.compile(r"(^|/)(vendor|node_modules|dist|build|fixtures?|campaigns?|results?|data|outputs?|generated|"
                  r"third_party|\.venv|venv)(/|$)|\.min\.js$|-results?/|(^|/)report\.html$")
-FAMILY = {"Python": "Python", "Rust": "Rust", "JavaScript": "JS/TS", "TypeScript": "JS/TS"}
+FAMILY = {"Python": "Python", "Rust": "Rust", "JavaScript": "JS/TS", "TypeScript": "JS/TS",
+          "Svelte": "JS/TS", "Vue": "JS/TS"}
 FAMILY_ORDER = ["Python", "Rust", "JS/TS", "Other"]
 THEMES = {
     "light": {
@@ -293,7 +294,7 @@ def draw_chart(csv_path, png_path, since, theme="light"):
     fig.text(0.02, 0.955, "Share of added lines by language, per month",
              fontsize=14, fontweight="bold", color=INK, ha="left")
     fig.text(0.02, 0.905, "Own non-fork repos. Number above each bar = total lines added that month", fontsize=10, color=INK2, ha="left")
-    fig.text(0.02, 0.02, f"Data since {since}. Data, lock, log, vendor and generated files excluded.",
+    fig.text(0.02, 0.02, f"Data since {since}. Code only: HTML, docs, data, lock, vendor and generated files excluded; Svelte counts as JS/TS.",
              fontsize=8, color=INK2)
     fig.subplots_adjust(left=0.07, right=0.98, top=0.84, bottom=0.12)
     fig.savefig(png_path, dpi=200, facecolor=T["bg"], transparent=(T["bg"] == "none"))
