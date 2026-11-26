@@ -2,7 +2,7 @@
 """Monthly language share of lines added across your own (non-fork) GitHub repos.
 
 Usage:
-    python3 lang_stats.py                      # last 365 days, chart to assets/languages-monthly.png
+    python3 lang_stats.py                      # last 13 months (from the 1st), chart to assets/languages-monthly.png
     python3 lang_stats.py --out /tmp/foo       # other folder for the PNG
     python3 lang_stats.py --since 2025-11-26   # fixed start date
     python3 lang_stats.py --no-fetch           # reuse cached clones, skip git fetch
@@ -283,14 +283,23 @@ def draw_chart(csv_path, png_path, since, theme="light"):
     return png_path
 
 
+def default_since():
+    """First day of the month 12 months back: 13 monthly bars, the oldest full, the current one partial."""
+    t = dt.date.today()
+    y, m = t.year, t.month - 12
+    if m < 1:
+        y, m = y - 1, m + 12
+    return dt.date(y, m, 1).isoformat()
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--out", default=DEFAULT_OUT, help=f"folder for the PNG (default: {DEFAULT_OUT})")
-    ap.add_argument("--since", help="window start YYYY-MM-DD (default: one year ago today)")
+    ap.add_argument("--since", help="window start YYYY-MM-DD (default: 1st of the month 12 months ago)")
     ap.add_argument("--no-fetch", action="store_true", help="do not fetch existing clones")
     args = ap.parse_args()
 
-    since = args.since or (dt.date.today() - dt.timedelta(days=365)).isoformat()
+    since = args.since or default_since()
     os.makedirs(args.out, exist_ok=True)
     os.makedirs(CLONES, exist_ok=True)
 
