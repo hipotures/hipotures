@@ -2,14 +2,15 @@
 """Monthly language share of lines added across your own (non-fork) GitHub repos.
 
 Usage:
-    python3 lang_stats.py                      # last 365 days, output to /tmp/lang_stats
-    python3 lang_stats.py --out /tmp/foo       # other output folder
+    python3 lang_stats.py                      # last 365 days, chart to assets/languages-monthly.png
+    python3 lang_stats.py --out /tmp/foo       # other folder for the PNG
     python3 lang_stats.py --since 2025-11-26   # fixed start date
     python3 lang_stats.py --no-fetch           # reuse cached clones, skip git fetch
 
 Requires: gh (logged in), git, python3 with matplotlib.
 Clones are cached in ~/.cache/lang-stats/clones and updated on every run.
-Outputs: languages_monthly.csv and languages_monthly.png in the output folder.
+Outputs: languages-monthly.png in the output folder (default: assets/ next to this script, as the README
+expects) and the intermediate languages_monthly.csv in ~/.cache/lang-stats.
 """
 import argparse
 import collections
@@ -23,6 +24,7 @@ import sys
 
 CACHE = os.path.expanduser("~/.cache/lang-stats")
 CLONES = os.path.join(CACHE, "clones")
+DEFAULT_OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
 GH_USER = None  # None = author from `gh api user`
 
 EXT = {
@@ -267,7 +269,7 @@ def draw_chart(csv_path, png_path, since):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--out", default="/tmp/lang_stats", help="output folder (default: /tmp/lang_stats)")
+    ap.add_argument("--out", default=DEFAULT_OUT, help=f"folder for the PNG (default: {DEFAULT_OUT})")
     ap.add_argument("--since", help="window start YYYY-MM-DD (default: one year ago today)")
     ap.add_argument("--no-fetch", action="store_true", help="do not fetch existing clones")
     args = ap.parse_args()
@@ -294,8 +296,8 @@ def main():
         all_rows.append((full, rows))
 
     monthly = aggregate(all_rows)
-    csv_path = write_csv(monthly, os.path.join(args.out, "languages_monthly.csv"))
-    png_path = draw_chart(csv_path, os.path.join(args.out, "languages_monthly.png"), since)
+    csv_path = write_csv(monthly, os.path.join(CACHE, "languages_monthly.csv"))
+    png_path = draw_chart(csv_path, os.path.join(args.out, "languages-monthly.png"), since)
 
     print(f"wrote {csv_path}")
     if png_path:
