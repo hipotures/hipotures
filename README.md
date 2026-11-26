@@ -132,3 +132,7 @@ Opened pull requests or issues, or joined a discussion:
 | [rspamd/⁠rspamd](https://github.com/rspamd/rspamd) | 2018–2019 | 8 issues |
 | [joyieldInc/⁠predixy](https://github.com/joyieldInc/predixy) | 2018 | 1 issue |
 <!-- CONTRIBUTIONS:END -->
+
+## Languages
+
+<img src="assets/languages-monthly.png" alt="Share of added lines by language, per month" width="100%">
