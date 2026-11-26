@@ -261,7 +261,9 @@ def draw_chart(csv_path, png_path, since, theme="light"):
     for side in ("top", "right", "left"):
         ax.spines[side].set_visible(False)
     ax.spines["bottom"].set_color(T["axis"])
-    ax.yaxis.grid(True, color=T["grid"], linewidth=0.8, zorder=0)
+    # Gridlines stop at the last bar so they never run through the direct labels.
+    ax.hlines([25, 50, 75, 100], -0.6, n - 1 + 0.4, color=T["grid"], linewidth=0.8, zorder=0)
+    ax.spines["bottom"].set_bounds(-0.6, n - 1 + 0.4)
     ax.set_axisbelow(True)
     ax.tick_params(length=0, colors=INK2, labelsize=9)
     ax.set_xticks(x)
