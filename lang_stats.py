@@ -9,7 +9,7 @@ Usage:
 
 Requires: gh (logged in), git, python3 with matplotlib.
 Clones are cached in ~/.cache/lang-stats/clones and updated on every run.
-Outputs: languages-monthly.png in the output folder (default: assets/ next to this script, as the README
+Outputs: languages-monthly.png and languages-monthly-dark.png (transparent) in the output folder (default: assets/ next to this script, as the README
 expects) and the intermediate languages_monthly.csv in ~/.cache/lang-stats.
 """
 import argparse
@@ -44,10 +44,21 @@ BAD = re.compile(r"(^|/)(vendor|node_modules|dist|build|fixtures?|campaigns?|res
                  r"third_party|\.venv|venv)(/|$)|\.min\.js$|-results?/")
 FAMILY = {"Python": "Python", "Rust": "Rust", "JavaScript": "JS/TS", "TypeScript": "JS/TS"}
 FAMILY_ORDER = ["Python", "Rust", "JS/TS", "Other"]
-COLORS = {"Python": "#2f5d8a", "Rust": "#c8643c", "JS/TS": "#7bb8a8", "Other": "#cfd2d8"}
-LABEL_INK = {"Python": "white", "Rust": "white", "JS/TS": "#191919", "Other": "#191919"}
-TEXT_COLORS = {"Python": "#2f5d8a", "Rust": "#b0532d", "JS/TS": "#3f8a78", "Other": "#6b6f78"}
-INK, INK2, GRID = "#191919", "#666666", "#e7e7e7"
+THEMES = {
+    "light": {
+        "bg": "#ffffff", "ink": "#191919", "ink2": "#666666", "grid": "#e7e7e7", "axis": "#c2c2c2",
+        "colors": {"Python": "#2f5d8a", "Rust": "#c8643c", "JS/TS": "#7bb8a8", "Other": "#cfd2d8"},
+        "label": {"Python": "white", "Rust": "white", "JS/TS": "#191919", "Other": "#191919"},
+        "text": {"Python": "#2f5d8a", "Rust": "#b0532d", "JS/TS": "#3f8a78", "Other": "#6b6f78"},
+    },
+    # Transparent, so it blends into any dark GitHub theme (default, dimmed, high contrast).
+    "dark": {
+        "bg": "none", "ink": "#e6edf3", "ink2": "#9198a1", "grid": "#ffffff1a", "axis": "#ffffff33",
+        "colors": {"Python": "#6a9fd8", "Rust": "#e08f66", "JS/TS": "#7bb8a8", "Other": "#3b414d"},
+        "label": {"Python": "#0d1117", "Rust": "#0d1117", "JS/TS": "#0d1117", "Other": "#e6edf3"},
+        "text": {"Python": "#6a9fd8", "Rust": "#e08f66", "JS/TS": "#7bb8a8", "Other": "#9198a1"},
+    },
+}
 
 
 def run(cmd, cwd=None):
@@ -204,7 +215,9 @@ def spread(centers, min_gap, lo=0.0, hi=100.0):
     return [pos[i] for i in range(len(centers))]
 
 
-def draw_chart(csv_path, png_path, since):
+def draw_chart(csv_path, png_path, since, theme="light"):
+    T = THEMES[theme]
+    INK, INK2 = T["ink"], T["ink2"]
     try:
         import matplotlib
         matplotlib.use("Agg")
@@ -217,19 +230,20 @@ def draw_chart(csv_path, png_path, since):
         print("no data, chart skipped")
         return None
     n = len(rows)
-    fig, ax = plt.subplots(figsize=(11, 6.4), facecolor="white")
-    ax.set_facecolor("white")
+    fig, ax = plt.subplots(figsize=(11, 6.4), facecolor=T["bg"])
+    ax.set_facecolor(T["bg"])
     x = list(range(n))
     bottom = [0.0] * n
     last_centers = {}
     for key in FAMILY_ORDER:
         vals = [float(r[key]) for r in rows]
-        ax.bar(x, vals, bottom=bottom, color=COLORS[key], width=0.62,
-               edgecolor="white", linewidth=1.5, zorder=3)
+        gap = 0.5  # visual gap between segments, in percentage points (no outline, so it works on transparent)
+        ax.bar(x, [max(v - gap, 0) for v in vals], bottom=[b + gap / 2 for b in bottom],
+               color=T["colors"][key], width=0.62, linewidth=0, zorder=3)
         for i, v in enumerate(vals):
             if v >= 6:
                 ax.text(i, bottom[i] + v / 2, f"{v:.0f}%", ha="center", va="center",
-                        fontsize=9, color=LABEL_INK[key], zorder=4)
+                        fontsize=9, color=T["label"][key], zorder=4)
         last_centers[key] = bottom[-1] + vals[-1] / 2
         bottom = [b + v for b, v in zip(bottom, vals)]
 
@@ -242,12 +256,12 @@ def draw_chart(csv_path, png_path, since):
     ys = spread([last_centers[k] for k in FAMILY_ORDER], min_gap=5.5)
     for key, y in zip(FAMILY_ORDER, ys):
         ax.text(n - 1 + 0.46, y, key, ha="left", va="center", fontsize=10,
-                fontweight="bold", color=TEXT_COLORS[key], zorder=4)
+                fontweight="bold", color=T["text"][key], zorder=4)
 
     for side in ("top", "right", "left"):
         ax.spines[side].set_visible(False)
-    ax.spines["bottom"].set_color("#c2c2c2")
-    ax.yaxis.grid(True, color=GRID, linewidth=0.8, zorder=0)
+    ax.spines["bottom"].set_color(T["axis"])
+    ax.yaxis.grid(True, color=T["grid"], linewidth=0.8, zorder=0)
     ax.set_axisbelow(True)
     ax.tick_params(length=0, colors=INK2, labelsize=9)
     ax.set_xticks(x)
@@ -262,7 +276,7 @@ def draw_chart(csv_path, png_path, since):
     fig.text(0.02, 0.02, f"Data since {since}. Data, lock, log, vendor and generated files excluded.",
              fontsize=8, color=INK2)
     fig.subplots_adjust(left=0.07, right=0.98, top=0.84, bottom=0.12)
-    fig.savefig(png_path, dpi=200, facecolor="white")
+    fig.savefig(png_path, dpi=200, facecolor=T["bg"], transparent=(T["bg"] == "none"))
     plt.close(fig)
     return png_path
 
@@ -297,11 +311,11 @@ def main():
 
     monthly = aggregate(all_rows)
     csv_path = write_csv(monthly, os.path.join(CACHE, "languages_monthly.csv"))
-    png_path = draw_chart(csv_path, os.path.join(args.out, "languages-monthly.png"), since)
-
     print(f"wrote {csv_path}")
-    if png_path:
-        print(f"wrote {png_path}")
+    for theme, name in (("light", "languages-monthly.png"), ("dark", "languages-monthly-dark.png")):
+        png_path = draw_chart(csv_path, os.path.join(args.out, name), since, theme)
+        if png_path:
+            print(f"wrote {png_path}")
     if problems:
         print("warnings:")
         for p in problems:

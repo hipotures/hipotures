@@ -135,4 +135,7 @@ Opened pull requests or issues, or joined a discussion:
 
 ## Languages
 
-<img src="assets/languages-monthly.png" alt="Share of added lines by language, per month" width="100%">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/languages-monthly-dark.png">
+  <img src="assets/languages-monthly.png" alt="Share of added lines by language, per month" width="100%">
+</picture>
