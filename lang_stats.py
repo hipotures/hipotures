@@ -24,6 +24,7 @@ import sys
 
 CACHE = os.path.expanduser("~/.cache/lang-stats")
 CLONES = os.path.join(CACHE, "clones")
+SINGLE_LANG_SHARE = 80  # % of "Other" a language needs to be named inside the bar
 DEFAULT_OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
 GH_USER = None  # None = author from `gh api user`
 
@@ -41,7 +42,7 @@ DATA_EXT = {".md", ".json", ".yml", ".yaml", ".toml", ".txt", ".csv", ".lock", "
 SKIP_NAMES = {"package-lock.json", "Cargo.lock", "yarn.lock", "pnpm-lock.yaml", "poetry.lock", "uv.lock"}
 # Vendored, generated, fixture and experiment-output paths.
 BAD = re.compile(r"(^|/)(vendor|node_modules|dist|build|fixtures?|campaigns?|results?|data|outputs?|generated|"
-                 r"third_party|\.venv|venv)(/|$)|\.min\.js$|-results?/")
+                 r"third_party|\.venv|venv)(/|$)|\.min\.js$|-results?/|(^|/)report\.html$")
 FAMILY = {"Python": "Python", "Rust": "Rust", "JavaScript": "JS/TS", "TypeScript": "JS/TS"}
 FAMILY_ORDER = ["Python", "Rust", "JS/TS", "Other"]
 THEMES = {
@@ -156,30 +157,40 @@ def classify(path):
     ext = os.path.splitext(base)[1].lower()
     if ext in DATA_EXT or ext == "":
         return None
-    lang = EXT.get(ext, "Other-code")
+    lang = EXT.get(ext)
+    if lang is None:  # unknown extension: experiment output and data (.stdout, .csv-done, ...), not code
+        return None
     return FAMILY.get(lang, "Other")
 
 
 def aggregate(all_rows):
+    """Return (monthly family counters, per-month counters of the languages inside "Other")."""
     monthly = collections.defaultdict(collections.Counter)
+    other = collections.defaultdict(collections.Counter)
     for repo, rows in all_rows:
         for _sha, month, path, added in rows:
             fam = classify(norm_path(path))
             if fam is None:
                 continue
             monthly[month][fam] += added
-    return monthly
+            if fam == "Other":
+                other[month][EXT[os.path.splitext(norm_path(path))[1].lower()]] += added
+    return monthly, other
 
 
-def write_csv(monthly, path):
+def write_csv(monthly, other, path):
     with open(path, "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["month"] + FAMILY_ORDER + ["total_lines"])
+        w.writerow(["month"] + FAMILY_ORDER + ["total_lines", "other_top", "other_top_share"])
         for m in sorted(monthly):
             c = monthly[m]
             total = sum(c.values())
             shares = [round(100 * c[k] / total, 1) if total else 0.0 for k in FAMILY_ORDER]
-            w.writerow([m] + shares + [total])
+            top, top_share = "", 0.0
+            if other[m]:
+                top, top_lines = other[m].most_common(1)[0]
+                top_share = round(100 * top_lines / sum(other[m].values()), 1)
+            w.writerow([m] + shares + [total, top, top_share])
     return path
 
 
@@ -241,9 +252,16 @@ def draw_chart(csv_path, png_path, since, theme="light"):
         ax.bar(x, [max(v - gap, 0) for v in vals], bottom=[b + gap / 2 for b in bottom],
                color=T["colors"][key], width=0.62, linewidth=0, zorder=3)
         for i, v in enumerate(vals):
+            name = rows[i]["other_top"] if key == "Other" else ""
+            named = bool(name) and v > 30 and float(rows[i]["other_top_share"]) >= SINGLE_LANG_SHARE
             if v >= 6:
-                ax.text(i, bottom[i] + v / 2, f"{v:.0f}%", ha="center", va="center",
+                # a named segment keeps its % at the top and the language name runs vertically below it
+                y = bottom[i] + v - 3 if named else bottom[i] + v / 2
+                ax.text(i, y, f"{v:.0f}%", ha="center", va="center",
                         fontsize=9, color=T["label"][key], zorder=4)
+            if named:
+                ax.text(i, bottom[i] + (v - 6) / 2, name, rotation=90, ha="center", va="center",
+                        fontsize=10, fontweight="bold", color=T["label"][key], zorder=4)
         last_centers[key] = bottom[-1] + vals[-1] / 2
         bottom = [b + v for b, v in zip(bottom, vals)]
 
@@ -320,8 +338,8 @@ def main():
             continue
         all_rows.append((full, rows))
 
-    monthly = aggregate(all_rows)
-    csv_path = write_csv(monthly, os.path.join(CACHE, "languages_monthly.csv"))
+    monthly, other = aggregate(all_rows)
+    csv_path = write_csv(monthly, other, os.path.join(CACHE, "languages_monthly.csv"))
     print(f"wrote {csv_path}")
     for theme, name in (("light", "languages-monthly.png"), ("dark", "languages-monthly-dark.png")):
         png_path = draw_chart(csv_path, os.path.join(args.out, name), since, theme)
