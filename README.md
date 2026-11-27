@@ -71,7 +71,7 @@
 
 ## Open Problems
 
-Open problems in graph theory, starting with the [Erdős–Gyárfás conjecture](https://github.com/hipotures/conjectures): new bounds for graphs without power-of-two cycles, with Lean 4 proofs, DRAT-checked SAT proofs and reproducible censuses. Papers, code and data, CC0.
+Results on open problems in mathematics, each published with a paper, a Lean 4 proof checked by the Lean kernel, an independent checker, and the data needed to reproduce it. More in [hipotures/conjectures](https://github.com/hipotures/conjectures).
 
 | Problem | Result | Paper |
 | --- | --- | --- |
