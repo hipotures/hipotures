@@ -69,6 +69,17 @@
 | [identity](https://github.com/hipotures/identity) | Image rotation, playback speed control and a path recording mode exporting clicked pixel coordinates as JSON. | [YaLTeR/⁠identity](https://gitlab.gnome.org/YaLTeR/identity) |
 <!-- FORKS:END -->
 
+## Open Problems
+
+Open problems in graph theory, starting with the [Erdős–Gyárfás conjecture](https://github.com/hipotures/conjectures): new bounds for graphs without power-of-two cycles, with Lean 4 proofs, DRAT-checked SAT proofs and reproducible censuses. Papers, code and data, CC0.
+
+| Problem | Result | Paper |
+| --- | --- | --- |
+| Erdős–Gyárfás | [Small graphs without cycles of length a power of two](https://github.com/hipotures/conjectures/tree/main/results/small-graphs-power-of-two-cycles) | [PDF](https://github.com/hipotures/conjectures/blob/main/results/small-graphs-power-of-two-cycles/paper.pdf) |
+| Erdős–Gyárfás | [Cubic bipartite graphs on at most 84 vertices have a cycle of length 4, 8 or 16](https://github.com/hipotures/conjectures/tree/main/results/cubic-bipartite-power-of-two-cycles) | [PDF](https://github.com/hipotures/conjectures/blob/main/results/cubic-bipartite-power-of-two-cycles/paper.pdf) |
+| Erdős–Gyárfás | [Cycles of length 4, 8, 16 and 32 in censuses of cubic graphs](https://github.com/hipotures/conjectures/tree/main/results/cubic-census-power-of-two-cycles) | [PDF](https://github.com/hipotures/conjectures/blob/main/results/cubic-census-power-of-two-cycles/paper.pdf) |
+| Erdős–Gyárfás | [The smallest Tutte–Coxeter lifts without cycles of length 32](https://github.com/hipotures/conjectures/tree/main/results/tutte-coxeter-lifts-without-32-cycles) | [PDF](https://github.com/hipotures/conjectures/blob/main/results/tutte-coxeter-lifts-without-32-cycles/paper.pdf) |
+
 ## Contributions
 
 <!-- CONTRIBUTIONS:START -->
