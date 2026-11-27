@@ -69,7 +69,7 @@
 | [identity](https://github.com/hipotures/identity) | Image rotation, playback speed control and a path recording mode exporting clicked pixel coordinates as JSON. | [YaLTeR/⁠identity](https://gitlab.gnome.org/YaLTeR/identity) |
 <!-- FORKS:END -->
 
-## Open Problems
+## Math: Open Problems
 
 | Problem | Result | Paper |
 | --- | --- | --- |
