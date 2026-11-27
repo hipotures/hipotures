@@ -121,17 +121,17 @@
    "description": "Self-hosted hybrid file space for Linux and Android built in Rust. Smart LAN sync, BLAKE3-verified size-based offloading, on-demand video streaming, and multi-channel pairing.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-26T07:37:05Z",
+   "pushed_at": "2026-11-27T14:44:32Z",
    "monthly": {
     "2026-11": [
-     184,
-     67824,
-     9173
+     211,
+     71211,
+     10227
     ]
    },
    "languages": {
-    "Rust": 557660,
-    "Kotlin": 347709,
+    "Rust": 573564,
+    "Kotlin": 367713,
     "Shell": 4119
    }
   },
@@ -199,6 +199,27 @@
     "CSS": 10764,
     "Shell": 6586,
     "HTML": 503
+   }
+  },
+  {
+   "name": "conjectures",
+   "html_url": "https://github.com/hipotures/conjectures",
+   "description": null,
+   "fork": false,
+   "archived": false,
+   "pushed_at": "2026-11-27T15:48:22Z",
+   "monthly": {
+    "2026-11": [
+     43,
+     96597,
+     776
+    ]
+   },
+   "languages": {
+    "Lean": 438632,
+    "TeX": 66480,
+    "C++": 60800,
+    "Python": 51785
    }
   },
   {
@@ -314,7 +335,7 @@
    "description": "Structural Graph Conjecture Lab: reproducible AI-directed searches for counterexamples to the Erdős–Gyárfás conjecture.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-26T15:46:36Z",
+   "pushed_at": "2026-11-27T10:21:50Z",
    "monthly": {
     "2026-07": [
      146,
@@ -327,19 +348,20 @@
      222
     ],
     "2026-11": [
-     23,
-     17516,
-     965
+     52,
+     44857,
+     1612
     ]
    },
    "languages": {
-    "Python": 2850638,
-    "Rust": 484888,
+    "Python": 2915383,
+    "Rust": 611673,
+    "Lean": 435921,
+    "C++": 267334,
     "HTML": 66379,
     "JavaScript": 48557,
-    "C++": 23631,
     "CSS": 7915,
-    "Shell": 2779,
+    "Shell": 4789,
     "Makefile": 1538
    }
   },
@@ -381,12 +403,12 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-26T02:11:15Z",
+   "pushed_at": "2026-11-26T16:06:56Z",
    "monthly": {
     "2026-11": [
-     87,
-     13050,
-     1949
+     88,
+     13102,
+     1985
     ]
    },
    "languages": {
@@ -1163,7 +1185,7 @@
    "description": "Collection of small personal utility scripts organized by category",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-24T06:25:48Z",
+   "pushed_at": "2026-11-27T08:30:51Z",
    "monthly": {
     "2025-11": [
      68,
@@ -1221,16 +1243,16 @@
      4775
     ],
     "2026-11": [
-     59,
-     79519,
-     79526
+     107,
+     90631,
+     80714
     ]
    },
    "languages": {
-    "Python": 550581,
+    "Python": 694434,
     "JavaScript": 160635,
-    "Luau": 57239,
-    "Shell": 20639,
+    "Luau": 100401,
+    "Shell": 21187,
     "CSS": 1036
    }
   },
