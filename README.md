@@ -71,7 +71,7 @@
 
 ## Open Problems
 
-Results on open problems in mathematics, each published with a paper, a Lean 4 proof checked by the Lean kernel, an independent checker, and the data needed to reproduce it. More in [hipotures/conjectures](https://github.com/hipotures/conjectures).
+Computer-assisted and formally verified results on open mathematical conjectures (Erdős–Gyárfás, …). Each result is a paper with its code, data and machine-checked proofs (Lean 4, DRAT), released with a Zenodo DOI. CC0. More in [hipotures/conjectures](https://github.com/hipotures/conjectures).
 
 | Problem | Result | Paper |
 | --- | --- | --- |
