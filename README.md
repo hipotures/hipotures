@@ -71,8 +71,6 @@
 
 ## Open Problems
 
-Computer-assisted and formally verified results on open mathematical conjectures (Erdős–Gyárfás, …). Each result is a paper with its code, data and machine-checked proofs (Lean 4, DRAT), released with a Zenodo DOI. CC0. More in [hipotures/conjectures](https://github.com/hipotures/conjectures).
-
 | Problem | Result | Paper |
 | --- | --- | --- |
 | Erdős–Gyárfás | [Small graphs without cycles of length a power of two](https://github.com/hipotures/conjectures/tree/main/results/small-graphs-power-of-two-cycles) | <a href="https://github.com/hipotures/conjectures/blob/main/results/small-graphs-power-of-two-cycles/paper.pdf"><img src="assets/paper-small-graphs-power-of-two-cycles.png" width="100" alt="PDF"></a> |
