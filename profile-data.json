@@ -121,12 +121,12 @@
    "description": "Self-hosted hybrid file space for Linux and Android built in Rust. Smart LAN sync, BLAKE3-verified size-based offloading, on-demand video streaming, and multi-channel pairing.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-27T14:44:32Z",
+   "pushed_at": "2026-11-27T16:03:19Z",
    "monthly": {
     "2026-11": [
-     211,
-     71211,
-     10227
+     213,
+     71269,
+     10237
     ]
    },
    "languages": {
@@ -204,22 +204,22 @@
   {
    "name": "conjectures",
    "html_url": "https://github.com/hipotures/conjectures",
-   "description": null,
+   "description": "Computer-assisted and formally verified results on open mathematical conjectures (Erdős–Gyárfás, …). Each result is a paper with its code, data and machine-checked proofs (Lean 4, DRAT), released with a Zenodo DOI. CC0.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-27T15:48:22Z",
+   "pushed_at": "2026-11-28T10:15:58Z",
    "monthly": {
     "2026-11": [
-     43,
-     96597,
-     776
+     61,
+     119683,
+     1686
     ]
    },
    "languages": {
     "Lean": 438632,
-    "TeX": 66480,
-    "C++": 60800,
-    "Python": 51785
+    "Python": 133751,
+    "TeX": 114159,
+    "C++": 72125
    }
   },
   {
@@ -403,12 +403,12 @@
    "description": "GitHub profile README",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-26T16:06:56Z",
+   "pushed_at": "2026-11-27T21:07:02Z",
    "monthly": {
     "2026-11": [
-     88,
-     13102,
-     1985
+     101,
+     13191,
+     2032
     ]
    },
    "languages": {
@@ -1081,7 +1081,7 @@
    "description": "Research archive for local LLM serving: Qwen benchmarks, hardware characterization, expert-residency experiments and launch scripts.",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-04T00:56:31Z",
+   "pushed_at": "2026-11-28T14:40:16Z",
    "monthly": {
     "2026-10": [
      130,
@@ -1089,16 +1089,17 @@
      4633
     ],
     "2026-11": [
-     60,
-     175126,
-     2533
+     112,
+     204278,
+     3213
     ]
    },
    "languages": {
-    "Python": 18350142,
+    "Python": 18371596,
     "C++": 1623662,
-    "Cuda": 195484,
-    "Shell": 151071,
+    "Cuda": 246800,
+    "Shell": 168640,
+    "Rust": 114301,
     "CMake": 64495,
     "TeX": 34193,
     "HTML": 7731,
@@ -1185,7 +1186,7 @@
    "description": "Collection of small personal utility scripts organized by category",
    "fork": false,
    "archived": false,
-   "pushed_at": "2026-11-27T08:30:51Z",
+   "pushed_at": "2026-11-27T16:28:42Z",
    "monthly": {
     "2025-11": [
      68,
@@ -1243,15 +1244,15 @@
      4775
     ],
     "2026-11": [
-     107,
-     90631,
-     80714
+     108,
+     90646,
+     80727
     ]
    },
    "languages": {
     "Python": 694434,
     "JavaScript": 160635,
-    "Luau": 100401,
+    "Luau": 100503,
     "Shell": 21187,
     "CSS": 1036
    }
